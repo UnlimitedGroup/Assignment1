@@ -2,6 +2,6 @@ package controller;
 
 public class MainController {
 	public static void main(String[] args) {
-		System.out.println("tes");
+		System.out.println("te");
 	}
 }
