@@ -5,3 +5,7 @@ If your missing JRE libaries and your file won't compile follow:
 
 Potential Sprites
 ![image](https://user-images.githubusercontent.com/37185972/76338676-2144a580-634d-11ea-9580-edc52a966ebc.png)
+
+
+WIP UML Diagram
+![image](https://user-images.githubusercontent.com/37185972/76348323-1ba28c00-635c-11ea-88fe-770509bcffd5.png)
