@@ -8,7 +8,7 @@ Potential Sprites
 
 
 WIP UML Diagram
-![image](https://user-images.githubusercontent.com/37185972/76348323-1ba28c00-635c-11ea-88fe-770509bcffd5.png)
+![image](https://user-images.githubusercontent.com/37185972/76684540-d5517380-6660-11ea-80fb-19e77c255a95.png)
 
 Please read this article to get a started with Git 
 http://www.geo.uzh.ch/microsite/reproducible_research/post/rr-eclipse-git/
