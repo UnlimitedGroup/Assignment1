@@ -8,19 +8,16 @@ public class Board {
 	private static Square Squares[][];
 	
 	public static void initialize() {
-		try {
-		
-		} catch () {
-			//something
-		}	
+		initializePlayers();
+		initializeSquares();
+		initializePieces();
 	}
-	
 	public static void initializePlayers() {
 		try {
-			Player Player1 = new Player(1);
-			Player Player2 = new Player(2);
+			Player Player1 = new Player("red");
+			Player Player2 = new Player("black");
 			
-		} catch (idException e) {
+		} catch (teamException e) {
 			//something
 		}	
 	}
@@ -100,15 +97,8 @@ public class Board {
 			Squares[8][7] = new Square(8,7);		
 	}
 	public static void initializePieces() {
-		try {
-			//Initialize Player Objects
-			Player Player1 = new Player(1);
-			Player Player2 = new Player(2);
 			
-			
-		} catch (idException e) {
-			//something
-		}	
+		
 	}
 	
 	//Static get methods
@@ -116,7 +106,7 @@ public class Board {
 		return PieceSet;
 	}
 	public static Square[][] getSquareList() {
-		return Square;
+		return Squares;
 	}
 
 }

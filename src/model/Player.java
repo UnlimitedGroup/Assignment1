@@ -2,19 +2,15 @@ package model;
 import java.util.ArrayList;
 
 public class Player {
-	private int id;
-	ArrayList<Integer>idCheck = new ArrayList<Integer>();
+	private String team;
 	
-	public Player(int id) throws idException {
-		if (!idCheck.isEmpty()) {
-			for (Integer x: idCheck) {
-				if (id != x) {
-					this.id = id;
-					idCheck.add(this.id);
-				}else {
-					throw new idException();
+	
+	public Player(String team) throws teamException {
+		if (team == "red" || team == "black") {
+			this.team = team;
+		}else {
+		 throw new teamException();
 				}
 			}
-		}
-	}
 }
+	
