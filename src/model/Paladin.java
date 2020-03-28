@@ -2,7 +2,7 @@ package model;
 
 public class Paladin extends Piece {
 
-	public Paladin(int health, Square currentSquare, String team) {
+	public Paladin(int health, Square currentSquare, int team) {
 		super(health, currentSquare, team);
 	}
 

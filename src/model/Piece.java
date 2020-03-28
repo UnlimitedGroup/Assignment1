@@ -4,10 +4,10 @@ public abstract class Piece {
 	
 	private int health;
 	private Square currentSquare;
-	private String team;
+	private int team;
 
 	
-	public Piece(int health, Square currentSquare, String team) {
+	public Piece(int health, Square currentSquare, int team) {
 		this.health = health;
 		this.currentSquare = currentSquare;
 		this.team = team;
@@ -18,7 +18,7 @@ public abstract class Piece {
 	public Square getCurrentSquare() {
 		return this.currentSquare;
 	}
-	public String getTeam() {
+	public int getTeam() {
 		return this.team;
 	}
 	//Set

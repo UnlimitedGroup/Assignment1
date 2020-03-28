@@ -1,12 +1,11 @@
 package model;
-import java.util.ArrayList;
 
 public class Player {
-	private String team;
+	private int team;
 	
 	//exceptions done later
-	public Player(String team) throws teamException {
-		if (team == "red" || team == "black") {
+	public Player(int team) throws teamException {
+		if (team == 0 || team == 1) {
 			this.team = team;
 		}else {
 		 throw new teamException();

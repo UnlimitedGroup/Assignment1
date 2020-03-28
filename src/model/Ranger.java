@@ -2,7 +2,7 @@ package model;
 
 public class Ranger extends Piece {
 
-	public Ranger(int health, Square currentSquare, String team) {
+	public Ranger(int health, Square currentSquare, int team) {
 		super(health, currentSquare, team);
 	}
 

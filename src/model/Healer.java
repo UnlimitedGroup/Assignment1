@@ -2,7 +2,7 @@ package model;
 
 public class Healer extends Piece{
 
-	public Healer(int health, Square currentSquare, String team) {
+	public Healer(int health, Square currentSquare, int team) {
 		super(health, currentSquare, team);
 		
 	}
