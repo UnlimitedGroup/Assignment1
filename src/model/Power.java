@@ -9,7 +9,7 @@ public Power(int health, Square currentSquare, String team) {
 }
 
 /*
- Unique spell is laser beam in forward direction 4 squares damaging first piece hit for 25 health
+ Unique spell is laser beam in forward direction 4 squares damaging first piece hit for 25 healt
  */
 public boolean spell() {
 	int currentRow = this.getCurrentSquare().getRow();

@@ -25,7 +25,7 @@ public abstract class Piece {
 	public void setCurrentSquare(Square newSquare) {
 		this.currentSquare = newSquare;
 	}
-	//Action
+	//Actio
 	public void takeDamage (int damage) {
 		this.health = this.health - damage;
 	}
