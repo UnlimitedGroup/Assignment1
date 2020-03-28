@@ -18,7 +18,7 @@ public class Board {
 			Player Player2 = new Player(1);
 			
 		} catch (teamException e) {
-			//handle exception
+			//handle
 		}	
 	}
 	public static void initializeSquares() {
