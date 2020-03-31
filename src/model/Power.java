@@ -11,7 +11,7 @@ public Power(int health, Square currentSquare, int team) {
 /*
  Unique spell is laser beam in forward direction 4 squares damaging first piece hit for 25 healt
  */
-public boolean spell() {
+public void spell() {
 	int currentRow = this.getCurrentSquare().getRow();
 	int currentColumn = this.getCurrentSquare().getColumn();
 	Square SquareList[][] = Board.getSquareList();
@@ -27,7 +27,7 @@ public boolean spell() {
 					if (PieceList.get(j).getCurrentSquare() == checkSquare) {
 						//Deal 25 Damage
 						PieceList.get(j).takeDamage(25);
-						return true;
+					
 					}
 				}
 			}
@@ -43,13 +43,12 @@ public boolean spell() {
 					if (PieceList.get(j).getCurrentSquare() == checkSquare) {
 						//Deal 25 Damage
 						PieceList.get(j).takeDamage(25);
-						return true;
+						
 					}
 				}
 			}
 		}
 	}
-	return false;
 }
 
 

@@ -8,43 +8,65 @@ public class Mage extends Piece {
 		super(health, currentSquare, team);
 		
 	}
-
+/*
+Unique Spell - Damage all surrounding units by 50 
+X X X
+X U X 
+X X X
+ */
 	@Override
-	public boolean spell() {
+	public void spell() {
 		int currentRow = this.getCurrentSquare().getRow();
 		int currentColumn = this.getCurrentSquare().getColumn();
 		Square SquareList[][] = Board.getSquareList();
 		ArrayList<Piece> PieceList = Board.getPieceSet();
 		
-	
-		
 		try {
-		
-			for (int i=0; i<3;i++) {
-				Square checkSquare0 = SquareList[currentRow++][currentColumn];
-				Square checkSquare1 = SquareList[currentRow++][currentColumn];
-				Square checkSquare2 = SquareList[currentRow++][currentColumn];
-				Square checkSquare3 = SquareList[currentRow++][currentColumn];
-				Square checkSquare4 = SquareList[currentRow++][currentColumn];
-				Square checkSquare5 = SquareList[currentRow++][currentColumn];
-				Square checkSquare6 = SquareList[currentRow++][currentColumn];
-				Square checkSquare7 = SquareList[currentRow++][currentColumn];
+				Square checkUp = SquareList[currentRow--][currentColumn];
+				Square checkDown = SquareList[currentRow++][currentColumn];
+				Square checkLeft = SquareList[currentRow][currentColumn--];
+				Square checkRight = SquareList[currentRow][currentColumn++];
+				Square checkTopLeft = SquareList[currentRow--][currentColumn--];
+				Square checkTopRight = SquareList[currentRow--][currentColumn++];
+				Square checkBottomLeft = SquareList[currentRow++][currentColumn--];
+				Square checkBottomRight = SquareList[currentRow++][currentColumn++];
 				for (int j = 0; j<PieceList.size()-1; j++) {
 					//Check only pieces on other team
 					if (PieceList.get(j).getTeam() != this.getTeam()) {
 						//Check if the piece is in the spell path square
-						if (PieceList.get(j).getCurrentSquare() == checkSquare) {
+						if (PieceList.get(j).getCurrentSquare() == checkUp) {
 							//Deal 25 Damage
 							PieceList.get(j).heal(25);
-							return true;
+						}
+						if (PieceList.get(j).getCurrentSquare() == checkDown) {
+							//Deal 25 Damage
+							PieceList.get(j).heal(25);
+						}
+						if (PieceList.get(j).getCurrentSquare() == checkLeft) {
+							//Deal 25 Damage
+							PieceList.get(j).heal(25);
+						}
+						if (PieceList.get(j).getCurrentSquare() == checkRight) {
+							//Deal 25 Damage
+							PieceList.get(j).heal(25);
+						}
+						if (PieceList.get(j).getCurrentSquare() == checkTopLeft) {
+							//Deal 25 Damage
+							PieceList.get(j).heal(25);
+						}
+						if (PieceList.get(j).getCurrentSquare() == checkBottomLeft) {
+							//Deal 25 Damage
+							PieceList.get(j).heal(25);
+						}
+						if (PieceList.get(j).getCurrentSquare() == checkBottomRight) {
+							//Deal 25 Damage
+							PieceList.get(j).heal(25);
 						}
 					}
 				}
-			}
 		} catch (Exception e) {
 			System.out.println("Square out of bounds");
 		}
-		return false;
 	}
 
 }

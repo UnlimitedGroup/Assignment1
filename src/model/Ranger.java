@@ -7,8 +7,8 @@ public class Ranger extends Piece {
 	}
 
 	@Override
-	public boolean spell() {
-		return false;
+	public void spell() {
+	
 	}
 
 }

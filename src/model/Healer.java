@@ -8,8 +8,7 @@ public class Healer extends Piece{
 	}
 
 	@Override
-	public boolean spell() {
-		return false;
+	public void spell() {
 	}
 
 }

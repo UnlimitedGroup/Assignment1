@@ -11,7 +11,7 @@ public class Paladin extends Piece {
 	 Unique spell is healing beam in forward direction 4 squares healing first piece hit for 25 healt
 	 */
 	@Override
-	public boolean spell() {
+	public void spell() {
 		int currentRow = this.getCurrentSquare().getRow();
 		int currentColumn = this.getCurrentSquare().getColumn();
 		Square SquareList[][] = Board.getSquareList();
@@ -27,7 +27,7 @@ public class Paladin extends Piece {
 						if (PieceList.get(j).getCurrentSquare() == checkSquare) {
 							//Deal 25 Damage
 							PieceList.get(j).heal(25);
-							return true;
+							
 						}
 					}
 				}
@@ -43,13 +43,13 @@ public class Paladin extends Piece {
 						if (PieceList.get(j).getCurrentSquare() == checkSquare) {
 							//Deal 25 Damage
 							PieceList.get(j).heal(25);
-							return true;
+							
 						}
 					}
 				}
 			}
 		}
-		return false;
+		
 	}
 
 }
