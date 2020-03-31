@@ -25,9 +25,19 @@ public abstract class Piece {
 	public void setCurrentSquare(Square newSquare) {
 		this.currentSquare = newSquare;
 	}
-	//Actio
+	//Action
 	public void takeDamage (int damage) {
 		this.health = this.health - damage;
+	}
+	public void heal(int heal) {
+		int newHealth = this.getHealth() + heal;
+			if (newHealth > 100) {
+				newHealth = 100;
+				this.health = newHealth;
+			}
+			else {
+				this.health = this.health + heal;
+			}
 	}
     abstract public boolean spell();
 }
