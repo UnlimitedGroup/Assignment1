@@ -27,7 +27,7 @@ public class Paladin extends Piece {
 						if (PieceList.get(j).getCurrentSquare() == checkSquare) {
 							//Deal 25 Damage
 							PieceList.get(j).heal(50);
-							
+							return;
 						}
 					}
 				}
@@ -43,6 +43,7 @@ public class Paladin extends Piece {
 						if (PieceList.get(j).getCurrentSquare() == checkSquare) {
 							//Deal 25 Damage
 							PieceList.get(j).heal(50);
+							return;
 							
 						}
 					}

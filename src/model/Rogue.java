@@ -26,6 +26,7 @@ public class Rogue extends Piece {
 						if (PieceList.get(j).getCurrentSquare() == checkSquare) {
 							//Deal 25 Damage
 							PieceList.get(j).takeDamage(75);
+							return;
 						
 						}
 					}
