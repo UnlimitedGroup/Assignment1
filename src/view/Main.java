@@ -197,13 +197,13 @@ public class Main {
 		JButton b16 = new JButton("");
 		p16.add(b16, BorderLayout.CENTER);
 		
-		JPanel panel_17 = new JPanel();
-		panel_17.setBorder(new LineBorder(new Color(0, 0, 0)));
-		board.add(panel_17);
-		panel_17.setLayout(new BorderLayout(0, 0));
+		JPanel p20 = new JPanel();
+		p20.setBorder(new LineBorder(new Color(0, 0, 0)));
+		board.add(p20);
+		p20.setLayout(new BorderLayout(0, 0));
 		
 		JButton btnNewButton_13 = new JButton("");
-		panel_17.add(btnNewButton_13, BorderLayout.CENTER);
+		p20.add(btnNewButton_13, BorderLayout.CENTER);
 		
 		JPanel panel_14 = new JPanel();
 		panel_14.setBorder(new LineBorder(new Color(0, 0, 0)));
