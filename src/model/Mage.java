@@ -36,36 +36,40 @@ X X X
 						//Check if the piece is in the spell path square
 						if (PieceList.get(j).getCurrentSquare() == checkUp) {
 							//Deal 25 Damage
-							PieceList.get(j).heal(25);
+							PieceList.get(j).takeDamage(25);
 						}
 						if (PieceList.get(j).getCurrentSquare() == checkDown) {
 							//Deal 25 Damage
-							PieceList.get(j).heal(25);
+							PieceList.get(j).takeDamage(25);
 						}
 						if (PieceList.get(j).getCurrentSquare() == checkLeft) {
 							//Deal 25 Damage
-							PieceList.get(j).heal(25);
+							PieceList.get(j).takeDamage(25);
 						}
 						if (PieceList.get(j).getCurrentSquare() == checkRight) {
 							//Deal 25 Damage
-							PieceList.get(j).heal(25);
+							PieceList.get(j).takeDamage(25);
 						}
 						if (PieceList.get(j).getCurrentSquare() == checkTopLeft) {
 							//Deal 25 Damage
-							PieceList.get(j).heal(25);
+							PieceList.get(j).takeDamage(25);
+						}
+						if (PieceList.get(j).getCurrentSquare() == checkTopRight) {
+							//Deal 25 Damage
+							PieceList.get(j).takeDamage(25);
 						}
 						if (PieceList.get(j).getCurrentSquare() == checkBottomLeft) {
 							//Deal 25 Damage
-							PieceList.get(j).heal(25);
+							PieceList.get(j).takeDamage(25);
 						}
 						if (PieceList.get(j).getCurrentSquare() == checkBottomRight) {
 							//Deal 25 Damage
-							PieceList.get(j).heal(25);
+							PieceList.get(j).takeDamage(25);
 						}
 					}
 				}
 		} catch (Exception e) {
-			System.out.println("Square out of bounds");
+			System.out.println(e);
 		}
 	}
 
