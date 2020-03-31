@@ -39,7 +39,12 @@ public abstract class Piece {
 				this.health = this.health + heal;
 			}
 	}
+	public boolean moveCheck() {
+		return true;
+	}
+	
     abstract public void spell();
+    abstract public boolean move();
 }
 
 

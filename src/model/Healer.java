@@ -64,5 +64,10 @@ public class Healer extends Piece{
 			System.out.println(e);
 		}
 	}
+	@Override
+	public boolean move() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }
