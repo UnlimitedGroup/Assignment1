@@ -14,3 +14,5 @@ Please read this article to get a started with Git
 http://www.geo.uzh.ch/microsite/reproducible_research/post/rr-eclipse-git/
 
 We will discuss branching and merging for those who are unfamiliar with it
+
+https://www.youtube.com/watch?v=QFEfQMc4qEk
