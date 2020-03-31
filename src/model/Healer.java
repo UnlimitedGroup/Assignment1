@@ -8,7 +8,12 @@ public class Healer extends Piece{
 		super(health, currentSquare, team);
 		
 	}
-
+	/*
+	Unique Spell - Heal all surrounding units by 25 
+	X X X
+	X U X 
+	X X X
+	 */
 	@Override
 	public void spell() {
 		int currentRow = this.getCurrentSquare().getRow();

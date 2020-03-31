@@ -8,12 +8,12 @@ public class Mage extends Piece {
 		super(health, currentSquare, team);
 		
 	}
-/*
-Unique Spell - Damage all surrounding units by 50 
-X X X
-X U X 
-X X X
- */
+	/*
+	Unique Spell - Damage all surrounding units by 50 
+	X X X
+	X U X 
+	X X X
+	 */
 	@Override
 	public void spell() {
 		int currentRow = this.getCurrentSquare().getRow();

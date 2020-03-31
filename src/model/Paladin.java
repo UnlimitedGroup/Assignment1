@@ -8,7 +8,7 @@ public class Paladin extends Piece {
 		super(health, currentSquare, team);
 	}
 	/*
-	 Unique spell is healing beam in forward direction 4 squares healing first piece hit for 25 healt
+	Unique Spell - Heal unit up to 4 squares away in a straight line by 50
 	 */
 	@Override
 	public void spell() {
@@ -26,7 +26,7 @@ public class Paladin extends Piece {
 						//Check if the piece is in the spell path square
 						if (PieceList.get(j).getCurrentSquare() == checkSquare) {
 							//Deal 25 Damage
-							PieceList.get(j).heal(25);
+							PieceList.get(j).heal(50);
 							
 						}
 					}
@@ -42,7 +42,7 @@ public class Paladin extends Piece {
 						//Check if the piece is in the spell path square
 						if (PieceList.get(j).getCurrentSquare() == checkSquare) {
 							//Deal 25 Damage
-							PieceList.get(j).heal(25);
+							PieceList.get(j).heal(50);
 							
 						}
 					}
