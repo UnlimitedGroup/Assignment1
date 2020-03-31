@@ -52,150 +52,150 @@ public class Main {
 		frame.getContentPane().add(userPanel, BorderLayout.WEST);
 		userPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JButton btnNewButton = new JButton("Move");
-		userPanel.add(btnNewButton);
+		JButton moveButton = new JButton("Move");
+		userPanel.add(moveButton);
 		
-		JButton btnNewButton_1 = new JButton("Cast Spell");
-		userPanel.add(btnNewButton_1);
+		JButton spellButton = new JButton("Cast Spell");
+		userPanel.add(spellButton);
 		
-		JButton btnNewButton_2 = new JButton("Finish Turn");
-		userPanel.add(btnNewButton_2);
+		JButton turnButton = new JButton("Finish Turn");
+		userPanel.add(turnButton);
 		
-		JPanel panel_2 = new JPanel();
-		userPanel.add(panel_2);
-		panel_2.setLayout(new GridLayout(3, 3, 0, 0));
+		JPanel infoPanel = new JPanel();
+		userPanel.add(infoPanel);
+		infoPanel.setLayout(new GridLayout(3, 3, 0, 0));
 		
-		JLabel lblNewLabel = new JLabel("Unit Health");
-		panel_2.add(lblNewLabel);
+		JLabel unitHealth = new JLabel("Unit Health");
+		infoPanel.add(unitHealth);
 		
-		JLabel lblNewLabel_2 = new JLabel("Moves left");
-		panel_2.add(lblNewLabel_2);
+		JLabel movesLeft = new JLabel("Moves left");
+		infoPanel.add(movesLeft);
 		
-		JLabel lblNewLabel_1 = new JLabel("Turn");
-		panel_2.add(lblNewLabel_1);
+		JLabel turnStatus = new JLabel("Turn");
+		infoPanel.add(turnStatus);
 		
-		JPanel panel_57 = new JPanel();
-		userPanel.add(panel_57);
+		JPanel statusPanel = new JPanel();
+		userPanel.add(statusPanel);
 		
-		JLabel lblNewLabel_3 = new JLabel("Status");
-		panel_57.add(lblNewLabel_3);
+		JLabel status = new JLabel("Status");
+		statusPanel.add(status);
 		
 		JPanel board = new JPanel();
 		board.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		frame.getContentPane().add(board, BorderLayout.CENTER);
 		board.setLayout(new GridLayout(8, 7, 0, 0));
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		board.add(panel_1);
-		panel_1.setLayout(new BorderLayout(0, 0));
+		JPanel p00 = new JPanel();
+		p00.setBorder(new LineBorder(new Color(0, 0, 0)));
+		board.add(p00);
+		p00.setLayout(new BorderLayout(0, 0));
 		
-		JButton btnNewButton_3 = new JButton("");
-		panel_1.add(btnNewButton_3, BorderLayout.CENTER);
+		JButton b00 = new JButton("");
+		p00.add(b00, BorderLayout.CENTER);
 		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBorder(new LineBorder(new Color(0, 0, 0)));
-		board.add(panel_3);
-		panel_3.setLayout(new BorderLayout(0, 0));
+		JPanel p01 = new JPanel();
+		p01.setBorder(new LineBorder(new Color(0, 0, 0)));
+		board.add(p01);
+		p01.setLayout(new BorderLayout(0, 0));
 		
-		JButton btnNewButton_5 = new JButton("");
-		panel_3.add(btnNewButton_5, BorderLayout.CENTER);
+		JButton b01 = new JButton("");
+		p01.add(b01, BorderLayout.CENTER);
 		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBorder(new LineBorder(new Color(0, 0, 0)));
-		board.add(panel_4);
-		panel_4.setLayout(new BorderLayout(0, 0));
+		JPanel p02 = new JPanel();
+		p02.setBorder(new LineBorder(new Color(0, 0, 0)));
+		board.add(p02);
+		p02.setLayout(new BorderLayout(0, 0));
 		
-		JButton btnNewButton_7 = new JButton("");
-		panel_4.add(btnNewButton_7, BorderLayout.CENTER);
+		JButton b02 = new JButton("");
+		p02.add(b02, BorderLayout.CENTER);
 		
-		JPanel panel_5 = new JPanel();
-		panel_5.setBorder(new LineBorder(new Color(0, 0, 0)));
-		board.add(panel_5);
-		panel_5.setLayout(new BorderLayout(0, 0));
+		JPanel p03 = new JPanel();
+		p03.setBorder(new LineBorder(new Color(0, 0, 0)));
+		board.add(p03);
+		p03.setLayout(new BorderLayout(0, 0));
 		
-		JButton btnNewButton_9 = new JButton("");
-		panel_5.add(btnNewButton_9, BorderLayout.CENTER);
+		JButton b03 = new JButton("");
+		p03.add(b03, BorderLayout.CENTER);
 		
-		JPanel panel_6 = new JPanel();
-		panel_6.setBorder(new LineBorder(new Color(0, 0, 0)));
-		board.add(panel_6);
-		panel_6.setLayout(new BorderLayout(0, 0));
+		JPanel p04 = new JPanel();
+		p04.setBorder(new LineBorder(new Color(0, 0, 0)));
+		board.add(p04);
+		p04.setLayout(new BorderLayout(0, 0));
 		
-		JButton btnNewButton_10 = new JButton("");
-		panel_6.add(btnNewButton_10, BorderLayout.CENTER);
+		JButton b04 = new JButton("");
+		p04.add(b04, BorderLayout.CENTER);
 		
-		JPanel panel_7 = new JPanel();
-		panel_7.setBorder(new LineBorder(new Color(0, 0, 0)));
-		board.add(panel_7);
-		panel_7.setLayout(new BorderLayout(0, 0));
+		JPanel p05 = new JPanel();
+		p05.setBorder(new LineBorder(new Color(0, 0, 0)));
+		board.add(p05);
+		p05.setLayout(new BorderLayout(0, 0));
 		
-		JButton btnNewButton_18 = new JButton("");
-		panel_7.add(btnNewButton_18, BorderLayout.CENTER);
+		JButton b05 = new JButton("");
+		p05.add(b05, BorderLayout.CENTER);
 		
-		JPanel panel_8 = new JPanel();
-		panel_8.setBorder(new LineBorder(new Color(0, 0, 0)));
-		board.add(panel_8);
-		panel_8.setLayout(new BorderLayout(0, 0));
+		JPanel p06 = new JPanel();
+		p06.setBorder(new LineBorder(new Color(0, 0, 0)));
+		board.add(p06);
+		p06.setLayout(new BorderLayout(0, 0));
 		
-		JButton btnNewButton_20 = new JButton("");
-		panel_8.add(btnNewButton_20, BorderLayout.CENTER);
+		JButton b06 = new JButton("");
+		p06.add(b06, BorderLayout.CENTER);
 		
-		JPanel panel_9 = new JPanel();
-		panel_9.setBorder(new LineBorder(new Color(0, 0, 0)));
-		board.add(panel_9);
-		panel_9.setLayout(new BorderLayout(0, 0));
+		JPanel p10 = new JPanel();
+		p10.setBorder(new LineBorder(new Color(0, 0, 0)));
+		board.add(p10);
+		p10.setLayout(new BorderLayout(0, 0));
 		
-		JButton btnNewButton_4 = new JButton("");
-		panel_9.add(btnNewButton_4, BorderLayout.CENTER);
+		JButton b10 = new JButton("");
+		p10.add(b10, BorderLayout.CENTER);
 		
-		JPanel panel_11 = new JPanel();
-		panel_11.setBorder(new LineBorder(new Color(0, 0, 0)));
-		board.add(panel_11);
-		panel_11.setLayout(new BorderLayout(0, 0));
+		JPanel p11 = new JPanel();
+		p11.setBorder(new LineBorder(new Color(0, 0, 0)));
+		board.add(p11);
+		p11.setLayout(new BorderLayout(0, 0));
 		
-		JButton btnNewButton_6 = new JButton("");
-		panel_11.add(btnNewButton_6, BorderLayout.CENTER);
+		JButton b11 = new JButton("");
+		p11.add(b11, BorderLayout.CENTER);
 		
-		JPanel panel_10 = new JPanel();
-		panel_10.setBorder(new LineBorder(new Color(0, 0, 0)));
-		board.add(panel_10);
-		panel_10.setLayout(new BorderLayout(0, 0));
+		JPanel p12 = new JPanel();
+		p12.setBorder(new LineBorder(new Color(0, 0, 0)));
+		board.add(p12);
+		p12.setLayout(new BorderLayout(0, 0));
 		
-		JButton btnNewButton_8 = new JButton("");
-		panel_10.add(btnNewButton_8, BorderLayout.CENTER);
+		JButton b12 = new JButton("");
+		p12.add(b12, BorderLayout.CENTER);
 		
-		JPanel panel_12 = new JPanel();
-		panel_12.setBorder(new LineBorder(new Color(0, 0, 0)));
-		board.add(panel_12);
-		panel_12.setLayout(new BorderLayout(0, 0));
+		JPanel p13 = new JPanel();
+		p13.setBorder(new LineBorder(new Color(0, 0, 0)));
+		board.add(p13);
+		p13.setLayout(new BorderLayout(0, 0));
 		
-		JButton btnNewButton_11 = new JButton("");
-		panel_12.add(btnNewButton_11, BorderLayout.CENTER);
+		JButton b13 = new JButton("");
+		p13.add(b13, BorderLayout.CENTER);
 		
-		JPanel panel_13 = new JPanel();
-		panel_13.setBorder(new LineBorder(new Color(0, 0, 0)));
-		board.add(panel_13);
-		panel_13.setLayout(new BorderLayout(0, 0));
+		JPanel p14 = new JPanel();
+		p14.setBorder(new LineBorder(new Color(0, 0, 0)));
+		board.add(p14);
+		p14.setLayout(new BorderLayout(0, 0));
 		
-		JButton btnNewButton_12 = new JButton("");
-		panel_13.add(btnNewButton_12, BorderLayout.CENTER);
+		JButton b14 = new JButton("");
+		p14.add(b14, BorderLayout.CENTER);
 		
-		JPanel panel_15 = new JPanel();
-		panel_15.setBorder(new LineBorder(new Color(0, 0, 0)));
-		board.add(panel_15);
-		panel_15.setLayout(new BorderLayout(0, 0));
+		JPanel p15 = new JPanel();
+		p15.setBorder(new LineBorder(new Color(0, 0, 0)));
+		board.add(p15);
+		p15.setLayout(new BorderLayout(0, 0));
 		
-		JButton btnNewButton_21 = new JButton("");
-		panel_15.add(btnNewButton_21, BorderLayout.CENTER);
+		JButton b15 = new JButton("");
+		p15.add(b15, BorderLayout.CENTER);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		board.add(panel);
-		panel.setLayout(new BorderLayout(0, 0));
+		JPanel p16 = new JPanel();
+		p16.setBorder(new LineBorder(new Color(0, 0, 0)));
+		board.add(p16);
+		p16.setLayout(new BorderLayout(0, 0));
 		
-		JButton btnNewButton_22 = new JButton("");
-		panel.add(btnNewButton_22, BorderLayout.CENTER);
+		JButton b16 = new JButton("");
+		p16.add(b16, BorderLayout.CENTER);
 		
 		JPanel panel_17 = new JPanel();
 		panel_17.setBorder(new LineBorder(new Color(0, 0, 0)));
