@@ -13,7 +13,7 @@ public class MainController {
 	}
 	
 	
-	public boolean selectPreCondition() {
+	public static boolean selectPreCondition() {
 		int count = 0;
 		for (int i = 0; i < Board.squares.length; i++) {
 	        for (int j = 0; j < Board.squares[i].length; j++) {
@@ -48,41 +48,58 @@ public class MainController {
 	public static void select(int row, int column) {
 		Square selectedSquares[] = fetchSelectedSquares();
 		
-		for (Piece i: Board.pieceSet) {
-			//Check if selected Square has a piece on it
-			if (i.getCurrentSquare() == Board.squares[row][column]) {
-				//Check no other selected square has a piece
-				for (Piece j: Board.pieceSet) {
-					if(j.getCurrentSquare() == selectedSquares[0]) {
-						System.out.println("please select an empty square or deselect the piece selected");
-					}
-					if(j.getCurrentSquare() == selectedSquares[1]) {
-						System.out.println("please select an empty square or deselect the piece selected");
-					}
-					//if no other square has a piece, set square select status as true
-					else {	
-						Board.squares[row][column].setSelectStatus(); 
+		if (selectPreCondition()) {
+			for (Piece i: Board.pieceSet) {
+				//if square with piece is selected
+				if (i.getCurrentSquare() == Board.squares[row][column]) {
+					//Check no other selected square has a piece
+					for (Piece j: Board.pieceSet) {
+						if(j.getCurrentSquare() == selectedSquares[0]) {
+							System.out.println("please select an empty square or deselect the piece selected");
+						}
+						if(j.getCurrentSquare() == selectedSquares[1]) {
+							System.out.println("please select an empty square or deselect the piece selected");
+						}
+						//if no other square has a piece, set square select status as true
+						else {	
+							Board.squares[row][column].setSelectStatus(); 
+						}
 					}
 				}
-			}
-			else {
-				
-			}
-		
-						
-					
-				
-				
-			        	
-				
-			
-			
-		
-		
-		
-	}
+				//if blank square is selected
+				if (i.getCurrentSquare() != Board.squares[row][column]) {
+					//Check if a square with a piece is selected  
+					for (Piece j: Board.pieceSet) {
+						if(j.getCurrentSquare() == selectedSquares[0]) {
+							Board.squares[row][column].setSelectStatus();
+							return;
+						}
+						if(j.getCurrentSquare() == selectedSquares[1]) {
+							Board.squares[row][column].setSelectStatus();
+							return;
+						}
+					}
+					//if no squares selected
+					if (selectedSquares[0] == null) {
+						Board.squares[row][column].setSelectStatus();
+						return;
+					}
+					/*
+					if the selected square is blank when an already selected 
+					square is blank too 
+					*/
+					else {
+						System.out.println("please select a square with a piece");
+					}	
+				}
+			}			
+		}
+		else {
+			System.out.println("two");
+		}
+}
 
 	
 	
 	
-}
+
