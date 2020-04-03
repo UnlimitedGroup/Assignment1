@@ -3,8 +3,8 @@ package model;
 import java.util.ArrayList;
 
 public class Board {
-	private static ArrayList<Piece> pieceSet = new ArrayList<Piece>();
-	private static Square squares[][];
+	public static ArrayList<Piece> pieceSet = new ArrayList<Piece>();
+	public static Square squares[][];
 	
 	public static void initialize() {
 		initializePlayers();
