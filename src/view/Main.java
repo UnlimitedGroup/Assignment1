@@ -183,6 +183,15 @@ public class Main extends JPanel {
 				b23.setIcon(MainController.displayImg(1, 3));
 				p23.add(b23, BorderLayout.CENTER);
 				b23.setBackground(MainController.changeButtonColour(1, 3));
+				b23.addActionListener(new ActionListener () {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MainController.select(1, 3);
+						b23.setBackground(MainController.changeButtonColour(1, 3));
+						return;
+					}});
+				
+				
 			
 			JPanel p24 = new JPanel();
 			p24.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -193,6 +202,13 @@ public class Main extends JPanel {
 				b24.setIcon(MainController.displayImg(1, 4));
 				p24.add(b24, BorderLayout.CENTER);
 				b24.setBackground(MainController.changeButtonColour(1, 4));
+				b24.addActionListener(new ActionListener () {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MainController.select(1, 4);
+						b24.setBackground(MainController.changeButtonColour(1, 4));
+						return;
+					}});
 			
 			JPanel p30 = new JPanel();
 			p30.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -203,6 +219,13 @@ public class Main extends JPanel {
 				b30.setIcon(MainController.displayImg(2, 0));
 				p30.add(b30, BorderLayout.CENTER);
 				b30.setBackground(MainController.changeButtonColour(2, 0));
+				b30.addActionListener(new ActionListener () {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MainController.select(2, 0);
+						b30.setBackground(MainController.changeButtonColour(2, 0));
+						return;
+					}});
 			
 			JPanel p31 = new JPanel();
 			p31.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -213,6 +236,13 @@ public class Main extends JPanel {
 				b31.setIcon(MainController.displayImg(2, 1));
 				p31.add(b31, BorderLayout.CENTER);
 				b31.setBackground(MainController.changeButtonColour(2, 1));
+				b31.addActionListener(new ActionListener () {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MainController.select(2, 0);
+						b31.setBackground(MainController.changeButtonColour(2, 1));
+						return;
+					}});
 			
 			JPanel p32 = new JPanel();
 			p32.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -223,6 +253,13 @@ public class Main extends JPanel {
 				b32.setIcon(MainController.displayImg(2, 2));
 				p32.add(b32, BorderLayout.CENTER);
 				b32.setBackground(MainController.changeButtonColour(2, 2));
+				b32.addActionListener(new ActionListener () {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MainController.select(2, 2);
+						b30.setBackground(MainController.changeButtonColour(2, 2));
+						return;
+					}});
 			
 			JPanel p33 = new JPanel();
 			p33.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -233,6 +270,13 @@ public class Main extends JPanel {
 				b33.setIcon(MainController.displayImg(2, 3));
 				p33.add(b33, BorderLayout.CENTER);
 				b33.setBackground(MainController.changeButtonColour(2, 3));
+				b33.addActionListener(new ActionListener () {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MainController.select(2, 3);
+						b30.setBackground(MainController.changeButtonColour(2, 3));
+						return;
+					}});
 			
 			JPanel p34 = new JPanel();
 			p34.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -243,6 +287,14 @@ public class Main extends JPanel {
 				b34.setIcon(MainController.displayImg(2, 4));
 				p34.add(b34, BorderLayout.CENTER);
 				b34.setBackground(MainController.changeButtonColour(2, 4));
+				b34.addActionListener(new ActionListener () {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MainController.select(2, 4);
+						b34.setBackground(MainController.changeButtonColour(2, 4));
+						return;
+					}});
+				
 			
 			JPanel p40 = new JPanel();
 			p40.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -253,6 +305,13 @@ public class Main extends JPanel {
 				b40.setIcon(MainController.displayImg(3, 0));
 				p40.add(b40, BorderLayout.CENTER);
 				b40.setBackground(MainController.changeButtonColour(3, 0));
+				b40.addActionListener(new ActionListener () {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MainController.select(3, 0);
+						b40.setBackground(MainController.changeButtonColour(3, 0));
+						return;
+					}});
 			
 			JPanel p41 = new JPanel();
 			p41.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -263,6 +322,13 @@ public class Main extends JPanel {
 				b41.setIcon(MainController.displayImg(3, 1));
 				p41.add(b41, BorderLayout.CENTER);
 				b41.setBackground(MainController.changeButtonColour(3, 1));
+				b41.addActionListener(new ActionListener () {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MainController.select(3, 1);
+						b40.setBackground(MainController.changeButtonColour(3, 1));
+						return;
+					}});
 			
 			JPanel p42 = new JPanel();
 			p42.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -273,6 +339,13 @@ public class Main extends JPanel {
 				b42.setIcon(MainController.displayImg(3, 2));
 				p42.add(b42, BorderLayout.CENTER);
 				b42.setBackground(MainController.changeButtonColour(3, 2));
+				b42.addActionListener(new ActionListener () {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MainController.select(3, 2);
+						b42.setBackground(MainController.changeButtonColour(3, 2));
+						return;
+					}});
 			
 			JPanel p43 = new JPanel();
 			p43.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -283,6 +356,13 @@ public class Main extends JPanel {
 				b43.setIcon(MainController.displayImg(3, 3));
 				p43.add(b43, BorderLayout.CENTER);
 				b43.setBackground(MainController.changeButtonColour(3, 3));
+				b43.addActionListener(new ActionListener () {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MainController.select(3, 3);
+						b43.setBackground(MainController.changeButtonColour(3, 3));
+						return;
+					}});
 			
 			JPanel p44 = new JPanel();
 			p44.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -293,6 +373,13 @@ public class Main extends JPanel {
 				b44.setIcon(MainController.displayImg(3, 4));
 				p44.add(b44, BorderLayout.CENTER);
 				b44.setBackground(MainController.changeButtonColour(3, 4));
+				b44.addActionListener(new ActionListener () {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MainController.select(3, 4);
+						b44.setBackground(MainController.changeButtonColour(3, 4));
+						return;
+					}});
 			
 			JPanel p50 = new JPanel();
 			p50.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -303,6 +390,13 @@ public class Main extends JPanel {
 				b50.setIcon(MainController.displayImg(4, 0));
 				p50.add(b50, BorderLayout.CENTER);
 				b50.setBackground(MainController.changeButtonColour(4, 0));
+				b50.addActionListener(new ActionListener () {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MainController.select(4, 0);
+						b50.setBackground(MainController.changeButtonColour(4, 0));
+						return;
+					}});
 			
 			JPanel p51 = new JPanel();
 			p51.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -313,6 +407,14 @@ public class Main extends JPanel {
 				b51.setIcon(MainController.displayImg(4, 1));
 				p51.add(b51, BorderLayout.CENTER);
 				b51.setBackground(MainController.changeButtonColour(4, 1));
+				b51.addActionListener(new ActionListener () {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MainController.select(4, 1);
+						b51.setBackground(MainController.changeButtonColour(4, 1));
+						return;
+					}});
+				
 			
 			JPanel p52 = new JPanel();
 			p52.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -323,6 +425,13 @@ public class Main extends JPanel {
 				b52.setIcon(MainController.displayImg(4, 2));
 				p52.add(b52, BorderLayout.CENTER);
 				b52.setBackground(MainController.changeButtonColour(4, 2));
+				b52.addActionListener(new ActionListener () {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MainController.select(4, 2);
+						b52.setBackground(MainController.changeButtonColour(4, 2));
+						return;
+					}});
 			
 			JPanel p53 = new JPanel();
 			p53.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -333,6 +442,13 @@ public class Main extends JPanel {
 				b53.setIcon(MainController.displayImg(4, 3));
 				p53.add(b53, BorderLayout.CENTER);
 				b53.setBackground(MainController.changeButtonColour(4, 3));
+				b53.addActionListener(new ActionListener () {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MainController.select(4, 3);
+						b53.setBackground(MainController.changeButtonColour(4, 3));
+						return;
+					}});
 			
 			JPanel p54 = new JPanel();
 			p54.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -343,6 +459,13 @@ public class Main extends JPanel {
 				b54.setIcon(MainController.displayImg(4, 4));
 				p54.add(b54, BorderLayout.CENTER);
 				b54.setBackground(MainController.changeButtonColour(4, 4));
+				b54.addActionListener(new ActionListener () {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MainController.select(4, 4);
+						b54.setBackground(MainController.changeButtonColour(4, 4));
+						return;
+					}});
 			
 			JPanel p60 = new JPanel();
 			p60.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -353,6 +476,13 @@ public class Main extends JPanel {
 				b60.setIcon(MainController.displayImg(5, 0));
 				p60.add(b60, BorderLayout.CENTER);
 				b60.setBackground(MainController.changeButtonColour(5, 0));
+				b60.addActionListener(new ActionListener () {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MainController.select(5, 0);
+						b60.setBackground(MainController.changeButtonColour(5, 0));
+						return;
+					}});
 			
 			JPanel p61 = new JPanel();
 			p61.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -363,6 +493,13 @@ public class Main extends JPanel {
 				b61.setIcon(MainController.displayImg(5, 1));
 				p61.add(b61, BorderLayout.CENTER);
 				b61.setBackground(MainController.changeButtonColour(5, 1));
+				b61.addActionListener(new ActionListener () {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MainController.select(5, 1);
+						b61.setBackground(MainController.changeButtonColour(5, 1));
+						return;
+					}});
 				
 			JPanel p62 = new JPanel();
 			p62.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -373,6 +510,13 @@ public class Main extends JPanel {
 				b62.setIcon(MainController.displayImg(5, 2));
 				p62.add(b62, BorderLayout.CENTER);
 				b62.setBackground(MainController.changeButtonColour(5, 2));
+				b62.addActionListener(new ActionListener () {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MainController.select(5, 2);
+						b62.setBackground(MainController.changeButtonColour(5, 2));
+						return;
+					}});
 			
 			JPanel p63 = new JPanel();
 			p63.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -383,6 +527,13 @@ public class Main extends JPanel {
 				b63.setIcon(MainController.displayImg(5, 3));
 				p63.add(b63, BorderLayout.CENTER);
 				b63.setBackground(MainController.changeButtonColour(5, 3));
+				b63.addActionListener(new ActionListener () {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MainController.select(5, 3);
+						b63.setBackground(MainController.changeButtonColour(5, 3));
+						return;
+					}});
 			
 			JPanel p64 = new JPanel();
 			p64.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -393,6 +544,13 @@ public class Main extends JPanel {
 				b64.setIcon(MainController.displayImg(5, 4));
 				p64.add(b64, BorderLayout.CENTER);
 				b64.setBackground(MainController.changeButtonColour(5, 4));
+				b64.addActionListener(new ActionListener () {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MainController.select(5, 4);
+						b64.setBackground(MainController.changeButtonColour(5, 4));
+						return;
+					}});
 			
 			JPanel p70 = new JPanel();
 			p70.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -403,6 +561,13 @@ public class Main extends JPanel {
 				b70.setIcon(MainController.displayImg(6, 0));
 				p70.add(b70, BorderLayout.CENTER);
 				b70.setBackground(MainController.changeButtonColour(6, 0));
+				b70.addActionListener(new ActionListener () {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MainController.select(6, 0);
+						b70.setBackground(MainController.changeButtonColour(6, 0));
+						return;
+					}});
 			
 			JPanel p71 = new JPanel();
 			p71.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -413,6 +578,13 @@ public class Main extends JPanel {
 				b71.setIcon(MainController.displayImg(6, 1));
 				p71.add(b71, BorderLayout.CENTER);
 				b71.setBackground(MainController.changeButtonColour(6, 1));
+				b71.addActionListener(new ActionListener () {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MainController.select(6, 1);
+						b71.setBackground(MainController.changeButtonColour(6, 1));
+						return;
+					}});
 			
 			JPanel p72 = new JPanel();
 			p72.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -423,6 +595,13 @@ public class Main extends JPanel {
 				b72.setIcon(MainController.displayImg(6, 2));
 				p72.add(b72, BorderLayout.CENTER);
 				b72.setBackground(MainController.changeButtonColour(6, 2));
+				b72.addActionListener(new ActionListener () {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MainController.select(6, 2);
+						b72.setBackground(MainController.changeButtonColour(6, 2));
+						return;
+					}});
 			
 			JPanel p73 = new JPanel();
 			p73.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -433,6 +612,13 @@ public class Main extends JPanel {
 				b73.setIcon(MainController.displayImg(6, 3));
 				p73.add(b73, BorderLayout.CENTER);
 				b73.setBackground(MainController.changeButtonColour(6, 3));
+				b73.addActionListener(new ActionListener () {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MainController.select(6, 3);
+						b73.setBackground(MainController.changeButtonColour(6, 3));
+						return;
+					}});
 			
 			JPanel p74 = new JPanel();
 			p74.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -443,5 +629,12 @@ public class Main extends JPanel {
 				b74.setIcon(MainController.displayImg(6, 4));
 				p74.add(b74, BorderLayout.CENTER);
 				b74.setBackground(MainController.changeButtonColour(6, 4));
+				b74.addActionListener(new ActionListener () {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MainController.select(6, 4);
+						b74.setBackground(MainController.changeButtonColour(6, 4));
+						return;
+					}});
 		}
 }
