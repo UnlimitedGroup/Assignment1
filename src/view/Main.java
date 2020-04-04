@@ -1,50 +1,25 @@
 package view;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JButton;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 
 import controller.MainController;
 
 import java.awt.Color;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 
 public class Main {
 	
+	public JFrame frame;
 
-	private JFrame frame;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Main window = new Main();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
+	
 	public Main() {
 		initialize();
 	}
-
 	/**
 	 * Initialize the contents of the frame.
 	 */
