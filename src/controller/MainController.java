@@ -1,5 +1,7 @@
 package controller;
 
+import java.awt.Color;
+
 import javax.swing.ImageIcon;
 
 import model.Board;
@@ -17,7 +19,6 @@ public class MainController {
 	private static ImageIcon princess2 = new ImageIcon(Main.class.getResource("/imgs/princess2.png"));
 	private static ImageIcon ranger = new ImageIcon(Main.class.getResource("/imgs/ranger.png"));
 	private static ImageIcon rogue = new ImageIcon(Main.class.getResource("/imgs/rogue.png"));
-	
 	
 	public static ImageIcon displayImg(int row, int column) {
 		for (Piece i: Board.pieceSet) {
@@ -51,12 +52,18 @@ public class MainController {
 		return null;
 	}
 	
+	public static Color changeButtonColour(int row, int column) {
+		if (Board.squares[row][column].getSelectStatus() == true) {
+			return Color.RED;
+		}
+		return Color.WHITE;
+	        		
+	     
+	}
 	
 	public static void move() {
 		return;
-	}
-	
-	
+	}	
 	public static boolean selectPreCondition() {
 		int count = 0;
 		for (int i = 0; i < Board.squares.length; i++) {
@@ -73,7 +80,6 @@ public class MainController {
 			return true;
 		}
 	}
-	
 	public static Square[] fetchSelectedSquares() {
 		Square selectedSquares[] = new Square[1];
 		int count = 0;
@@ -87,8 +93,6 @@ public class MainController {
 		}
 		return selectedSquares;	
 	}
-	
-	
 	public static void select(int row, int column) {
 		Square selectedSquares[] = fetchSelectedSquares();
 		
