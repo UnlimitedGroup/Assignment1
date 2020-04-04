@@ -4,6 +4,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
@@ -74,6 +77,12 @@ public class Main {
 				b10.setIcon(MainController.displayImg(0, 0));
 				p10.add(b10, BorderLayout.CENTER);
 				b10.setBackground(MainController.changeButtonColour(0, 0));
+				b10.addActionListener(new ActionListener () {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MainController.select(0, 0);
+						initialize();
+					}});
 			
 			JPanel p11 = new JPanel();
 			p11.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -255,7 +264,6 @@ public class Main {
 				b43.setIcon(MainController.displayImg(3, 3));
 				p43.add(b43, BorderLayout.CENTER);
 				b43.setBackground(MainController.changeButtonColour(3, 3));
-				
 			
 			JPanel p44 = new JPanel();
 			p44.setBorder(new LineBorder(new Color(0, 0, 0)));

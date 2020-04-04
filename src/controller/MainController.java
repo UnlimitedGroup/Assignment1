@@ -81,7 +81,7 @@ public class MainController {
 		}
 	}
 	public static Square[] fetchSelectedSquares() {
-		Square selectedSquares[] = new Square[1];
+		Square selectedSquares[] = new Square[2];
 		int count = 0;
 		for (int i = 0; i < Board.squares.length; i++) {
 	        for (int j = 0; j < Board.squares[i].length; j++) {
