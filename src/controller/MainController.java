@@ -9,18 +9,46 @@ import view.Main;
 
 public class MainController {
 	
-	private ImageIcon healer = new ImageIcon(Main.class.getResource("/imgs/healer.png"));
-	private ImageIcon mage = new ImageIcon(Main.class.getResource("/imgs/mage.png"));
-	private ImageIcon paladin = new ImageIcon(Main.class.getResource("/imgs/paladin.png"));
-	private ImageIcon power = new ImageIcon(Main.class.getResource("/imgs/power.png"));
-	private ImageIcon princess1 = new ImageIcon(Main.class.getResource("/imgs/princess1.png"));
-	private ImageIcon princess2 = new ImageIcon(Main.class.getResource("/imgs/princess2.png"));
-	private ImageIcon ranger = new ImageIcon(Main.class.getResource("/imgs/ranger.png"));
-	private ImageIcon rogue = new ImageIcon(Main.class.getResource("/imgs/rogue.png"));
+	private static ImageIcon healer = new ImageIcon(Main.class.getResource("/imgs/healer.png"));
+	private static ImageIcon mage = new ImageIcon(Main.class.getResource("/imgs/mage.png"));
+	private static ImageIcon paladin = new ImageIcon(Main.class.getResource("/imgs/paladin.png"));
+	private static ImageIcon power = new ImageIcon(Main.class.getResource("/imgs/power.png"));
+	private static ImageIcon princess1 = new ImageIcon(Main.class.getResource("/imgs/princess1.png"));
+	private static ImageIcon princess2 = new ImageIcon(Main.class.getResource("/imgs/princess2.png"));
+	private static ImageIcon ranger = new ImageIcon(Main.class.getResource("/imgs/ranger.png"));
+	private static ImageIcon rogue = new ImageIcon(Main.class.getResource("/imgs/rogue.png"));
 	
 	
-	public  ImageIcon displayImg(String row, String column) {
-		return healer;
+	public static ImageIcon displayImg(int row, int column) {
+		for (Piece i: Board.pieceSet) {
+			if(i.getCurrentSquare() == Board.squares[row][column]) {
+				if(i.toString() == "healer") {
+					return healer;
+				}
+				if(i.toString() == "mage") {
+					return mage;
+				}
+				if(i.toString() == "paladin") {
+					return paladin;
+				}
+				if(i.toString() == "power") {
+					return power;
+				}
+				if(i.toString() == "princess1") {
+					return princess1;
+				}
+				if(i.toString() == "princess2") {
+					return princess2;
+				}
+				if(i.toString() == "rogue") {
+					return rogue;
+				}
+				if(i.toString() == "ranger") {
+					return ranger;
+				}
+			}	
+		}
+		return null;
 	}
 	
 	
