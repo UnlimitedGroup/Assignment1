@@ -161,10 +161,18 @@ public class Main extends JPanel {
 			board.add(p22);
 			p22.setLayout(new BorderLayout(0, 0));
 			
+			
 				JButton b22 = new JButton("");
 				b22.setIcon(MainController.displayImg(1, 2));
 				p22.add(b22, BorderLayout.CENTER);
 				b22.setBackground(MainController.changeButtonColour(1, 2));
+				b22.addActionListener(new ActionListener () {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						MainController.select(1, 2);
+						b22.setBackground(MainController.changeButtonColour(1, 2));
+						return;
+					}});
 			
 			JPanel p23 = new JPanel();
 			p23.setBorder(new LineBorder(new Color(0, 0, 0)));

@@ -73,11 +73,11 @@ public class MainController {
 	        	}
 	        }
 		}
-		if (count >= 2) {
-    		return false;
+		if (count < 2) {
+    		return true;
     	}
 		else {
-			return true;
+			return false;
 		}
 	}
 	public static Square[] fetchSelectedSquares() {
@@ -85,7 +85,7 @@ public class MainController {
 		int count = 0;
 		for (int i = 0; i < Board.squares.length; i++) {
 	        for (int j = 0; j < Board.squares[i].length; j++) {
-	        	if (Board.squares[i][j].getSelectStatus() == true) {
+	        	if (Board.squares[i][j].getSelectStatus()) {
 	        		selectedSquares[count] = Board.squares[i][j];
 	        		count++;
 	        	}
@@ -115,11 +115,13 @@ public class MainController {
 							System.out.println("1");
 							Board.squares[row][column].setSelectStatus(true);
 							return;
+							}
 						}
 					}
 				}
+				for (Piece x: Board.pieceSet) {
 				//if blank square is selected
-				if (i.getCurrentSquare() != Board.squares[row][column]) {
+				if (x.getCurrentSquare() != Board.squares[row][column]) {
 					//Check if a square with a piece is selected  
 					for (Piece j: Board.pieceSet) {
 						if(j.getCurrentSquare() == selectedSquares[0]) {
@@ -133,25 +135,25 @@ public class MainController {
 							return;
 						}
 					}
-					//if no squares selected
-					if (selectedSquares[0] == null) {
-						Board.squares[row][column].setSelectStatus(true);
-						System.out.println("4");
-						return;
-					}
-					/*
-					if the selected square is blank when an already selected 
-					square is blank too 
-					*/
-					else {
-						System.out.println("please select a square with a piece");
-						return;
-					}	
 				}
-			}			
-		}
-		else {
-			System.out.println("two pieces are already selected");
+			}
+		    //if no squares selected
+		    if (selectedSquares[0] == null) {
+				Board.squares[row][column].setSelectStatus(true);
+				System.out.println("4");
+				return;
+				}
+			/*
+			if the selected square is blank when an already selected 
+			square is blank too 
+			*/
+			else {
+				System.out.println("please select a square with a piece");
+			return;
+				}				
+			}
+			else {
+				System.out.println("two pieces are already selected");
 			return;
 		}
 	}
