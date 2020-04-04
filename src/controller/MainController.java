@@ -110,16 +110,15 @@ public class MainController {
 							System.out.println("please select an empty square or deselect the piece selected");
 							return;
 						}
-						//if no other square has a piece, set square select status as true
-						else {
-							System.out.println("1");
-							Board.squares[row][column].setSelectStatus(true);
-							return;
-							}
-						}
 					}
+						//if no other square has a piece, set square select status as true
+						System.out.println("1");
+						Board.squares[row][column].setSelectStatus(true);
+						return;	
 				}
-				for (Piece x: Board.pieceSet) {
+			}
+			
+			for (Piece x: Board.pieceSet) {
 				//if blank square is selected
 				if (x.getCurrentSquare() != Board.squares[row][column]) {
 					//Check if a square with a piece is selected  
