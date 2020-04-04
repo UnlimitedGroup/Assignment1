@@ -15,7 +15,8 @@ public class Healer extends Piece{
 	X X X
 	X U X 
 	X X X
-	 */
+	 
+	*/
 	/*
 	@Override
 
@@ -70,9 +71,18 @@ public class Healer extends Piece{
 	}
 	*/
 	@Override
-	public boolean move() {
-		// TODO Auto-generated method stub
+	public boolean move(int row, int column) {
+		int currentRow = this.getCurrentSquare().getRow();
+		int currentColumn = this.getCurrentSquare().getColumn();
+
+		//Check row is in range
+		if (row == currentRow || row == currentRow + 1 || row == currentRow - 1) {
+		    //Check column is in range
+			if (column == currentColumn || column == currentColumn + 1 || column == currentColumn - 1 ) {
+			this.setCurrentSquare(Board.squares[row][column]);
+			return true;
+			}
+		}
 		return false;
 	}
-
 }
