@@ -9,23 +9,27 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.border.LineBorder;
 
 import controller.MainController;
 
 import java.awt.Color;
+import java.awt.EventQueue;
 
-public class Main {
+public class Main extends JPanel {
 	
 	public JFrame frame;
+	
 
 	
 	public Main() {
 		initialize();
 	}
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	
+	
+
+	
 	public void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 495, 361);
@@ -37,6 +41,12 @@ public class Main {
 		
 			JButton moveButton = new JButton("Move");
 			userPanel.add(moveButton);
+			moveButton.addActionListener(new ActionListener () {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					MainController.move();
+					//refresh every square color and icon
+				}});
 			
 			JButton spellButton = new JButton("Cast Spell");
 			userPanel.add(spellButton);
@@ -73,7 +83,7 @@ public class Main {
 			board.add(p10);
 			p10.setLayout(new BorderLayout(0, 0));
 			
-				JButton b10 = new JButton("");
+			    JButton b10 = new JButton("");
 				b10.setIcon(MainController.displayImg(0, 0));
 				p10.add(b10, BorderLayout.CENTER);
 				b10.setBackground(MainController.changeButtonColour(0, 0));
@@ -81,7 +91,8 @@ public class Main {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						MainController.select(0, 0);
-						initialize();
+						b10.setBackground(MainController.changeButtonColour(0, 0));
+						return;
 					}});
 			
 			JPanel p11 = new JPanel();
@@ -425,5 +436,4 @@ public class Main {
 				p74.add(b74, BorderLayout.CENTER);
 				b74.setBackground(MainController.changeButtonColour(6, 4));
 		}
-
 }

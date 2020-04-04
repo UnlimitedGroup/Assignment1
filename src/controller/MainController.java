@@ -53,7 +53,7 @@ public class MainController {
 	}
 	
 	public static Color changeButtonColour(int row, int column) {
-		if (Board.squares[row][column].getSelectStatus() == true) {
+		if (Board.squares[row][column].getSelectStatus()) {
 			return Color.RED;
 		}
 		return Color.WHITE;
@@ -104,13 +104,17 @@ public class MainController {
 					for (Piece j: Board.pieceSet) {
 						if(j.getCurrentSquare() == selectedSquares[0]) {
 							System.out.println("please select an empty square or deselect the piece selected");
+							return;
 						}
 						if(j.getCurrentSquare() == selectedSquares[1]) {
 							System.out.println("please select an empty square or deselect the piece selected");
+							return;
 						}
 						//if no other square has a piece, set square select status as true
-						else {	
-							Board.squares[row][column].setSelectStatus(); 
+						else {
+							System.out.println("1");
+							Board.squares[row][column].setSelectStatus(true);
+							return;
 						}
 					}
 				}
@@ -119,17 +123,20 @@ public class MainController {
 					//Check if a square with a piece is selected  
 					for (Piece j: Board.pieceSet) {
 						if(j.getCurrentSquare() == selectedSquares[0]) {
-							Board.squares[row][column].setSelectStatus();
+							Board.squares[row][column].setSelectStatus(true);
+							System.out.println("2");
 							return;
 						}
 						if(j.getCurrentSquare() == selectedSquares[1]) {
-							Board.squares[row][column].setSelectStatus();
+							Board.squares[row][column].setSelectStatus(true);
+							System.out.println("3");
 							return;
 						}
 					}
 					//if no squares selected
 					if (selectedSquares[0] == null) {
-						Board.squares[row][column].setSelectStatus();
+						Board.squares[row][column].setSelectStatus(true);
+						System.out.println("4");
 						return;
 					}
 					/*
@@ -138,12 +145,14 @@ public class MainController {
 					*/
 					else {
 						System.out.println("please select a square with a piece");
+						return;
 					}	
 				}
 			}			
 		}
 		else {
 			System.out.println("two pieces are already selected");
+			return;
 		}
 	}
 }

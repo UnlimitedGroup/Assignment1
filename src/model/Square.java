@@ -22,9 +22,7 @@ public class Square {
 	public boolean getSelectStatus() {
 		return this.selectStatus;
 	}
-	public boolean setSelectStatus() {
-		/*NEEDS WORK needs so that only one tile can be selected at one time
-		 */
-		return true;
+	public void setSelectStatus(boolean status) {
+		this.selectStatus = status;
 	}
 }
