@@ -281,7 +281,7 @@ public class Main extends JPanel {
 				b31.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						MainController.select(2, 0);
+						MainController.select(2, 1);
 						b31.setBackground(MainController.changeButtonColour(2, 1));
 						return;
 					}});
