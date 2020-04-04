@@ -7,6 +7,9 @@ public class Paladin extends Piece {
 	public Paladin(int health, Square currentSquare, int team) {
 		super(health, currentSquare, team);
 	}
+	public String toString() {
+		return "paladin";
+		}
 	/*
 	Unique Spell - Heal unit up to 4 squares away in a straight line by 50
 	 */

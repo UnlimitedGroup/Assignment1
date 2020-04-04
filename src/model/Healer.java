@@ -5,9 +5,11 @@ import java.util.ArrayList;
 public class Healer extends Piece{
 
 	public Healer(int health, Square currentSquare, int team) {
-		super(health, currentSquare, team);
-		
+		super(health, currentSquare, team);	
 	}
+	public String toString() {
+		return "healer";
+		}
 	/*
 	Unique Spell - Heal all surrounding units by 25 
 	X X X

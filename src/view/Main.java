@@ -23,7 +23,7 @@ public class Main {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	public void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 495, 361);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

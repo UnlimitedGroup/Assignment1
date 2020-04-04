@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class Board {
 	public static ArrayList<Piece> pieceSet = new ArrayList<Piece>();
-	public static Square squares[][];
+	//5x7 Grid
+	public static Square[][] squares = new Square[7][5];
 	
 	public static void create() {
 		initializePlayers();
@@ -22,7 +23,6 @@ public class Board {
 		}	
 	}
 	public static void initializeSquares() {
-		//5x7 Grid
 		squares[0][0] = new Square(0,0, false);
 		squares[0][1] = new Square(0,1, false);
 		squares[0][2] = new Square(0,2, false);
@@ -60,14 +60,14 @@ public class Board {
 		squares[6][4] = new Square(6,4, false);	
 	}
 	public static void initializePieces() {
-		Piece power = new Power(100, squares[5][1], 0);
-		Piece paladin = new Paladin(100, squares[5][2], 0);
-		Piece mage = new Mage(100, squares[5][3], 0);
-		Piece ranger = new Ranger(100, squares[1][1], 0);
-		Piece healer = new Healer(100, squares[1][2], 0);
-		Piece rogue = new Rogue(100, squares[1][3], 0);
-		Piece princess1 = new Princess(100, squares[0][2], 0);
-		Piece princess2 = new Princess(100, squares[6][2], 0);
+		Piece power = new Power(100, squares[5][1], 1);
+		Piece paladin = new Paladin(100, squares[5][2], 1);
+		Piece mage = new Mage(100, squares[5][3], 1);
+		Piece ranger = new Ranger(100, squares[1][1], 2);
+		Piece healer = new Healer(100, squares[1][2], 2);
+		Piece rogue = new Rogue(100, squares[1][3], 2);
+		Piece princess1 = new Princess(100, squares[0][2], 1);
+		Piece princess2 = new Princess(100, squares[6][2], 2);
 		pieceSet.add(power);
 		pieceSet.add(paladin);
 		pieceSet.add(mage);

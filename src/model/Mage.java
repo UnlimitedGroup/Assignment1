@@ -5,9 +5,11 @@ import java.util.ArrayList;
 public class Mage extends Piece {
 
 	public Mage(int health, Square currentSquare, int team) {
-		super(health, currentSquare, team);
-		
+		super(health, currentSquare, team);	
 	}
+	public String toString() {
+		return "mage";
+		}
 	/*
 	Unique Spell - Damage all surrounding units by 50 
 	X X X

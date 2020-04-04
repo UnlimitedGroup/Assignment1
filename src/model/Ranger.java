@@ -7,6 +7,9 @@ public class Ranger extends Piece {
 	public Ranger(int health, Square currentSquare, int team) {
 		super(health, currentSquare, team);
 	}
+	public String toString() {
+		return "ranger";
+		}
 	/*
 	Unique Spell - Damage unit up to 7 squares away in a straight line by 20
 	 */

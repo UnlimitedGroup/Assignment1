@@ -7,6 +7,9 @@ public class Power extends Piece {
 	public Power(int health, Square currentSquare, int team) {
 		super(health, currentSquare, team);
 	}
+	public String toString() {
+		return "power";
+		}
 	
 	/*
 	Unique Spell - Damage unit up to 4 squares away in a straight line by 25
