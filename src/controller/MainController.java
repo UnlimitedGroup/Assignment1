@@ -94,8 +94,20 @@ public class MainController {
 	}
 	public static void select(int row, int column) {
 		Square selectedSquares[] = fetchSelectedSquares();
+		System.out.println(selectedSquares[0]);
+		System.out.println(selectedSquares[1]);
 		
-		if (selectPreCondition()) {
+		//Deselect
+		if(Board.squares[row][column] == selectedSquares[0]) {
+			Board.squares[row][column].setSelectStatus(false);
+			return;
+		}
+		if(Board.squares[row][column] == selectedSquares[1]) {
+			Board.squares[row][column].setSelectStatus(false);
+			return;
+		}
+		
+		else if (selectPreCondition()) {
 			for (Piece i: Board.pieceSet) {
 				//if square with piece is selected
 				if (i.getCurrentSquare() == Board.squares[row][column]) {
@@ -116,7 +128,6 @@ public class MainController {
 						return;	
 				}
 			}
-			
 			for (Piece x: Board.pieceSet) {
 				//if blank square is selected
 				if (x.getCurrentSquare() != Board.squares[row][column]) {
