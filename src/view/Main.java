@@ -299,7 +299,7 @@ public class Main extends JPanel {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						MainController.select(2, 2);
-						b30.setBackground(MainController.changeButtonColour(2, 2));
+						b32.setBackground(MainController.changeButtonColour(2, 2));
 						return;
 					}});
 			
@@ -368,7 +368,7 @@ public class Main extends JPanel {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						MainController.select(3, 1);
-						b40.setBackground(MainController.changeButtonColour(3, 1));
+						b41.setBackground(MainController.changeButtonColour(3, 1));
 						return;
 					}});
 			

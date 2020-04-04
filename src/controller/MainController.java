@@ -54,13 +54,12 @@ public class MainController {
 	
 	public static Color changeButtonColour(int row, int column) {
 		if (Board.squares[row][column].getSelectStatus()) {
-			return Color.RED;
+			return Color.BLUE;
 		}
-		return Color.WHITE;
+		return new Color(255,255,204);
 	        		
 	     
 	}
-	
 	public static void move() {
 		return;
 	}	
