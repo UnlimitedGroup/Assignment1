@@ -34,45 +34,7 @@ public class Main extends JPanel {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 495, 361);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		JPanel userPanel = new JPanel();
-		frame.getContentPane().add(userPanel, BorderLayout.WEST);
-		userPanel.setLayout(new GridLayout(0, 1, 0, 0));
-		
-			JButton moveButton = new JButton("Move");
-			userPanel.add(moveButton);
-			moveButton.addActionListener(new ActionListener () {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					MainController.move();
-					//refresh every square color and icon
-				}});
 			
-			JButton spellButton = new JButton("Cast Spell");
-			userPanel.add(spellButton);
-			
-			JButton turnButton = new JButton("Finish Turn");
-			userPanel.add(turnButton);
-		
-		JPanel infoPanel = new JPanel();
-		userPanel.add(infoPanel);
-		infoPanel.setLayout(new GridLayout(3, 3, 0, 0));
-		
-			JLabel unitHealth = new JLabel("Unit Health");
-			infoPanel.add(unitHealth);
-			
-			JLabel movesLeft = new JLabel("Moves left");
-			infoPanel.add(movesLeft);
-			
-			JLabel turnStatus = new JLabel("Turn");
-			infoPanel.add(turnStatus);
-		
-		JPanel statusPanel = new JPanel();
-		userPanel.add(statusPanel);
-			
-			JLabel status = new JLabel("Status");
-			statusPanel.add(status);
-		
 		JPanel board = new JPanel();
 		board.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		frame.getContentPane().add(board, BorderLayout.CENTER);
@@ -678,5 +640,78 @@ public class Main extends JPanel {
 						b74.setBackground(MainController.changeButtonColour(6, 4));
 						return;
 					}});
-		}
+				
+				JPanel userPanel = new JPanel();
+				frame.getContentPane().add(userPanel, BorderLayout.WEST);
+				userPanel.setLayout(new GridLayout(0, 1, 0, 0));
+				
+					JButton moveButton = new JButton("Move");
+					userPanel.add(moveButton);
+					moveButton.addActionListener(new ActionListener () {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							MainController.move();
+							//refresh all squares
+							b10.setIcon(MainController.displayImg(0, 0));
+							b11.setIcon(MainController.displayImg(0, 1));
+							b12.setIcon(MainController.displayImg(0, 2));
+							b13.setIcon(MainController.displayImg(0, 3));
+							b14.setIcon(MainController.displayImg(0, 4));
+							b20.setIcon(MainController.displayImg(1, 0));
+							b21.setIcon(MainController.displayImg(1, 1));
+							b22.setIcon(MainController.displayImg(1, 2));
+							b23.setIcon(MainController.displayImg(1, 3));
+							b24.setIcon(MainController.displayImg(1, 4));
+							b30.setIcon(MainController.displayImg(2, 0));
+							b31.setIcon(MainController.displayImg(2, 1));
+							b32.setIcon(MainController.displayImg(2, 2));
+							b33.setIcon(MainController.displayImg(2, 3));
+							b34.setIcon(MainController.displayImg(2, 4));
+							b40.setIcon(MainController.displayImg(3, 0));
+							b41.setIcon(MainController.displayImg(3, 1));
+							b42.setIcon(MainController.displayImg(3, 2));
+							b43.setIcon(MainController.displayImg(3, 3));
+							b44.setIcon(MainController.displayImg(3, 4));
+							b50.setIcon(MainController.displayImg(4, 0));
+							b51.setIcon(MainController.displayImg(4, 1));
+							b52.setIcon(MainController.displayImg(4, 2));
+							b53.setIcon(MainController.displayImg(4, 3));
+							b54.setIcon(MainController.displayImg(4, 4));
+							b60.setIcon(MainController.displayImg(5, 0));
+							b61.setIcon(MainController.displayImg(5, 1));
+							b62.setIcon(MainController.displayImg(5, 2));
+							b63.setIcon(MainController.displayImg(5, 3));
+							b64.setIcon(MainController.displayImg(5, 4));
+							b70.setIcon(MainController.displayImg(6, 0));
+							b71.setIcon(MainController.displayImg(6, 1));
+							b72.setIcon(MainController.displayImg(6, 2));
+							b73.setIcon(MainController.displayImg(6, 3));
+							b74.setIcon(MainController.displayImg(6, 4));
+							}});
+			
+					JButton spellButton = new JButton("Cast Spell");
+					userPanel.add(spellButton);
+					
+					JButton turnButton = new JButton("Finish Turn");
+					userPanel.add(turnButton);
+				
+				JPanel infoPanel = new JPanel();
+				userPanel.add(infoPanel);
+				infoPanel.setLayout(new GridLayout(3, 3, 0, 0));
+				
+					JLabel unitHealth = new JLabel("Unit Health");
+					infoPanel.add(unitHealth);
+					
+					JLabel movesLeft = new JLabel("Moves left");
+					infoPanel.add(movesLeft);
+					
+					JLabel turnStatus = new JLabel("Turn");
+					infoPanel.add(turnStatus);
+				
+				JPanel statusPanel = new JPanel();
+				userPanel.add(statusPanel);
+					
+					JLabel status = new JLabel("Status");
+					statusPanel.add(status);	
+	}			
 }

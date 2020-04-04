@@ -61,8 +61,26 @@ public class MainController {
 	     
 	}
 	public static void move() {
-		return;
-	}	
+		Square selectedSquares[] = fetchSelectedSquares();
+		
+		for (Piece i : Board.pieceSet) {
+			if (selectedSquares[0].getRow() == i.getCurrentSquare().getRow()) {
+				if (selectedSquares[0].getColumn() == i.getCurrentSquare().getColumn()) {
+					System.out.println(i.toString() + " " + "moves");
+					i.move(selectedSquares[1].getRow(), selectedSquares[1].getColumn());
+					return;
+				}
+			}
+			if (selectedSquares[1].getRow() == i.getCurrentSquare().getRow()) {
+				if (selectedSquares[1].getColumn() == i.getCurrentSquare().getColumn()) {
+					System.out.println(i.toString() + " " + "moves");
+					i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn());
+					return;
+				}
+			}
+		}
+	}
+		
 	public static boolean selectPreCondition() {
 		int count = 0;
 		for (int i = 0; i < Board.squares.length; i++) {
@@ -97,7 +115,7 @@ public class MainController {
 		System.out.println(selectedSquares[0]);
 		System.out.println(selectedSquares[1]);
 		
-		//Deselect
+		//deselect
 		if(Board.squares[row][column] == selectedSquares[0]) {
 			Board.squares[row][column].setSelectStatus(false);
 			return;
