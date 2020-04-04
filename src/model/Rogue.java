@@ -10,6 +10,7 @@ public class Rogue extends Piece {
 	/*
 	Unique Spell - Damage unit in front by 75
 	 */
+	/*
 	public void spell() {
 		int currentRow = this.getCurrentSquare().getRow();
 		int currentColumn = this.getCurrentSquare().getColumn();
@@ -50,6 +51,7 @@ public class Rogue extends Piece {
 			}
 		}
 	}
+	*/
 	@Override
 	public boolean move() {
 		// TODO Auto-generated method stub

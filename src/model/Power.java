@@ -11,6 +11,7 @@ public class Power extends Piece {
 	/*
 	Unique Spell - Damage unit up to 4 squares away in a straight line by 25
 	 */
+	/*
 	public void spell() {
 		int currentRow = this.getCurrentSquare().getRow();
 		int currentColumn = this.getCurrentSquare().getColumn();
@@ -52,7 +53,7 @@ public class Power extends Piece {
 			}
 		}
 	}
-
+	 */
 	@Override
 	public boolean move() {
 		// TODO Auto-generated method stub

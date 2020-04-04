@@ -14,6 +14,7 @@ public class Mage extends Piece {
 	X U X 
 	X X X
 	 */
+	/*
 	@Override
 	public void spell() {
 		int currentRow = this.getCurrentSquare().getRow();
@@ -72,6 +73,7 @@ public class Mage extends Piece {
 			System.out.println(e);
 		}
 	}
+	*/
 	@Override
 	public boolean move() {
 		// TODO Auto-generated method stub

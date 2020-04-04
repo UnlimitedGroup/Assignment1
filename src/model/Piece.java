@@ -42,8 +42,9 @@ public abstract class Piece {
 	public boolean moveCheck() {
 		return true;
 	}
-	
+	/*
     abstract public void spell();
+    */
     abstract public boolean move();
 }
 

@@ -10,6 +10,7 @@ public class Ranger extends Piece {
 	/*
 	Unique Spell - Damage unit up to 7 squares away in a straight line by 20
 	 */
+	/*
 	public void spell() {
 		int currentRow = this.getCurrentSquare().getRow();
 		int currentColumn = this.getCurrentSquare().getColumn();
@@ -50,6 +51,7 @@ public class Ranger extends Piece {
 			}
 		}
 	}
+	*/
 	@Override
 	public boolean move() {
 		// TODO Auto-generated method stub

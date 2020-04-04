@@ -1,7 +1,5 @@
 package controller;
 
-import java.util.ArrayList;
-
 import model.Board;
 import model.Piece;
 import model.Square;
@@ -95,8 +93,9 @@ public class MainController {
 			}			
 		}
 		else {
-			System.out.println("two");
+			System.out.println("two pieces are already selected");
 		}
+	}
 }
 
 	

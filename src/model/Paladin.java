@@ -10,6 +10,7 @@ public class Paladin extends Piece {
 	/*
 	Unique Spell - Heal unit up to 4 squares away in a straight line by 50
 	 */
+	/*
 	@Override
 	public void spell() {
 		int currentRow = this.getCurrentSquare().getRow();
@@ -52,6 +53,7 @@ public class Paladin extends Piece {
 		}
 		
 	}
+	*/
 	@Override
 	public boolean move() {
 		// TODO Auto-generated method stub

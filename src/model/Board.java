@@ -6,7 +6,7 @@ public class Board {
 	public static ArrayList<Piece> pieceSet = new ArrayList<Piece>();
 	public static Square squares[][];
 	
-	public static void initialize() {
+	public static void create() {
 		initializePlayers();
 		initializeSquares();
 		initializePieces();
@@ -60,40 +60,22 @@ public class Board {
 		squares[6][4] = new Square(6,4, false);	
 	}
 	public static void initializePieces() {
-		Piece power0 = new Power(100, null, 0);
-		Piece power1 = new Power(100, null, 1);
-		Piece paladin0 = new Paladin(100, null, 0);
-		Piece paladin1 = new Paladin(100, null, 1);
-		Piece mage0 = new Mage(100, null, 0);
-		Piece mage1 = new Mage(100, null, 1);
-		Piece ranger0 = new Ranger(100, null, 0);
-		Piece ranger1 = new Ranger(100, null, 1);
-		Piece healer0 = new Healer(100, null, 0);
-		Piece healer1= new Healer(100, null, 1);
-		Piece rogue0 = new Rogue(100, null, 0);
-		Piece rogue1 = new Rogue(100, null, 1);
-		Piece princess0 = new Princess(100, null, 0);
-		Piece princess1 = new Princess(100, null, 1);
-		pieceSet.add(power0);
-		pieceSet.add(power1);
-		pieceSet.add(paladin0);
-		pieceSet.add(paladin1);
-		pieceSet.add(mage0);
-		pieceSet.add(mage1);
-		pieceSet.add(ranger0);
-		pieceSet.add(ranger1);
-		pieceSet.add(healer0);
-		pieceSet.add(healer1);
-		pieceSet.add(rogue0);
-		pieceSet.add(rogue1);
-		pieceSet.add(princess0);
+		Piece power = new Power(100, squares[5][1], 0);
+		Piece paladin = new Paladin(100, squares[5][2], 0);
+		Piece mage = new Mage(100, squares[5][3], 0);
+		Piece ranger = new Ranger(100, squares[1][1], 0);
+		Piece healer = new Healer(100, squares[1][2], 0);
+		Piece rogue = new Rogue(100, squares[1][3], 0);
+		Piece princess1 = new Princess(100, squares[0][2], 0);
+		Piece princess2 = new Princess(100, squares[6][2], 0);
+		pieceSet.add(power);
+		pieceSet.add(paladin);
+		pieceSet.add(mage);
+		pieceSet.add(ranger);
+		pieceSet.add(healer);
+		pieceSet.add(rogue);
 		pieceSet.add(princess1);
+		pieceSet.add(princess2);
+	
 	}
-	public static ArrayList<Piece> getPieceSet() {
-		return pieceSet;
-	}
-	public static Square[][] getSquareList() {
-		return squares;
-	}
-
 }
