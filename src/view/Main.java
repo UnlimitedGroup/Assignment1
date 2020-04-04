@@ -15,6 +15,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 
 public class Main {
+	
 
 	private JFrame frame;
 
@@ -92,6 +93,7 @@ public class Main {
 			p00.setLayout(new BorderLayout(0, 0));
 			
 				JButton b00 = new JButton("");
+				b00.setIcon(rogue);
 				p00.add(b00, BorderLayout.CENTER);
 			
 			JPanel p01 = new JPanel();
@@ -132,7 +134,6 @@ public class Main {
 			p05.setLayout(new BorderLayout(0, 0));
 			
 				JButton b05 = new JButton("");
-				b05.setIcon(new ImageIcon(Main.class.getResource("/imgs/rsz_princess1.png")));
 				p05.add(b05, BorderLayout.CENTER);
 			
 			JPanel p06 = new JPanel();

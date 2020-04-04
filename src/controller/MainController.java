@@ -1,10 +1,28 @@
 package controller;
 
+import javax.swing.ImageIcon;
+
 import model.Board;
 import model.Piece;
 import model.Square;
+import view.Main;
 
 public class MainController {
+	
+	private ImageIcon healer = new ImageIcon(Main.class.getResource("/imgs/healer.png"));
+	private ImageIcon mage = new ImageIcon(Main.class.getResource("/imgs/mage.png"));
+	private ImageIcon paladin = new ImageIcon(Main.class.getResource("/imgs/paladin.png"));
+	private ImageIcon power = new ImageIcon(Main.class.getResource("/imgs/power.png"));
+	private ImageIcon princess1 = new ImageIcon(Main.class.getResource("/imgs/princess1.png"));
+	private ImageIcon princess2 = new ImageIcon(Main.class.getResource("/imgs/princess2.png"));
+	private ImageIcon ranger = new ImageIcon(Main.class.getResource("/imgs/ranger.png"));
+	private ImageIcon rogue = new ImageIcon(Main.class.getResource("/imgs/rogue.png"));
+	
+	
+	public  ImageIcon displayImg(String row, String column) {
+		return healer;
+	}
+	
 	
 	public static void move() {
 		return;
