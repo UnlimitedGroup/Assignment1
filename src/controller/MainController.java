@@ -86,22 +86,26 @@ public class MainController {
 				if (selectedSquares[0].getRow() == i.getCurrentSquare().getRow()) {
 					if (selectedSquares[0].getColumn() == i.getCurrentSquare().getColumn()) {
 						if (i.getTeam() == 0) {
-							System.out.println(i.toString() + " " + "moves");
-							i.move(selectedSquares[1].getRow(), selectedSquares[1].getColumn());
-							Board.Players[0].setTurn(false);
-							Board.Players[1].setTurn(true);
-							return;
+							if (i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn())) {
+								System.out.println(i.toString() + " " + "moves");
+								i.move(selectedSquares[1].getRow(), selectedSquares[1].getColumn());
+								Board.Players[0].setTurn(false);
+								Board.Players[1].setTurn(true);
+								return;
+							}
 						}
 					}
 				}
 				if (selectedSquares[1].getRow() == i.getCurrentSquare().getRow()) {
 					if (selectedSquares[1].getColumn() == i.getCurrentSquare().getColumn()) {
 						if (i.getTeam() == 0) {
-							System.out.println(i.toString() + " " + "moves");
-							i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn());
-							Board.Players[0].setTurn(false);
-							Board.Players[1].setTurn(true);
-							return;
+							if (i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn())) {
+								i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn());
+								System.out.println(i.toString() + " " + "moves");
+								Board.Players[0].setTurn(false);
+								Board.Players[1].setTurn(true);
+								return;
+							}
 							}
 						}
 					}
@@ -112,22 +116,26 @@ public class MainController {
 				if (selectedSquares[0].getRow() == i.getCurrentSquare().getRow()) {
 					if (selectedSquares[0].getColumn() == i.getCurrentSquare().getColumn()) {
 						if (i.getTeam() == 1) {
-							System.out.println(i.toString() + " " + "moves");
-							i.move(selectedSquares[1].getRow(), selectedSquares[1].getColumn());
-							Board.Players[1].setTurn(false);
-							Board.Players[0].setTurn(true);
-							return;
+							if (i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn())) {
+								System.out.println(i.toString() + " " + "moves");
+								i.move(selectedSquares[1].getRow(), selectedSquares[1].getColumn());
+								Board.Players[1].setTurn(false);
+								Board.Players[0].setTurn(true);
+								return;
+							}
 						}
 					}
 				}
 				if (selectedSquares[1].getRow() == i.getCurrentSquare().getRow()) {
 					if (selectedSquares[1].getColumn() == i.getCurrentSquare().getColumn()) {
 						if (i.getTeam() == 1) {
-							System.out.println(i.toString() + " " + "moves");
-							i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn());
-							Board.Players[1].setTurn(false);
-							Board.Players[0].setTurn(true);
-							return;
+							if (i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn())) {
+								System.out.println(i.toString() + " " + "moves");
+								i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn());
+								Board.Players[1].setTurn(false);
+								Board.Players[0].setTurn(true);
+								return;
+								}
 							}
 						}
 					}

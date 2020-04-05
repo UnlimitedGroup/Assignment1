@@ -9,9 +9,17 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+
 import controller.MainController;
 import java.awt.Color;
 import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
+import java.awt.FlowLayout;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
 
 public class Main {
 	
@@ -638,33 +646,36 @@ public class Main {
 				
 				
 				JPanel infoPanel = new JPanel();
+				infoPanel.setBackground(Color.WHITE);
 				userPanel.add(infoPanel);
 				infoPanel.setLayout(new GridLayout(3, 3, 0, 0));
-				
-					JLabel unitHealth = new JLabel("Unit Health");
-					infoPanel.add(unitHealth);
 					
-					JTextArea textArea_1 = new JTextArea();
-					infoPanel.add(textArea_1);
-					
-					JLabel movesLeft = new JLabel("Moves left");
-					infoPanel.add(movesLeft);
-					
-					JTextArea textArea = new JTextArea();
-					infoPanel.add(textArea);
-					
-					JLabel turnStatus = new JLabel("Turn");
+					JLabel turnStatus = new JLabel("Turn:");
 					infoPanel.add(turnStatus);
 					
 					JTextArea turnDisplay = new JTextArea();
 					turnDisplay.setText(MainController.displayTurn());
+					
+					turnDisplay.setEditable(false);
 					infoPanel.add(turnDisplay);
+				
+					JLabel unitHealth = new JLabel("Unit Health:");
+					infoPanel.add(unitHealth);
+					
+					JTextArea textArea = new JTextArea();
+					infoPanel.add(textArea);
 				
 				JPanel statusPanel = new JPanel();
 				userPanel.add(statusPanel);
+					statusPanel.setLayout(new BorderLayout(0, 0));
 					
-					JLabel status = new JLabel("Status");
-					statusPanel.add(status);
+					JLabel Status = new JLabel("Status");
+					Status.setHorizontalAlignment(SwingConstants.CENTER);
+					statusPanel.add(Status, BorderLayout.NORTH);
+					
+					JTextArea txtrOutputstream = new JTextArea();
+					txtrOutputstream.setText("outputStream\r\n");
+					statusPanel.add(txtrOutputstream, BorderLayout.CENTER);
 				
 					JButton moveButton = new JButton("Move");
 					userPanel.add(moveButton);
@@ -746,15 +757,12 @@ public class Main {
 							b73.setBackground(MainController.changeButtonColour(6, 3));
 							b74.setBackground(MainController.changeButtonColour(6, 4));
 							turnDisplay.setText(MainController.displayTurn());
-							
+								
 							
 							}});
 			
 					JButton spellButton = new JButton("Cast Spell");
 					userPanel.add(spellButton);
-					
-					JButton turnButton = new JButton("Finish Turn");
-					userPanel.add(turnButton);
 				
 					
 	}			
