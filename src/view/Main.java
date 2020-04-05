@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 import javax.swing.text.SimpleAttributeSet;
@@ -676,6 +677,27 @@ public class Main {
 					JTextArea txtrOutputstream = new JTextArea();
 					txtrOutputstream.setText("outputStream\r\n");
 					statusPanel.add(txtrOutputstream, BorderLayout.CENTER);
+					
+					JButton instructionsButton = new JButton("Instructions");
+					userPanel.add(instructionsButton);
+					instructionsButton.addActionListener(new ActionListener () {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							String msg = "Player 1 is the robots, who start at bottom, \n"
+									   + "Player 2 is the girlgang, who start at the top, \n"
+									   + "Player 1 always goes first \n"
+									   + "\n"
+									   + "Select a piece and the square you wish to move to,\n"
+									   + "selected squares will highlight in blue,\n"
+									   + "click selected squares to deselect them \n"
+									   + "\n"
+									   + "One action per turn,\n"
+									   + "an action consists of a move or spell";
+							
+							JOptionPane.showMessageDialog(null, msg, "Instructions", JOptionPane.ERROR_MESSAGE);
+							return;
+						}});
+					
 				
 					JButton moveButton = new JButton("Move");
 					userPanel.add(moveButton);
