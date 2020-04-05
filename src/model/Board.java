@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class Board {
+	public static Player[] Players = new Player[2];
 	public static ArrayList<Piece> pieceSet = new ArrayList<Piece>();
 	//5x7 Grid
 	public static Square[][] squares = new Square[7][5];
@@ -15,9 +16,8 @@ public class Board {
 	
 	public static void initializePlayers() {
 		try {
-			Player Player1 = new Player(0);
-			Player Player2 = new Player(1);
-			
+			Players[0] = new Player(1, true);
+			Players[1] = new Player(2, false);
 		} catch (teamException e) {
 			//handle
 		}	
