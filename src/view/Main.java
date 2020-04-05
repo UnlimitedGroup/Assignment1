@@ -11,20 +11,15 @@ import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 import controller.MainController;
 import java.awt.Color;
-
+import javax.swing.JTextArea;
 
 public class Main {
 	
 	public JFrame frame;
 	
-
-	
 	public Main() {
 		initialize();
 	}
-	
-	
-
 	
 	public void initialize() {
 		frame = new JFrame();
@@ -641,6 +636,36 @@ public class Main {
 				frame.getContentPane().add(userPanel, BorderLayout.WEST);
 				userPanel.setLayout(new GridLayout(0, 1, 0, 0));
 				
+				
+				JPanel infoPanel = new JPanel();
+				userPanel.add(infoPanel);
+				infoPanel.setLayout(new GridLayout(3, 3, 0, 0));
+				
+					JLabel unitHealth = new JLabel("Unit Health");
+					infoPanel.add(unitHealth);
+					
+					JTextArea textArea_1 = new JTextArea();
+					infoPanel.add(textArea_1);
+					
+					JLabel movesLeft = new JLabel("Moves left");
+					infoPanel.add(movesLeft);
+					
+					JTextArea textArea = new JTextArea();
+					infoPanel.add(textArea);
+					
+					JLabel turnStatus = new JLabel("Turn");
+					infoPanel.add(turnStatus);
+					
+					JTextArea turnDisplay = new JTextArea();
+					turnDisplay.setText(MainController.displayTurn());
+					infoPanel.add(turnDisplay);
+				
+				JPanel statusPanel = new JPanel();
+				userPanel.add(statusPanel);
+					
+					JLabel status = new JLabel("Status");
+					statusPanel.add(status);
+				
 					JButton moveButton = new JButton("Move");
 					userPanel.add(moveButton);
 					moveButton.addActionListener(new ActionListener () {
@@ -720,6 +745,8 @@ public class Main {
 							b72.setBackground(MainController.changeButtonColour(6, 2));
 							b73.setBackground(MainController.changeButtonColour(6, 3));
 							b74.setBackground(MainController.changeButtonColour(6, 4));
+							turnDisplay.setText(MainController.displayTurn());
+							
 							
 							}});
 			
@@ -729,23 +756,6 @@ public class Main {
 					JButton turnButton = new JButton("Finish Turn");
 					userPanel.add(turnButton);
 				
-				JPanel infoPanel = new JPanel();
-				userPanel.add(infoPanel);
-				infoPanel.setLayout(new GridLayout(3, 3, 0, 0));
-				
-					JLabel unitHealth = new JLabel("Unit Health");
-					infoPanel.add(unitHealth);
 					
-					JLabel movesLeft = new JLabel("Moves left");
-					infoPanel.add(movesLeft);
-					
-					JLabel turnStatus = new JLabel("Turn");
-					infoPanel.add(turnStatus);
-				
-				JPanel statusPanel = new JPanel();
-				userPanel.add(statusPanel);
-					
-					JLabel status = new JLabel("Status");
-					statusPanel.add(status);	
 	}			
 }

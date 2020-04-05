@@ -20,6 +20,16 @@ public class MainController {
 	private static ImageIcon ranger = new ImageIcon(Main.class.getResource("/imgs/ranger.png"));
 	private static ImageIcon rogue = new ImageIcon(Main.class.getResource("/imgs/rogue.png"));
 	
+	public static String displayTurn() {
+		if (Board.Players[0].getTurn()) {
+			return "Player 1";
+		}
+		if (Board.Players[1].getTurn()) {
+			return "Player 2";
+		}
+		return null;
+	}
+	
 	public static ImageIcon displayImg(int row, int column) {
 		for (Piece i: Board.pieceSet) {
 			if(i.getCurrentSquare() == Board.squares[row][column]) {
