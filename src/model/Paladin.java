@@ -59,7 +59,17 @@ public class Paladin extends Piece {
 	*/
 	@Override
 	public boolean move(int row, int column) {
-		this.setCurrentSquare(Board.squares[row][column]);
-			return true;	
+		int currentRow = this.getCurrentSquare().getRow();
+		int currentColumn = this.getCurrentSquare().getColumn();
+
+		//Check row is in range
+		if (row == currentRow || row == currentRow + 1 || row == currentRow - 1) {
+		    //Check column is in range
+			if (column == currentColumn || column == currentColumn + 1 || column == currentColumn - 1 ) {
+			this.setCurrentSquare(Board.squares[row][column]);
+			return true;
+			}
+		}
+		return false;
 	}
 }

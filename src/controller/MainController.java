@@ -20,6 +20,10 @@ public class MainController {
 	private static ImageIcon ranger = new ImageIcon(Main.class.getResource("/imgs/ranger.png"));
 	private static ImageIcon rogue = new ImageIcon(Main.class.getResource("/imgs/rogue.png"));
 	
+	public static void turn() {
+		
+	}
+	
 	public static ImageIcon displayImg(int row, int column) {
 		for (Piece i: Board.pieceSet) {
 			if(i.getCurrentSquare() == Board.squares[row][column]) {
@@ -51,7 +55,15 @@ public class MainController {
 		}
 		return null;
 	}
-	
+	public static void resetSquares() {
+		for (int i = 0; i < Board.squares.length; i++) {
+	        for (int j = 0; j < Board.squares[i].length; j++) {
+	        	if (Board.squares[i][j].getSelectStatus() == true) {
+	        		Board.squares[i][j].setSelectStatus(false);
+	        	}
+	        }
+		}
+	}
 	public static Color changeButtonColour(int row, int column) {
 		if (Board.squares[row][column].getSelectStatus()) {
 			return Color.BLUE;
@@ -80,7 +92,6 @@ public class MainController {
 			}
 		}
 	}
-		
 	public static boolean selectPreCondition() {
 		int count = 0;
 		for (int i = 0; i < Board.squares.length; i++) {
