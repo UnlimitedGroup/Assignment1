@@ -6,18 +6,14 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JLabel;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.border.LineBorder;
-
 import controller.MainController;
-
 import java.awt.Color;
-import java.awt.EventQueue;
 
-public class Main extends JPanel {
+
+public class Main {
 	
 	public JFrame frame;
 	
@@ -651,6 +647,7 @@ public class Main extends JPanel {
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							MainController.move();
+						
 							MainController.resetSquares();
 							//refresh all squares
 							b10.setIcon(MainController.displayImg(0, 0));

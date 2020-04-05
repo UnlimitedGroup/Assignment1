@@ -6,7 +6,6 @@ import javax.swing.ImageIcon;
 
 import model.Board;
 import model.Piece;
-import model.Player;
 import model.Square;
 import view.Main;
 
@@ -20,18 +19,7 @@ public class MainController {
 	private static ImageIcon princess2 = new ImageIcon(Main.class.getResource("/imgs/princess2.png"));
 	private static ImageIcon ranger = new ImageIcon(Main.class.getResource("/imgs/ranger.png"));
 	private static ImageIcon rogue = new ImageIcon(Main.class.getResource("/imgs/rogue.png"));
-	/*
-	public static void turn() {
-	       if (Board.Players[0].getTurn()) {
-	    	   Board.Players[0].setTurn(false);
-	    	   Board.Players[1].setTurn(true);
-			}
-	       if (Board.Players[1].getTurn()) {
-	    	   Board.Players[1].setTurn(false);
-	    	   Board.Players[0].setTurn(true);
-			}	
-		}
-*/
+	
 	public static ImageIcon displayImg(int row, int column) {
 		for (Piece i: Board.pieceSet) {
 			if(i.getCurrentSquare() == Board.squares[row][column]) {
@@ -82,29 +70,60 @@ public class MainController {
 	}
 	public static void move() {
 		Square selectedSquares[] = fetchSelectedSquares();
+		
+		if (Board.Players[0].getTurn()) {
 			for (Piece i : Board.pieceSet) {
 				if (selectedSquares[0].getRow() == i.getCurrentSquare().getRow()) {
 					if (selectedSquares[0].getColumn() == i.getCurrentSquare().getColumn()) {
-						
-						System.out.println(i.toString() + " " + "moves");
-						i.move(selectedSquares[1].getRow(), selectedSquares[1].getColumn());
-						return;
-					
+						if (i.getTeam() == 0) {
+							System.out.println(i.toString() + " " + "moves");
+							i.move(selectedSquares[1].getRow(), selectedSquares[1].getColumn());
+							Board.Players[0].setTurn(false);
+							Board.Players[1].setTurn(true);
+							return;
+						}
 					}
 				}
 				if (selectedSquares[1].getRow() == i.getCurrentSquare().getRow()) {
 					if (selectedSquares[1].getColumn() == i.getCurrentSquare().getColumn()) {
-						
-						System.out.println(i.toString() + " " + "moves");
-						i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn());
-						return;
-						
+						if (i.getTeam() == 0) {
+							System.out.println(i.toString() + " " + "moves");
+							i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn());
+							Board.Players[0].setTurn(false);
+							Board.Players[1].setTurn(true);
+							return;
+							}
+						}
 					}
 				}
 			}
-		}
-		
-	
+		if (Board.Players[1].getTurn()) {
+			for (Piece i : Board.pieceSet) {
+				if (selectedSquares[0].getRow() == i.getCurrentSquare().getRow()) {
+					if (selectedSquares[0].getColumn() == i.getCurrentSquare().getColumn()) {
+						if (i.getTeam() == 1) {
+							System.out.println(i.toString() + " " + "moves");
+							i.move(selectedSquares[1].getRow(), selectedSquares[1].getColumn());
+							Board.Players[1].setTurn(false);
+							Board.Players[0].setTurn(true);
+							return;
+						}
+					}
+				}
+				if (selectedSquares[1].getRow() == i.getCurrentSquare().getRow()) {
+					if (selectedSquares[1].getColumn() == i.getCurrentSquare().getColumn()) {
+						if (i.getTeam() == 1) {
+							System.out.println(i.toString() + " " + "moves");
+							i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn());
+							Board.Players[1].setTurn(false);
+							Board.Players[0].setTurn(true);
+							return;
+							}
+						}
+					}
+				}
+			}
+	}
 	public static boolean selectPreCondition() {
 		int count = 0;
 		for (int i = 0; i < Board.squares.length; i++) {
