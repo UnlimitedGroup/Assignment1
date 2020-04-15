@@ -683,17 +683,17 @@ public class Main {
 					instructionsButton.addActionListener(new ActionListener () {
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							String msg = "Player 1 is the robots, who start at bottom, \n"
-									   + "Player 2 is the girlgang, who start at the top, \n"
-									   + "Player 1 always goes first \n"
-									   + "\n"
-									   + "Select a piece and the square you wish to move to,\n"
-									   + "selected squares will highlight in blue,\n"
-									   + "click selected squares to deselect them \n"
-									   + "\n"
-									   + "One action per turn,\n"
-									   + "an action consists of a move or spell";
-							
+							StringBuilder msg = new StringBuilder();
+							msg.append("Player 1 is the robots, who start at bottom, \n");
+							msg.append("Player 2 is the girlgang, who start at the top, \n");
+							msg.append("Player 1 always goes first \n");
+							msg.append("\n");
+							msg.append("Select a piece and the square you wish to move to,\n");
+							msg.append("selected squares will highlight in blue,\n");
+							msg.append("click selected squares to deselect them \n");
+							msg.append("\n");
+							msg.append("One action per turn,\n");
+							msg.append("an action consists of a move or spell");
 							JOptionPane.showMessageDialog(null, msg, "Instructions", JOptionPane.ERROR_MESSAGE);
 							return;
 						}});
