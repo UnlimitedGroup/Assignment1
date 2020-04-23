@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.healthException;
+
 public class Princess extends Piece {
 
 	public Princess(int health, Square currentSquare, int team) throws healthException {
@@ -20,18 +22,24 @@ public class Princess extends Piece {
 	}
     */
 	@Override
-	public boolean move(int row, int column) {
+	public boolean movePreModifier(int row, int column) {
 		int currentRow = this.getCurrentSquare().getRow();
 		int currentColumn = this.getCurrentSquare().getColumn();
-
-		//Check row is in range
 		if (row == currentRow || row == currentRow + 1 || row == currentRow - 1) {
-		    //Check column is in range
 			if (column == currentColumn || column == currentColumn + 1 || column == currentColumn - 1 ) {
-			this.setCurrentSquare(Board.squares[row][column]);
 			return true;
 			}
 		}
 		return false;
+	}
+	@Override
+	public boolean move(int row, int column) {
+		if (movePreModifier(row, column)) {
+			this.setCurrentSquare(Board.squares[row][column]);
+				return true;
+		}
+		else {
+			return false;
+		}
 	}
 }

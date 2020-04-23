@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.healthException;
+
 public abstract class Piece {
 	
 	private int health;
@@ -38,19 +40,15 @@ public abstract class Piece {
 	}
 	public void heal(int heal) {
 		int newHealth = this.getHealth() + heal;
-			if (newHealth > 100) {
-				newHealth = 100;
+			if (newHealth > maxHealth) {
+				newHealth = maxHealth;
 				this.health = newHealth;
 			}
 			else {
 				this.health = this.health + heal;
 			}
 	}
-	public boolean moveCheck() {
-		return true;
-	}
     abstract public boolean move(int row, int column);
-    
     //Premodifiers
     public boolean healthPreModifier(int health) {
     	if (health <= maxHealth) {
@@ -58,6 +56,7 @@ public abstract class Piece {
     	}
     	return false;
     }
+    abstract public boolean movePreModifier(int row, int column);
 }
 
 

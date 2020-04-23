@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.teamException;
+
 public class Player {
 	private int team;
 	private boolean turn;

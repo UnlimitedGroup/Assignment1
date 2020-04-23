@@ -1,6 +1,6 @@
 package model;
 
-import java.util.ArrayList;
+import exceptions.healthException;
 
 public class Healer extends Piece{
 
@@ -71,18 +71,24 @@ public class Healer extends Piece{
 	}
 	*/
 	@Override
-	public boolean move(int row, int column) {
+	public boolean movePreModifier(int row, int column) {
 		int currentRow = this.getCurrentSquare().getRow();
 		int currentColumn = this.getCurrentSquare().getColumn();
-
-		//Check row is in range
 		if (row == currentRow || row == currentRow + 1 || row == currentRow - 1) {
-		    //Check column is in range
 			if (column == currentColumn || column == currentColumn + 1 || column == currentColumn - 1 ) {
-			this.setCurrentSquare(Board.squares[row][column]);
 			return true;
 			}
 		}
 		return false;
+	}
+	@Override
+	public boolean move(int row, int column) {
+		if (movePreModifier(row, column)) {
+			this.setCurrentSquare(Board.squares[row][column]);
+				return true;
+		}
+		else {
+			return false;
+		}
 	}
 }

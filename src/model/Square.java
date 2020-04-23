@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.squareBoundsException;
+
 //Square
 public class Square {
 	private int row;

@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import exceptions.healthException;
+
 public class Rogue extends Piece {
 
 	public Rogue(int health, Square currentSquare, int team) throws healthException {
@@ -11,9 +13,10 @@ public class Rogue extends Piece {
 		return "rogue";
 		}
 	/*
-	Unique Spell - Damage unit in front by 75
-	 */
-	/*
+	Unique Spell - Damage unit in front by 75} catch (squareBoundsException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	public void spell() {
 		int currentRow = this.getCurrentSquare().getRow();
 		int currentColumn = this.getCurrentSquare().getColumn();
@@ -56,18 +59,24 @@ public class Rogue extends Piece {
 	}
 	*/
 	@Override
-	public boolean move(int row, int column) {
+	public boolean movePreModifier(int row, int column) {
 		int currentRow = this.getCurrentSquare().getRow();
 		int currentColumn = this.getCurrentSquare().getColumn();
-
-		//Check row is in range
 		if (row == currentRow || row == currentRow + 1 || row == currentRow - 1) {
-		    //Check column is in range
 			if (column == currentColumn || column == currentColumn + 1 || column == currentColumn - 1 ) {
-			this.setCurrentSquare(Board.squares[row][column]);
 			return true;
 			}
 		}
 		return false;
+	}
+	@Override
+	public boolean move(int row, int column) {
+		if (movePreModifier(row, column)) {
+			this.setCurrentSquare(Board.squares[row][column]);
+				return true;
+		}
+		else {
+			return false;
+		}
 	}
 }

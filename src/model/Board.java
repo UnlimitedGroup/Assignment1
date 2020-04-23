@@ -2,6 +2,10 @@ package model;
 
 import java.util.ArrayList;
 
+import exceptions.healthException;
+import exceptions.squareBoundsException;
+import exceptions.teamException;
+
 public class Board {
 	public static Player[] Players = new Player[2];
 	public static ArrayList<Piece> pieceSet = new ArrayList<Piece>();
