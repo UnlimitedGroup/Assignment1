@@ -10,7 +10,6 @@ public class Square {
 	private final int maxRow = 6;
 	private final int maxCol = 4;
 	
-
 	public Square (int row, int column, boolean selectStatus) throws squareBoundsException {
 		if (rowColPremodifier (row, column)) {
 			this.row = row;

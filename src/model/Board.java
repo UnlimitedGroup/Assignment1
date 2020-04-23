@@ -76,8 +76,8 @@ public class Board {
 			Piece ranger = new Ranger(100, squares[1][1], 1);
 			Piece healer = new Healer(100, squares[1][2], 1);
 			Piece rogue = new Rogue(100, squares[1][3], 1);
-			Piece princess1 = new Princess(100, squares[0][2], 0);
-			Piece princess2 = new Princess(100, squares[6][2], 1);
+			Piece princess1 = new Princess(100, squares[0][2], 1);
+			Piece princess2 = new Princess(100, squares[6][2], 0);
 			pieceSet.add(power);
 			pieceSet.add(paladin);
 			pieceSet.add(mage);
