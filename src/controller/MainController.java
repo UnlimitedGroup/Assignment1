@@ -86,7 +86,7 @@ public class MainController {
 				if (selectedSquares[0].getRow() == i.getCurrentSquare().getRow()) {
 					if (selectedSquares[0].getColumn() == i.getCurrentSquare().getColumn()) {
 						if (i.getTeam() == 0) {
-							if (i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn())) {
+							if (i.move(selectedSquares[1].getRow(), selectedSquares[1].getColumn())) {
 								System.out.println(i.toString() + " " + "moves");
 								i.move(selectedSquares[1].getRow(), selectedSquares[1].getColumn());
 								Board.Players[0].setTurn(false);
@@ -116,7 +116,7 @@ public class MainController {
 				if (selectedSquares[0].getRow() == i.getCurrentSquare().getRow()) {
 					if (selectedSquares[0].getColumn() == i.getCurrentSquare().getColumn()) {
 						if (i.getTeam() == 1) {
-							if (i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn())) {
+							if (i.move(selectedSquares[1].getRow(), selectedSquares[1].getColumn())) {
 								System.out.println(i.toString() + " " + "moves");
 								i.move(selectedSquares[1].getRow(), selectedSquares[1].getColumn());
 								Board.Players[1].setTurn(false);
