@@ -21,25 +21,15 @@ public class Princess extends Piece {
 	
 	}
     */
+	
+	//Princess can't move
 	@Override
 	public boolean movePreModifier(int row, int column) {
-		int currentRow = this.getCurrentSquare().getRow();
-		int currentColumn = this.getCurrentSquare().getColumn();
-		if (row == currentRow || row == currentRow + 1 || row == currentRow - 1) {
-			if (column == currentColumn || column == currentColumn + 1 || column == currentColumn - 1 ) {
-			return true;
-			}
-		}
 		return false;
 	}
 	@Override
 	public boolean move(int row, int column) {
-		if (movePreModifier(row, column)) {
-			this.setCurrentSquare(Board.squares[row][column]);
-				return true;
-		}
-		else {
-			return false;
+		return false;
 		}
 	}
-}
+
