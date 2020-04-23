@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Mage extends Piece {
 
-	public Mage(int health, Square currentSquare, int team) {
+	public Mage(int health, Square currentSquare, int team) throws healthException {
 		super(health, currentSquare, team);	
 	}
 	public String toString() {

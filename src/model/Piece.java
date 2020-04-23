@@ -5,13 +5,20 @@ public abstract class Piece {
 	private int health;
 	private Square currentSquare;
 	private int team;
+	private final int maxHealth = 100; 
 
-	
-	public Piece(int health, Square currentSquare, int team) {
-		this.health = health;
+	public Piece(int health, Square currentSquare, int team) throws healthException {
+		if (healthPreModifier(health)) {
+			this.health = health;
+		}
+		else {
+			throw new healthException();
+		}
 		this.currentSquare = currentSquare;
 		this.team = team;
 	}
+	
+	//Gets
 	public int getHealth() {
 		return this.health;
 	}
@@ -21,7 +28,7 @@ public abstract class Piece {
 	public int getTeam() {
 		return this.team;
 	}
-	//Set
+	//Sets
 	public void setCurrentSquare(Square newSquare) {
 		this.currentSquare = newSquare;
 	}
@@ -42,10 +49,15 @@ public abstract class Piece {
 	public boolean moveCheck() {
 		return true;
 	}
-	/*
-    abstract public void spell();
-    */
     abstract public boolean move(int row, int column);
+    
+    //Premodifiers
+    public boolean healthPreModifier(int health) {
+    	if (health <= maxHealth) {
+    		return true;
+    	}
+    	return false;
+    }
 }
 
 

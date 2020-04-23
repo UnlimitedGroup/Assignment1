@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Paladin extends Piece {
 
-	public Paladin(int health, Square currentSquare, int team) {
+	public Paladin(int health, Square currentSquare, int team) throws healthException {
 		super(health, currentSquare, team);
 	}
 	public String toString() {

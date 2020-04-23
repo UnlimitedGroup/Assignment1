@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Healer extends Piece{
 
-	public Healer(int health, Square currentSquare, int team) {
+	public Healer(int health, Square currentSquare, int team) throws healthException {
 		super(health, currentSquare, team);	
 	}
 	public String toString() {

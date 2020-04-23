@@ -29,7 +29,6 @@ public class MainController {
 		}
 		return null;
 	}
-	
 	public static ImageIcon displayImg(int row, int column) {
 		for (Piece i: Board.pieceSet) {
 			if(i.getCurrentSquare() == Board.squares[row][column]) {
@@ -77,6 +76,19 @@ public class MainController {
 		return new Color(255,255,204);
 	        		
 	     
+	}
+	public static Square[] fetchSelectedSquares() {
+		Square selectedSquares[] = new Square[2];
+		int count = 0;
+		for (int i = 0; i < Board.squares.length; i++) {
+	        for (int j = 0; j < Board.squares[i].length; j++) {
+	        	if (Board.squares[i][j].getSelectStatus()) {
+	        		selectedSquares[count] = Board.squares[i][j];
+	        		count++;
+	        	}
+	        }
+		}
+		return selectedSquares;	
 	}
 	public static void move() {
 		Square selectedSquares[] = fetchSelectedSquares();
@@ -142,35 +154,23 @@ public class MainController {
 				}
 			}
 	}
+	//Premodifier 
 	public static boolean selectPreCondition() {
 		int count = 0;
 		for (int i = 0; i < Board.squares.length; i++) {
-	        for (int j = 0; j < Board.squares[i].length; j++) {
-	        	if (Board.squares[i][j].getSelectStatus() == true) {
-	        	count++;
-	        	}
-	        }
+		    for (int j = 0; j < Board.squares[i].length; j++) {
+		        if (Board.squares[i][j].getSelectStatus() == true) {
+		        count++;
+		        	}
+		        }
+			}
+			if (count < 2) {
+	    		return true;
+	    	}
+			else {
+				return false;
+			}
 		}
-		if (count < 2) {
-    		return true;
-    	}
-		else {
-			return false;
-		}
-	}
-	public static Square[] fetchSelectedSquares() {
-		Square selectedSquares[] = new Square[2];
-		int count = 0;
-		for (int i = 0; i < Board.squares.length; i++) {
-	        for (int j = 0; j < Board.squares[i].length; j++) {
-	        	if (Board.squares[i][j].getSelectStatus()) {
-	        		selectedSquares[count] = Board.squares[i][j];
-	        		count++;
-	        	}
-	        }
-		}
-		return selectedSquares;	
-	}
 	public static void select(int row, int column) {
 		Square selectedSquares[] = fetchSelectedSquares();
 		System.out.println(selectedSquares[0]);
@@ -214,12 +214,10 @@ public class MainController {
 					for (Piece j: Board.pieceSet) {
 						if(j.getCurrentSquare() == selectedSquares[0]) {
 							Board.squares[row][column].setSelectStatus(true);
-							System.out.println("2");
 							return;
 						}
 						if(j.getCurrentSquare() == selectedSquares[1]) {
 							Board.squares[row][column].setSelectStatus(true);
-							System.out.println("3");
 							return;
 						}
 					}
@@ -228,7 +226,6 @@ public class MainController {
 		    //if no squares selected
 		    if (selectedSquares[0] == null) {
 				Board.squares[row][column].setSelectStatus(true);
-				System.out.println("4");
 				return;
 				}
 			/*
@@ -246,6 +243,7 @@ public class MainController {
 		}
 	}
 }
+
 
 	
 	

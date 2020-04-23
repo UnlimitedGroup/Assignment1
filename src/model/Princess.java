@@ -2,7 +2,7 @@ package model;
 
 public class Princess extends Piece {
 
-	public Princess(int health, Square currentSquare, int team) {
+	public Princess(int health, Square currentSquare, int team) throws healthException {
 		super(health, currentSquare, team);
 	}
 	public String toString() {

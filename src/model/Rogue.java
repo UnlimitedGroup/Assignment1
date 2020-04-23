@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Rogue extends Piece {
 
-	public Rogue(int health, Square currentSquare, int team) {
+	public Rogue(int health, Square currentSquare, int team) throws healthException {
 		super(health, currentSquare, team);
 	}
 	public String toString() {

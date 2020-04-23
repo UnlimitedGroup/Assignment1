@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Ranger extends Piece {
 
-	public Ranger(int health, Square currentSquare, int team) {
+	public Ranger(int health, Square currentSquare, int team) throws healthException {
 		super(health, currentSquare, team);
 	}
 	public String toString() {

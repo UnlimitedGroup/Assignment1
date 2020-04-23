@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Power extends Piece {
 
-	public Power(int health, Square currentSquare, int team) {
+	public Power(int health, Square currentSquare, int team) throws healthException {
 		super(health, currentSquare, team);
 	}
 	public String toString() {
