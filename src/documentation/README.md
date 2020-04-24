@@ -6,10 +6,6 @@ If your missing JRE libaries and your file won't compile follow:
 Potential Sprites
 ![image](https://user-images.githubusercontent.com/37185972/76338676-2144a580-634d-11ea-9580-edc52a966ebc.png)
 
-
-WIP UML Diagram
-![image](https://user-images.githubusercontent.com/37185972/76684540-d5517380-6660-11ea-80fb-19e77c255a95.png)
-
 Please read this article to get a started with Git 
 http://www.geo.uzh.ch/microsite/reproducible_research/post/rr-eclipse-git/
 
