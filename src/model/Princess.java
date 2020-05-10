@@ -72,7 +72,7 @@ public class Princess extends Piece {
 		}
 	public void spell(amount) {
 		int currentRow = this.getCurrentSquare().getRow();
-		int currentColumn = this.getCurrentSquare().getColumn();
+		int currentColumn = this.ggetCurrentSquare().getColumn();
 		Square SquareList[][] = Board.getSquareList();
 		ArrayList<Piece> PieceList = Board.getPieceSet();
 		
