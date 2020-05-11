@@ -17,7 +17,7 @@ public abstract class Piece {
 	abstract public int getHealth();
 	public Square getCurrentSquare() {
 		return this.currentSquare;
-	}
+	}	
 	public int getTeam() {
 		return this.team;
 	}
