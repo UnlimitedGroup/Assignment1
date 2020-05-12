@@ -781,7 +781,7 @@ public class Main {
 					JButton spellButton = new JButton("Cast Spell");
 					userPanel.add(spellButton);
 					
-					JButton Start = new JButton("Start");
+					JButton Start = new JButton("New Game");
 					userPanel.add(Start);
 					Start.addActionListener(new ActionListener () {
 						@Override

@@ -13,14 +13,16 @@ public class Board {
 	public static Square[][] squares = new Square[7][5];
 	
 	public static void create(String command, int row, int column) throws  ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
-		initializePlayers();
+		initializePlayers(command);
 		initializeSquares(command, row, column);
 		initializePieces(command);
 	return;
 	}
-	private static void initializePlayers() {
-		Players[0] = new Player(0, true);
-		Players[1] = new Player(1, false);
+	private static void initializePlayers(String command) {
+		if (command != "update") {
+			Players[0] = new Player(0, true);
+			Players[1] = new Player(1, false);
+		}
 	return;
 	}
 	private static void initializeSquares(String command,int rows, int columns) throws SQLException, ClassNotFoundException, squareBoundsException {
