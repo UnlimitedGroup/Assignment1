@@ -6,7 +6,7 @@ public abstract class Piece {
 	private Square currentSquare;
 	private int team; 
 
-	public Piece(Square currentSquare, int team, int health) {
+	public Piece(int health, Square currentSquare, int team) {
 		this.currentSquare = currentSquare;
 		this.team = team;
 		this.health = health;

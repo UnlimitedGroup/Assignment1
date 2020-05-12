@@ -87,37 +87,38 @@ public class DatabaseController {
 	}
 	private Piece getPieceFromStmt(ResultSet result) throws SQLException, squareBoundsException, PieceInvalidName {
 		Piece piece = null;
-		Square currentSquare = null;
 		String pieceName = result.getString("PIECE_NAME");
 		int row = result.getInt("ROW");
 		int column = result.getInt("COLUMN");
+		Square currentSquare = Board.squares[row][column];
 		int health = result.getInt("HEALTH");
 	
 		switch (pieceName.toLowerCase()) {
 			case "power":
-				currentSquare = new Square (row, column, false);
 				piece = new Power(health, currentSquare, 0);
 				return piece;
 			case "paladin":
-				currentSquare = new Square (row, column, false);
-				piece = new Power(health, currentSquare, 0);
+				piece = new Paladin(health, currentSquare, 0);
 				return piece; 
 			case "mage":
-				currentSquare = new Square (row, column, false);
-				piece = new Power(health, currentSquare, 0);
+				piece = new Mage(health, currentSquare, 0);
 				return piece;
 			case "ranger":
-				currentSquare = new Square (row, column, false);
-				piece = new Power(health, currentSquare, 1);
+				piece = new Ranger(health, currentSquare, 1);
 				return piece; 
 			case "healer":
-				currentSquare = new Square (row, column, false);
-				piece = new Power(health, currentSquare, 1);
+				piece = new Healer(health, currentSquare, 1);
 				return piece; 
 			case "rogue":
-				currentSquare = new Square (row, column, false);
-				piece = new Power(health, currentSquare, 1);
-				return piece; 
+				piece = new Rogue(health, currentSquare, 1);
+				return piece;
+			case "princess1":
+				piece = new Princess(health, currentSquare, 0);
+				return piece;
+			case "princess2":
+				
+				piece = new Princess(health, currentSquare, 1);
+				return piece;
 		}
 		throw new PieceInvalidName();
 	}
@@ -133,7 +134,7 @@ public class DatabaseController {
 	}
 	public void insertUpdatePiece(String action) throws SQLException {
 			Statement stmt = con.createStatement();
-			//If its an insert Query, pieces are initialized
+			//If its an insert Query, pieces are initialize
 			if (action != "update") {
 				//Clear SQL table
 				clearPieces(stmt);
@@ -170,7 +171,7 @@ public class DatabaseController {
 	public void loadBoard() throws ClassNotFoundException, SQLException, squareBoundsException {
 		Statement stmt;
 		ResultSet result;
-
+		
 			Class.forName("org.hsqldb.jdbc.JDBCDriver");
 			con = ConnectionTest.getConnection(DB_NAME);
 			stmt = con.createStatement();
@@ -186,12 +187,13 @@ public class DatabaseController {
 			        	Board.squares[i][j] = new Square(i,j, false);
 			        }
 				}
-			}	
+			} con.commit();	
 	}
 	public void loadPieces() throws ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
 		Statement stmt;
 		ResultSet result;
-		
+			
+			Board.pieceSet.clear();
 			Class.forName("org.hsqldb.jdbc.JDBCDriver");
 			con = ConnectionTest.getConnection(DB_NAME);
 			stmt = con.createStatement();
@@ -199,9 +201,10 @@ public class DatabaseController {
 					"SELECT * FROM PIECES");
 
 			while(result.next()){		
-				Piece piece = this.getPieceFromStmt(result);
+				Piece piece = getPieceFromStmt(result);
 				Board.pieceSet.add(piece);
 			}
+			con.commit();
 	}
 	
 	//Utility 

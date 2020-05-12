@@ -5,7 +5,7 @@ public class Mage extends Piece {
 	//private final int maxHealth = 100;
 
 	public Mage(int health, Square currentSquare, int team) {
-		super(currentSquare, team, health);
+		super(health, currentSquare, team);
 	}
 	
 	private boolean moveCheck(int row, int column) {

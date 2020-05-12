@@ -37,8 +37,7 @@ public class Board {
 	private static void initializePieces(String command) throws SQLException, ClassNotFoundException, squareBoundsException, PieceInvalidName {
 		DatabaseController db = DatabaseController.getInstance();
 		if (command == "start") {
-			db.insertUpdatePiece("start");
-			
+			db.insertUpdatePiece("start");	
 		}
 		if (command == "load") {
 			db.loadPieces();
