@@ -13,23 +13,15 @@ public class KillThePrincess {
 	
 	public static void main(String[] args) {
 		
-		//Initialize Game Objects
-		//this won't be here
+		//Initialize default settings
 		try {
 			Board.create("start", 6, 4);
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (squareBoundsException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (PieceInvalidName e1) {
+		} catch (ClassNotFoundException | SQLException | squareBoundsException | PieceInvalidName e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		
+		
 		
 		//Open Window
 		EventQueue.invokeLater(new Runnable() {

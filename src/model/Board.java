@@ -16,11 +16,12 @@ public class Board {
 		initializePlayers();
 		initializeSquares(command, row, column);
 		initializePieces(command);
+	return;
 	}
-	
 	private static void initializePlayers() {
 		Players[0] = new Player(0, true);
 		Players[1] = new Player(1, false);
+	return;
 	}
 	private static void initializeSquares(String command,int rows, int columns) throws SQLException, ClassNotFoundException, squareBoundsException {
 		DatabaseController db = DatabaseController.getInstance();
@@ -28,24 +29,29 @@ public class Board {
 			db.insertBoard(rows, columns);	
 			db.loadBoard();
 		}
-		if (command == "load") {	
+		if (command == "load") {
 			db.loadBoard();
 		}
+	return;
 	}
 	private static void initializePieces(String command) throws SQLException, ClassNotFoundException, squareBoundsException, PieceInvalidName {
 		DatabaseController db = DatabaseController.getInstance();
 		if (command == "start") {
-			db.insertUpdatePiece("insert");
+			db.insertUpdatePiece("start");
+			
 		}
 		if (command == "load") {
 			db.loadPieces();
 		}
 		if (command == "save") {
+			db.insertUpdatePiece("update");
 		}
-		
+	return;
 	}
-
-
-
-
+	
 }
+
+
+
+
+

@@ -1,9 +1,12 @@
 package controller;
 
 import java.awt.Color;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 
+import exceptions.PieceInvalidName;
+import exceptions.squareBoundsException;
 import model.Board;
 import model.Piece;
 import model.Square;
@@ -20,6 +23,7 @@ public class MainController {
 	private static ImageIcon ranger = new ImageIcon(Main.class.getResource("/imgs/ranger.png"));
 	private static ImageIcon rogue = new ImageIcon(Main.class.getResource("/imgs/rogue.png"));
 	
+	//utility
 	public static String displayTurn() {
 		if (Board.Players[0].getTurn()) {
 			return "Player 1";
@@ -69,27 +73,8 @@ public class MainController {
 	        }
 		}
 	}
-	public static Color changeButtonColour(int row, int column) {
-		if (Board.squares[row][column].getSelectStatus()) {
-			return Color.BLUE;
-		}
-		return new Color(255,255,204);
-	        		
-	     
-	}
-	public static Square[] fetchSelectedSquares() {
-		Square selectedSquares[] = new Square[2];
-		int count = 0;
-		for (int i = 0; i < Board.squares.length; i++) {
-	        for (int j = 0; j < Board.squares[i].length; j++) {
-	        	if (Board.squares[i][j].getSelectStatus()) {
-	        		selectedSquares[count] = Board.squares[i][j];
-	        		count++;
-	        	}
-	        }
-		}
-		return selectedSquares;	
-	}
+	
+	//move piece
 	public static void move() {
 		Square selectedSquares[] = fetchSelectedSquares();
 		
@@ -154,8 +139,9 @@ public class MainController {
 				}
 			}
 	}
-	//Premodifier 
-	public static boolean selectPreCondition() {
+	
+	//select squares related
+	private static boolean selectPreCondition() {
 		int count = 0;
 		for (int i = 0; i < Board.squares.length; i++) {
 		    for (int j = 0; j < Board.squares[i].length; j++) {
@@ -171,6 +157,19 @@ public class MainController {
 				return false;
 			}
 		}
+	private static Square[] fetchSelectedSquares() {
+		Square selectedSquares[] = new Square[2];
+		int count = 0;
+		for (int i = 0; i < Board.squares.length; i++) {
+	        for (int j = 0; j < Board.squares[i].length; j++) {
+	        	if (Board.squares[i][j].getSelectStatus()) {
+	        		selectedSquares[count] = Board.squares[i][j];
+	        		count++;
+	        	}
+	        }
+		}
+		return selectedSquares;	
+	}
 	public static void select(int row, int column) {
 		Square selectedSquares[] = fetchSelectedSquares();
 		System.out.println(selectedSquares[0]);
@@ -242,6 +241,25 @@ public class MainController {
 			return;
 		}
 	}
+	public static Color changeButtonColour(int row, int column) {
+		if (Board.squares[row][column].getSelectStatus()) {
+			return Color.BLUE;
+		}
+		return new Color(255,255,204);
+	        		
+	     
+	}
+	
+	//start, load, save game
+	public static void startGame() throws ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
+		Board.create("start", 6, 4);
+	}
+	public static void loadGame() throws ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
+		Board.create("load", 0, 0);
+	}
+	public static void saveGame() throws ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
+		Board.create("save", 0, 0);
+	}	
 }
 
 

@@ -135,7 +135,10 @@ public class DatabaseController {
 			Statement stmt = con.createStatement();
 			//If its an insert Query, pieces are initialized
 			if (action != "update") {
-				this.clearPieces(stmt);
+				//Clear SQL table
+				clearPieces(stmt);
+				//Clear piece array
+				Board.pieceSet.clear();
 				/*
 				 * Pieces are always initialized in the same spots, these squares will always 
 				 * exist due to minimum board size constraints
@@ -188,9 +191,7 @@ public class DatabaseController {
 	public void loadPieces() throws ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
 		Statement stmt;
 		ResultSet result;
-
-
-			
+		
 			Class.forName("org.hsqldb.jdbc.JDBCDriver");
 			con = ConnectionTest.getConnection(DB_NAME);
 			stmt = con.createStatement();
@@ -211,6 +212,7 @@ public class DatabaseController {
 	private void clearPieces(Statement stmt) throws SQLException {
 		String clearPieces = "DELETE FROM PIECES";
 		stmt.executeUpdate(clearPieces);
+		con.commit();
 	}
 	
 
