@@ -7,7 +7,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import database.*;
 import exceptions.PieceInvalidName;
-import exceptions.healthException;
 import exceptions.squareBoundsException;
 import model.Board;
 import model.Healer;
@@ -86,7 +85,7 @@ public class DatabaseController {
 		} 
 		return query;
 	}
-	private Piece getPieceFromStmt(ResultSet result) throws healthException, SQLException, squareBoundsException, PieceInvalidName {
+	private Piece getPieceFromStmt(ResultSet result) throws SQLException, squareBoundsException, PieceInvalidName {
 		Piece piece = null;
 		Square currentSquare = null;
 		String pieceName = result.getString("PIECE_NAME");
@@ -132,7 +131,7 @@ public class DatabaseController {
 			stmt.executeUpdate(prepQueryBoard(rows, columns));
 			con.commit();
 	}
-	public void insertUpdatePiece(String action) throws SQLException, healthException {
+	public void insertUpdatePiece(String action) throws SQLException {
 			Statement stmt = con.createStatement();
 			//If its an insert Query, pieces are initialized
 			if (action != "update") {
@@ -186,7 +185,7 @@ public class DatabaseController {
 				}
 			}	
 	}
-	public void loadPieces() throws ClassNotFoundException, SQLException, healthException, squareBoundsException, PieceInvalidName {
+	public void loadPieces() throws ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
 		Statement stmt;
 		ResultSet result;
 

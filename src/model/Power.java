@@ -1,43 +1,14 @@
 package model;
 
-import exceptions.healthException;
-
 public class Power extends Piece {
 
-	private final int maxHealth = 100;
-	private int health;
+	//private final int maxHealth = 100;
 
-	public Power(int health, Square currentSquare, int team) throws healthException {
-		super(currentSquare, team);
-		if (healthPreModifier(health)) {
-			this.health = health;
-		}
-		else {
-			throw new healthException();
-		}
+	public Power(int health, Square currentSquare, int team) {
+		super(currentSquare, team, health);
 	}
 	
-	public int getHealth () {
-		return this.health;
-	}
-	public void setHealth(int health) throws healthException {
-		if (health <= maxHealth) {
-			this.health = health;
-		}
-		else {
-			throw new healthException();
-		}
-	}
-	public boolean healthPreModifier(int health) {
-	    	if (health <= maxHealth) {
-	    		return true;
-	    	}
-	    	return false;
-	    }
-	public void heal(int heal) {
-	}
-	@Override
-	public boolean movePreModifier(int row, int column) {
+	private boolean moveCheck(int row, int column) {
 		int currentRow = this.getCurrentSquare().getRow();
 		int currentColumn = this.getCurrentSquare().getColumn();
 		if (row == currentRow || row == currentRow + 1 || row == currentRow - 1) {
@@ -49,7 +20,7 @@ public class Power extends Piece {
 	}
 	@Override
 	public boolean move(int row, int column) {
-		if (movePreModifier(row, column)) {
+		if (moveCheck(row, column)) {
 			this.setCurrentSquare(Board.squares[row][column]);
 				return true;
 		}

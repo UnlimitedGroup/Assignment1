@@ -5,22 +5,20 @@ import java.util.ArrayList;
 
 import database.DatabaseController;
 import exceptions.PieceInvalidName;
-import exceptions.healthException;
 import exceptions.squareBoundsException;
-import exceptions.teamException;
 
 public class Board {
 	public static Player[] Players = new Player[2];
 	public static ArrayList<Piece> pieceSet = new ArrayList<Piece>();
 	public static Square[][] squares = new Square[7][5];
 	
-	public static void create(String command, int row, int column) throws teamException, ClassNotFoundException, SQLException, squareBoundsException, healthException, PieceInvalidName {
+	public static void create(String command, int row, int column) throws  ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
 		initializePlayers();
 		initializeSquares(command, row, column);
 		initializePieces(command);
 	}
 	
-	private static void initializePlayers() throws teamException {
+	private static void initializePlayers() {
 		Players[0] = new Player(0, true);
 		Players[1] = new Player(1, false);
 	}
@@ -34,7 +32,7 @@ public class Board {
 			db.loadBoard();
 		}
 	}
-	private static void initializePieces(String command) throws SQLException, healthException, ClassNotFoundException, squareBoundsException, PieceInvalidName {
+	private static void initializePieces(String command) throws SQLException, ClassNotFoundException, squareBoundsException, PieceInvalidName {
 		DatabaseController db = DatabaseController.getInstance();
 		if (command == "start") {
 			db.insertUpdatePiece("insert");

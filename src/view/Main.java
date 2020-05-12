@@ -21,6 +21,7 @@ import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
+import java.awt.Font;
 
 public class Main {
 	
@@ -655,6 +656,7 @@ public class Main {
 					infoPanel.add(turnStatus);
 					
 					JTextArea turnDisplay = new JTextArea();
+					turnDisplay.setFont(new Font("Monospaced", Font.PLAIN, 10));
 					turnDisplay.setText(MainController.displayTurn());
 					
 					turnDisplay.setEditable(false);
@@ -665,18 +667,6 @@ public class Main {
 					
 					JTextArea textArea = new JTextArea();
 					infoPanel.add(textArea);
-				
-				JPanel statusPanel = new JPanel();
-				userPanel.add(statusPanel);
-					statusPanel.setLayout(new BorderLayout(0, 0));
-					
-					JLabel Status = new JLabel("Status");
-					Status.setHorizontalAlignment(SwingConstants.CENTER);
-					statusPanel.add(Status, BorderLayout.NORTH);
-					
-					JTextArea txtrOutputstream = new JTextArea();
-					txtrOutputstream.setText("outputStream\r\n");
-					statusPanel.add(txtrOutputstream, BorderLayout.CENTER);
 					
 					JButton instructionsButton = new JButton("Instructions");
 					userPanel.add(instructionsButton);
@@ -785,6 +775,15 @@ public class Main {
 			
 					JButton spellButton = new JButton("Cast Spell");
 					userPanel.add(spellButton);
+					
+					JButton Start = new JButton("Start");
+					userPanel.add(Start);
+					
+					JButton Load = new JButton("Load");
+					userPanel.add(Load);
+					
+					JButton Save = new JButton("Save");
+					userPanel.add(Save);
 				
 					
 	}			

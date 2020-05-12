@@ -1,26 +1,14 @@
 package model;
 
-import exceptions.teamException;
-
 public class Player {
 	private int team;
 	private boolean turn;
 	
-	public Player(int team, boolean turn) throws teamException {
-		if (checkTeamPremodifer(team)) {
-			this.team = team;
-		}else{
-		 throw new teamException();
-		}
+	public Player(int team, boolean turn)  {
+		this.team = team;
 		this.turn = turn;
 	}
 	
-	public boolean checkTeamPremodifer(int team) {
-		if (team == 0 || team == 1) {
-			return true;
-		}
-		return false;
-	}
 	public int getTeam() {
 		return this.team;
 	}
