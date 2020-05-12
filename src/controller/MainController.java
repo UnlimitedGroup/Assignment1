@@ -252,7 +252,7 @@ public class MainController {
 	
 	//start, load, save game
 	public static void startGame() throws ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
-		Board.create("start", 6, 4);
+		Board.create("update", 6, 4);
 	}
 	public static void loadGame() throws ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
 		Board.create("load", 0, 0);

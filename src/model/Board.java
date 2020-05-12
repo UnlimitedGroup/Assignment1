@@ -42,8 +42,8 @@ public class Board {
 		if (command == "load") {
 			db.loadPieces();
 		}
-		if (command == "save") {
-			db.insertUpdatePiece("update");
+		if (command == "update") {
+			db.insertUpdatePiece(command);
 		}
 	return;
 	}
