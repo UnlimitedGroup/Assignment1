@@ -69,8 +69,8 @@ public class DatabaseController {
 		if (action.equals("update")) {
 			query = "UPDATE PIECES SET " +
 					"ROW = " + pieceRow + "," +
-					"COLUMN = '" + pieceColumn + "'," +
-					"HEALTH = '" + pieceHealth + "'," +
+					"COLUMN = " + pieceColumn + "," +
+					"HEALTH = " + pieceHealth + 
 					" WHERE PIECE_NAME = '" + pieceName + "'";
 		} 
 		else {
@@ -113,11 +113,10 @@ public class DatabaseController {
 				piece = new Rogue(health, currentSquare, 1);
 				return piece;
 			case "princess1":
-				piece = new Princess(health, currentSquare, 0);
-				return piece;
-			case "princess2":
-				
 				piece = new Princess(health, currentSquare, 1);
+				return piece;
+			case "princess2":		
+				piece = new Princess(health, currentSquare, 0);
 				return piece;
 		}
 		throw new PieceInvalidName();
