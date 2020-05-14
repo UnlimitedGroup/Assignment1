@@ -11,8 +11,6 @@ public class Square {
 	public Square (int column, int row, boolean selectStatus) throws squareBoundsException {
 		this.row = row;
 		this.column = column;
-		this.row = row;
-		this.column = column;
 		this.selectStatus = selectStatus;
 	}
 	

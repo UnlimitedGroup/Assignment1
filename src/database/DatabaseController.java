@@ -229,12 +229,26 @@ public class DatabaseController {
 			while(result.next()){
 				int rows = result.getInt("ROWS");
 				int columns = result.getInt("COLUMNS");
-			
+				System.out.println(result.getInt("ROWS"));
+				System.out.println(result.getInt("COLUMNS"));
+				
 				//Build large board
 				if (rows >= 4 && columns >= 6) {
 					for (int i = 0; i <= rows; i++) {
 				        for (int j = 0; j <= columns; j++) {
 				        	Board.squares[j][i] = new Square(j,i, false);
+				        }
+					}
+				}
+				if (rows < 4 && columns < 6) {
+					for (int i = 0; i <= 4; i++) {
+				        for (int j = 0; j <= 6; j++) {
+				        	if (i == 0 || i == 4) {
+				        		Board.squares[j][i] = null;
+				        	}
+				        	else {
+				        		Board.squares[j][i] = new Square(j,i, false);
+				        	}
 				        }
 					}
 				}

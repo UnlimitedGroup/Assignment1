@@ -63,9 +63,9 @@ public class NewGame {
 		rangerBox.setBackground(new Color(255, 204, 102));
 		panel_1.add(rangerBox);
 		
-		JCheckBox arenaLargeCheck = new JCheckBox("Large");
-		arenaLargeCheck.setBackground(new Color(255, 204, 102));
-		panel_1.add(arenaLargeCheck);
+		JCheckBox largeBox = new JCheckBox("Large");
+		largeBox.setBackground(new Color(255, 204, 102));
+		panel_1.add(largeBox);
 		
 		JCheckBox paladinBox = new JCheckBox("Paladin");
 		paladinBox.setBackground(new Color(255, 204, 102));
@@ -75,9 +75,9 @@ public class NewGame {
 		healerBox.setBackground(new Color(255, 204, 102));
 		panel_1.add(healerBox);
 		
-		JCheckBox chckbxNewCheckBox_2 = new JCheckBox("Small");
-		chckbxNewCheckBox_2.setBackground(new Color(255, 204, 102));
-		panel_1.add(chckbxNewCheckBox_2);
+		JCheckBox smallBox = new JCheckBox("Small");
+		smallBox.setBackground(new Color(255, 204, 102));
+		panel_1.add(smallBox);
 		
 		JCheckBox mageBox = new JCheckBox("Mage");
 		mageBox.setBackground(new Color(255, 204, 102));
@@ -93,6 +93,8 @@ public class NewGame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
+					int column = 0;
+					int row = 0;
 					Boolean power = false;
 					Boolean paladin = false;
 					Boolean mage = false;
@@ -117,7 +119,15 @@ public class NewGame {
 					if (rogueBox.isSelected()) {
 						rogue = true;	
 					}
-					MainController.startGame(power, paladin, mage, ranger, healer, rogue);
+					if (smallBox.isSelected()) {
+						column = 5;
+						row = 3;
+					}
+					if (largeBox.isSelected()) {
+						column = 6;
+						row = 4;
+					}
+					MainController.startGame(column, row, power, paladin, mage, ranger, healer, rogue);
 					newGameFrame.setVisible(false);
 					Main mainFrame = new Main();
 					mainFrame.frame.setVisible(true);

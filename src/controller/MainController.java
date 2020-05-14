@@ -67,8 +67,10 @@ public class MainController {
 	public static void resetSquares() {
 		for (int i = 0; i < Board.squares.length; i++) {
 	        for (int j = 0; j < Board.squares[i].length; j++) {
-	        	if (Board.squares[i][j].getSelectStatus() == true) {
-	        		Board.squares[i][j].setSelectStatus(false);
+	        	if (Board.squares[i][j] != null) {
+		        	if (Board.squares[i][j].getSelectStatus() == true) {
+		        		Board.squares[i][j].setSelectStatus(false);
+		        	}
 	        	}
 	        }
 		}
@@ -145,10 +147,12 @@ public class MainController {
 		int count = 0;
 		for (int i = 0; i < Board.squares.length; i++) {
 		    for (int j = 0; j < Board.squares[i].length; j++) {
-		        if (Board.squares[i][j].getSelectStatus() == true) {
-		        count++;
-		        	}
-		        }
+		    	if (Board.squares[i][j] != null) {
+			        if (Board.squares[i][j].getSelectStatus() == true) {
+			        count++;
+			        	}
+			        }
+		    	}
 			}
 			if (count < 2) {
 	    		return true;
@@ -162,9 +166,11 @@ public class MainController {
 		int count = 0;
 		for (int i = 0; i < Board.squares.length; i++) {
 	        for (int j = 0; j < Board.squares[i].length; j++) {
-	        	if (Board.squares[i][j].getSelectStatus()) {
-	        		selectedSquares[count] = Board.squares[i][j];
-	        		count++;
+	        	if (Board.squares[i][j] != null) {
+		        	if (Board.squares[i][j].getSelectStatus()) {
+		        		selectedSquares[count] = Board.squares[i][j];
+		        		count++;
+		        	}
 	        	}
 	        }
 		}
@@ -253,8 +259,8 @@ public class MainController {
 	
 	//ADD ROWS AND COLUMN INPUT
 	//start, load, save game
-	public static void startGame(Boolean Power, Boolean Paladin, Boolean Mage, Boolean Ranger, Boolean Healer, Boolean Rogue) throws ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
-		Board.create("start", 6, 4, Power, Paladin, Mage, Ranger, Healer, Rogue);
+	public static void startGame(int column, int row, Boolean Power, Boolean Paladin, Boolean Mage, Boolean Ranger, Boolean Healer, Boolean Rogue) throws ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
+		Board.create("start", column, row, Power, Paladin, Mage, Ranger, Healer, Rogue);
 	}
 	public static void loadGame() throws ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
 		Board.create("load", 0, 0, null, null, null, null, null, null);
