@@ -16,10 +16,10 @@ public class Board {
 	public static ArrayList<Piece> pieceSet = new ArrayList<Piece>();
 	public static Square[][] squares = new Square[7][5];
 	
-	public static void create(String command, int row, int column) throws  ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
+	public static void create(String command, int row, int column, Boolean Power, Boolean Paladin, Boolean Mage, Boolean Ranger, Boolean Healer, Boolean Rogue) throws  ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
 		initializePlayers(command);
 		initializeSquares(command, row, column);
-		initializePieces(command);
+		initializePieces(command, Power, Paladin, Mage, Ranger, Healer, Rogue);
 	return;
 	}
 	private static void initializePlayers(String command) {
@@ -40,10 +40,10 @@ public class Board {
 		}
 	return;
 	}
-	private static void initializePieces(String command) throws SQLException, ClassNotFoundException, squareBoundsException, PieceInvalidName {
+	private static void initializePieces(String command, Boolean Power, Boolean Paladin, Boolean Mage, Boolean Ranger, Boolean Healer, Boolean Rogue) throws SQLException, ClassNotFoundException, squareBoundsException, PieceInvalidName {
 		DatabaseController db = DatabaseController.getInstance();
 		if (command == "start") {
-			db.insertUpdatePiece("start");	
+			db.insertUpdatePiece("start", Power, Paladin, Mage, Ranger, Healer, Rogue);	
 		}
 		if (command == "load") {
 			db.loadPieces();

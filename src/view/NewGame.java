@@ -41,21 +41,6 @@ public class NewGame {
 		panel.setBackground(Color.ORANGE);
 		newGameFrame.getContentPane().add(panel, BorderLayout.NORTH);
 		
-		JButton Start = new JButton("Start Game");
-		panel.add(Start);
-		Start.addActionListener(new ActionListener () {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-					try {
-						MainController.startGame();
-						newGameFrame.setVisible(false);
-						Main mainFrame = new Main();
-						mainFrame.frame.setVisible(true);
-					} catch (ClassNotFoundException | SQLException | squareBoundsException | PieceInvalidName e1) {
-						
-					}
-			}});
-		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(255, 204, 102));
 		newGameFrame.getContentPane().add(panel_1, BorderLayout.CENTER);
@@ -70,37 +55,76 @@ public class NewGame {
 		JLabel lblNewLabel_2 = new JLabel("Arena Size");
 		panel_1.add(lblNewLabel_2);
 		
-		JCheckBox chckbxNewCheckBox_1 = new JCheckBox("Power");
-		chckbxNewCheckBox_1.setBackground(new Color(255, 204, 102));
-		panel_1.add(chckbxNewCheckBox_1);
+		JCheckBox powerBox = new JCheckBox("Power");
+		powerBox.setBackground(new Color(255, 204, 102));
+		panel_1.add(powerBox);
 		
-		JCheckBox chckbxNewCheckBox_3 = new JCheckBox("Ranger");
-		chckbxNewCheckBox_3.setBackground(new Color(255, 204, 102));
-		panel_1.add(chckbxNewCheckBox_3);
+		JCheckBox rangerBox = new JCheckBox("Ranger");
+		rangerBox.setBackground(new Color(255, 204, 102));
+		panel_1.add(rangerBox);
 		
 		JCheckBox arenaLargeCheck = new JCheckBox("Large");
 		arenaLargeCheck.setBackground(new Color(255, 204, 102));
 		panel_1.add(arenaLargeCheck);
 		
-		JCheckBox chckbxNewCheckBox_4 = new JCheckBox("Paladin");
-		chckbxNewCheckBox_4.setBackground(new Color(255, 204, 102));
-		panel_1.add(chckbxNewCheckBox_4);
+		JCheckBox paladinBox = new JCheckBox("Paladin");
+		paladinBox.setBackground(new Color(255, 204, 102));
+		panel_1.add(paladinBox);
 		
-		JCheckBox chckbxNewCheckBox_6 = new JCheckBox("Healer");
-		chckbxNewCheckBox_6.setBackground(new Color(255, 204, 102));
-		panel_1.add(chckbxNewCheckBox_6);
+		JCheckBox healerBox = new JCheckBox("Healer");
+		healerBox.setBackground(new Color(255, 204, 102));
+		panel_1.add(healerBox);
 		
 		JCheckBox chckbxNewCheckBox_2 = new JCheckBox("Small");
 		chckbxNewCheckBox_2.setBackground(new Color(255, 204, 102));
 		panel_1.add(chckbxNewCheckBox_2);
 		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("Mage");
-		chckbxNewCheckBox.setBackground(new Color(255, 204, 102));
-		panel_1.add(chckbxNewCheckBox);
+		JCheckBox mageBox = new JCheckBox("Mage");
+		mageBox.setBackground(new Color(255, 204, 102));
+		panel_1.add(mageBox);
 		
-		JCheckBox chckbxNewCheckBox_7 = new JCheckBox("Rogue");
-		chckbxNewCheckBox_7.setBackground(new Color(255, 204, 102));
-		panel_1.add(chckbxNewCheckBox_7);
+		JCheckBox rogueBox = new JCheckBox("Rogue");
+		rogueBox.setBackground(new Color(255, 204, 102));
+		panel_1.add(rogueBox);
+		
+		JButton Start = new JButton("Start Game");
+		panel.add(Start);
+		Start.addActionListener(new ActionListener () {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Boolean power = false;
+					Boolean paladin = false;
+					Boolean mage = false;
+					Boolean ranger = false;
+					Boolean healer = false;
+					Boolean rogue = false;
+					if (powerBox.isSelected()) {
+						power = true;	
+					}
+					if (paladinBox.isSelected()) {
+						paladin = true;	
+					}
+					if (mageBox.isSelected()) {
+						mage = true;	
+					}
+					if (rangerBox.isSelected()) {
+						ranger = true;	
+					}
+					if (healerBox.isSelected()) {
+						healer = true;	
+					}
+					if (rogueBox.isSelected()) {
+						rogue = true;	
+					}
+					MainController.startGame(power, paladin, mage, ranger, healer, rogue);
+					newGameFrame.setVisible(false);
+					Main mainFrame = new Main();
+					mainFrame.frame.setVisible(true);
+				} catch (ClassNotFoundException | SQLException | squareBoundsException | PieceInvalidName e1) {
+						
+				}
+			}});
 		
 	}
 }
