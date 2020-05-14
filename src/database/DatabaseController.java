@@ -43,7 +43,7 @@ public class DatabaseController {
 	}
 	
 	//Prepare insert and update queries
-	private String prepQueryBoard(int rows, int columns) {
+	private String prepQueryBoard(int columns, int rows) {
 		String boardName = "mainboard";
 		int boardRows = rows;
 		int boardColumns = columns;
@@ -123,12 +123,12 @@ public class DatabaseController {
 	}
 	
 	//Committing Queries
-	public void insertBoard(int rows, int columns) throws SQLException {
+	public void insertBoard(int columns, int rows) throws SQLException {
 			Statement stmt = con.createStatement();
 			//Clear previous board
 			this.clearBoard(stmt);
 			//Insert new board
-			stmt.executeUpdate(prepQueryBoard(rows, columns));
+			stmt.executeUpdate(prepQueryBoard(columns, rows));
 			con.commit();
 	}
 	public void insertUpdatePiece(String action) throws SQLException {

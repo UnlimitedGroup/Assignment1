@@ -242,12 +242,13 @@ public class MainController {
 		}
 	}
 	public static Color changeButtonColour(int column, int row) {
-		if (Board.squares[column][row].getSelectStatus()) {
+		if (Board.squares[column][row] == null) {
+			return Color.GRAY;
+		}
+		if (Board.squares[column][row].getSelectStatus() && Board.squares[column][row] != null) {
 			return Color.BLUE;
 		}
-		return new Color(255,255,204);
-	        		
-	     
+		return new Color(255,255,204);   
 	}
 	
 	//ADD ROWS AND COLUMN INPUT
