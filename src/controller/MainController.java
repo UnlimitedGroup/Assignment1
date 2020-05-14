@@ -83,9 +83,9 @@ public class MainController {
 				if (selectedSquares[0].getRow() == i.getCurrentSquare().getRow()) {
 					if (selectedSquares[0].getColumn() == i.getCurrentSquare().getColumn()) {
 						if (i.getTeam() == 0) {
-							if (i.move(selectedSquares[1].getRow(), selectedSquares[1].getColumn())) {
+							if (i.move(selectedSquares[1].getColumn(),selectedSquares[1].getRow())) {
 								System.out.println(i.toString() + " " + "moves");
-								i.move(selectedSquares[1].getRow(), selectedSquares[1].getColumn());
+								i.move(selectedSquares[1].getColumn(),selectedSquares[1].getRow());
 								Board.Players[0].setTurn(false);
 								Board.Players[1].setTurn(true);
 								return;
@@ -96,8 +96,8 @@ public class MainController {
 				if (selectedSquares[1].getRow() == i.getCurrentSquare().getRow()) {
 					if (selectedSquares[1].getColumn() == i.getCurrentSquare().getColumn()) {
 						if (i.getTeam() == 0) {
-							if (i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn())) {
-								i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn());
+							if (i.move(selectedSquares[0].getColumn(), selectedSquares[0].getRow())) {
+								i.move(selectedSquares[0].getColumn(), selectedSquares[0].getRow());
 								System.out.println(i.toString() + " " + "moves");
 								Board.Players[0].setTurn(false);
 								Board.Players[1].setTurn(true);
@@ -113,9 +113,9 @@ public class MainController {
 				if (selectedSquares[0].getRow() == i.getCurrentSquare().getRow()) {
 					if (selectedSquares[0].getColumn() == i.getCurrentSquare().getColumn()) {
 						if (i.getTeam() == 1) {
-							if (i.move(selectedSquares[1].getRow(), selectedSquares[1].getColumn())) {
+							if (i.move(selectedSquares[1].getColumn(), selectedSquares[1].getRow())) {
 								System.out.println(i.toString() + " " + "moves");
-								i.move(selectedSquares[1].getRow(), selectedSquares[1].getColumn());
+								i.move(selectedSquares[1].getColumn(), selectedSquares[1].getRow());
 								Board.Players[1].setTurn(false);
 								Board.Players[0].setTurn(true);
 								return;
@@ -126,9 +126,9 @@ public class MainController {
 				if (selectedSquares[1].getRow() == i.getCurrentSquare().getRow()) {
 					if (selectedSquares[1].getColumn() == i.getCurrentSquare().getColumn()) {
 						if (i.getTeam() == 1) {
-							if (i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn())) {
+							if (i.move(selectedSquares[0].getColumn(), selectedSquares[0].getRow())) {
 								System.out.println(i.toString() + " " + "moves");
-								i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn());
+								i.move(selectedSquares[0].getColumn(), selectedSquares[0].getRow());
 								Board.Players[1].setTurn(false);
 								Board.Players[0].setTurn(true);
 								return;
@@ -170,25 +170,25 @@ public class MainController {
 		}
 		return selectedSquares;	
 	}
-	public static void select(int row, int column) {
+	public static void select(int column, int row) {
 		Square selectedSquares[] = fetchSelectedSquares();
 		System.out.println(selectedSquares[0]);
 		System.out.println(selectedSquares[1]);
 		
 		//deselect
-		if(Board.squares[row][column] == selectedSquares[0]) {
-			Board.squares[row][column].setSelectStatus(false);
+		if(Board.squares[column][row] == selectedSquares[0]) {
+			Board.squares[column][row].setSelectStatus(false);
 			return;
 		}
-		if(Board.squares[row][column] == selectedSquares[1]) {
-			Board.squares[row][column].setSelectStatus(false);
+		if(Board.squares[column][row] == selectedSquares[1]) {
+			Board.squares[column][row].setSelectStatus(false);
 			return;
 		}
 		
 		else if (selectPreCondition()) {
 			for (Piece i: Board.pieceSet) {
 				//if square with piece is selected
-				if (i.getCurrentSquare() == Board.squares[row][column]) {
+				if (i.getCurrentSquare() == Board.squares[column][row]) {
 					//Check no other selected square has a piece
 					for (Piece j: Board.pieceSet) {
 						if(j.getCurrentSquare() == selectedSquares[0]) {
@@ -202,21 +202,21 @@ public class MainController {
 					}
 						//if no other square has a piece, set square select status as true
 						System.out.println("1");
-						Board.squares[row][column].setSelectStatus(true);
+						Board.squares[column][row].setSelectStatus(true);
 						return;	
 				}
 			}
 			for (Piece x: Board.pieceSet) {
 				//if blank square is selected
-				if (x.getCurrentSquare() != Board.squares[row][column]) {
+				if (x.getCurrentSquare() != Board.squares[column][row]) {
 					//Check if a square with a piece is selected  
 					for (Piece j: Board.pieceSet) {
 						if(j.getCurrentSquare() == selectedSquares[0]) {
-							Board.squares[row][column].setSelectStatus(true);
+							Board.squares[column][row].setSelectStatus(true);
 							return;
 						}
 						if(j.getCurrentSquare() == selectedSquares[1]) {
-							Board.squares[row][column].setSelectStatus(true);
+							Board.squares[column][row].setSelectStatus(true);
 							return;
 						}
 					}
@@ -224,7 +224,7 @@ public class MainController {
 			}
 		    //if no squares selected
 		    if (selectedSquares[0] == null) {
-				Board.squares[row][column].setSelectStatus(true);
+				Board.squares[column][row].setSelectStatus(true);
 				return;
 				}
 			/*
@@ -241,8 +241,8 @@ public class MainController {
 			return;
 		}
 	}
-	public static Color changeButtonColour(int row, int column) {
-		if (Board.squares[row][column].getSelectStatus()) {
+	public static Color changeButtonColour(int column, int row) {
+		if (Board.squares[column][row].getSelectStatus()) {
 			return Color.BLUE;
 		}
 		return new Color(255,255,204);

@@ -90,7 +90,7 @@ public class DatabaseController {
 		String pieceName = result.getString("PIECE_NAME");
 		int row = result.getInt("ROW");
 		int column = result.getInt("COLUMN");
-		Square currentSquare = Board.squares[row][column];
+		Square currentSquare = Board.squares[column][row];
 		int health = result.getInt("HEALTH");
 	
 		switch (pieceName.toLowerCase()) {
@@ -229,11 +229,14 @@ public class DatabaseController {
 			while(result.next()){
 				int rows = result.getInt("ROWS");
 				int columns = result.getInt("COLUMNS");
-				//Build board
-				for (int i = 0; i <= rows; i++) {
-			        for (int j = 0; j <= columns; j++) {
-			        	Board.squares[i][j] = new Square(i,j, false);
-			        }
+			
+				//Build large board
+				if (rows >= 4 && columns >= 6) {
+					for (int i = 0; i <= rows; i++) {
+				        for (int j = 0; j <= columns; j++) {
+				        	Board.squares[j][i] = new Square(j,i, false);
+				        }
+					}
 				}
 			} con.commit();	
 	}
@@ -265,12 +268,5 @@ public class DatabaseController {
 		stmt.executeUpdate(clearPieces);
 		con.commit();
 	}
-	
-
-	
-	
-	
-	
-	
-	
+		
 }
