@@ -143,6 +143,7 @@ public class DatabaseController {
 				 * Pieces are always initialized in the same spots, these squares will always 
 				 * exist due to minimum board size constraints
 				 */
+				
 				Piece power = new Power(100, Board.squares[5][1], 0);
 				Piece paladin = new Paladin(100, Board.squares[5][2], 0);
 				Piece mage = new Mage(100, Board.squares[5][3], 0);
@@ -166,6 +167,54 @@ public class DatabaseController {
 				stmt.executeUpdate(pieceQuery);
 				con.commit();
 			}
+	}
+	
+	public void insertUpdatePiece(String action, Boolean Power, Boolean Paladin, Boolean Mage, Boolean Ranger, Boolean Healer, Boolean Rogue) throws SQLException {
+		Statement stmt = con.createStatement();
+		//If its an insert Query, pieces are initialize
+		//Clear SQL table
+		clearPieces(stmt);
+		//Clear piece array
+		Board.pieceSet.clear();
+		/*
+		 * Pieces are always initialized in the same spots, these squares will always 
+		* exist due to minimum board size constraints
+		*/
+		if (Power) {
+			Piece power = new Power(100, Board.squares[5][1], 0);
+			Board.pieceSet.add(power);
+		}
+		if (Paladin) {
+			Piece paladin = new Paladin(100, Board.squares[5][2], 0);
+			Board.pieceSet.add(paladin);
+		}
+		if (Mage) {
+			Piece mage = new Mage(100, Board.squares[5][3], 0);
+			Board.pieceSet.add(mage);
+		}
+		if (Ranger) {
+			Piece ranger = new Ranger(100, Board.squares[1][1], 1);
+			Board.pieceSet.add(ranger);
+		}
+		if (Healer) {
+			Piece healer = new Healer(100, Board.squares[1][2], 1);
+			Board.pieceSet.add(healer);
+		}
+		if (Rogue) {
+			Piece rogue = new Rogue(100, Board.squares[1][3], 1);
+			Board.pieceSet.add(rogue);
+		}
+		Piece princess1 = new Princess(100, Board.squares[0][2], 1);
+		Piece princess2 = new Princess(100, Board.squares[6][2], 0);
+		Board.pieceSet.add(princess1);
+		Board.pieceSet.add(princess2);
+			
+		for (Piece p : Board.pieceSet) {
+			String pieceQuery;
+			pieceQuery = prepQueryPiece(p, action);
+			stmt.executeUpdate(pieceQuery);
+			con.commit();
+		}
 	}
 	public void loadBoard() throws ClassNotFoundException, SQLException, squareBoundsException {
 		Statement stmt;

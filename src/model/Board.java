@@ -1,11 +1,15 @@
 package model;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import controller.MainController;
 import database.DatabaseController;
 import exceptions.PieceInvalidName;
 import exceptions.squareBoundsException;
+import view.Main;
 
 public class Board {
 	public static Player[] Players = new Player[2];
@@ -51,6 +55,9 @@ public class Board {
 	}
 	
 }
+
+
+
 
 
 
