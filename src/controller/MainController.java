@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import exceptions.PieceInvalidName;
 import exceptions.squareBoundsException;
 import model.Board;
+import model.Obstacle;
 import model.Piece;
 import model.Square;
 import view.Main;
@@ -22,6 +23,7 @@ public class MainController {
 	private static ImageIcon princess2 = new ImageIcon(Main.class.getResource("/imgs/princess2.png"));
 	private static ImageIcon ranger = new ImageIcon(Main.class.getResource("/imgs/ranger.png"));
 	private static ImageIcon rogue = new ImageIcon(Main.class.getResource("/imgs/rogue.png"));
+	private static ImageIcon rock = new ImageIcon(Main.class.getResource("/imgs/rock.png"));
 	
 	//utility
 	public static String displayTurn() {
@@ -61,6 +63,15 @@ public class MainController {
 					return ranger;
 				}
 			}	
+		}
+		for (int i = 0; i < Board.obstacles.length; i++) {
+			if (Board.obstacles[i] != null) {
+				if(Board.obstacles[i].getCurrentSquare() == Board.squares[row][column]) {
+					if(Board.obstacles[i].toString() == "rock") {
+						return rock;
+					}
+				}
+			}
 		}
 		return null;
 	}
@@ -181,6 +192,12 @@ public class MainController {
 		System.out.println(selectedSquares[0]);
 		System.out.println(selectedSquares[1]);
 		
+		for (int i = 0; i < Board.obstacles.length; i++) {
+			if (Board.squares[column][row] == Board.obstacles[i].getCurrentSquare()) {
+				return;
+			}
+		}
+		
 		//deselect
 		if(Board.squares[column][row] == selectedSquares[0]) {
 			Board.squares[column][row].setSelectStatus(false);
@@ -191,9 +208,11 @@ public class MainController {
 			return;
 		}
 		
+		//Ensures only two squares can be selected
 		else if (selectPreCondition()) {
+			
+			//if square with piece is selected
 			for (Piece i: Board.pieceSet) {
-				//if square with piece is selected
 				if (i.getCurrentSquare() == Board.squares[column][row]) {
 					//Check no other selected square has a piece
 					for (Piece j: Board.pieceSet) {
@@ -206,14 +225,13 @@ public class MainController {
 							return;
 						}
 					}
-						//if no other square has a piece, set square select status as true
-						System.out.println("1");
-						Board.squares[column][row].setSelectStatus(true);
-						return;	
+					//if no other square has a piece, set square select status as true
+					Board.squares[column][row].setSelectStatus(true);
+					return;	
 				}
 			}
+			//if blank square is selected
 			for (Piece x: Board.pieceSet) {
-				//if blank square is selected
 				if (x.getCurrentSquare() != Board.squares[column][row]) {
 					//Check if a square with a piece is selected  
 					for (Piece j: Board.pieceSet) {
@@ -228,22 +246,22 @@ public class MainController {
 					}
 				}
 			}
-		    //if no squares selected
+		    //selecting first square
 		    if (selectedSquares[0] == null) {
 				Board.squares[column][row].setSelectStatus(true);
 				return;
-				}
+			}
 			/*
 			if the selected square is blank when an already selected 
 			square is blank too 
 			*/
 			else {
 				System.out.println("please select a square with a piece");
-			return;
+				return;
 				}				
 			}
-			else {
-				System.out.println("two pieces are already selected");
+		else {
+			System.out.println("two pieces are already selected");
 			return;
 		}
 	}
@@ -257,7 +275,6 @@ public class MainController {
 		return new Color(255,255,204);   
 	}
 	
-	//ADD ROWS AND COLUMN INPUT
 	//start, load, save game
 	public static void startGame(int column, int row, Boolean Power, Boolean Paladin, Boolean Mage, Boolean Ranger, Boolean Healer, Boolean Rogue) throws ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
 		Board.create("start", column, row, Power, Paladin, Mage, Ranger, Healer, Rogue);

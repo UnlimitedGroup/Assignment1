@@ -1,0 +1,11 @@
+TO DO:
+
+- save obstacles and players to DB
+- decorator spells
+- spell + move = turn or move + move or spell + spell
+
+done 
+- Singleton
+- Facade
+- Prototype
+

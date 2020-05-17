@@ -1,9 +1,11 @@
 package model;
 
 import java.awt.event.ActionEvent;
+import java.util.concurrent.ThreadLocalRandom;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import controller.MainController;
 import database.DatabaseController;
@@ -14,12 +16,14 @@ import view.Main;
 public class Board {
 	public static Player[] Players = new Player[2];
 	public static ArrayList<Piece> pieceSet = new ArrayList<Piece>();
+	public static Obstacle[] obstacles = new Obstacle[2];
 	public static Square[][] squares = new Square[7][5];
 	
 	public static void create(String command, int column, int row, Boolean Power, Boolean Paladin, Boolean Mage, Boolean Ranger, Boolean Healer, Boolean Rogue) throws  ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
 		initializePlayers(command);
 		initializeSquares(command, column, row);
 		initializePieces(command, Power, Paladin, Mage, Ranger, Healer, Rogue);
+		initializeObstacles();
 	return;
 	}
 	private static void initializePlayers(String command) {
@@ -53,8 +57,21 @@ public class Board {
 		}
 	return;
 	}
+	private static void initializeObstacles() {
+		
+		Obstacle rock = new Rock();
+		for (int j = 0; j <= 1; j++) {
+			int randomRow = ThreadLocalRandom.current().nextInt(2, 4 + 1);
+			int randomColumn = ThreadLocalRandom.current().nextInt(2, 3 + 1);
+			obstacles[j] = rock.clone();
+			obstacles[j].setCurrentSquare(Board.squares[randomRow][randomColumn]);
+		}
+		
+		
+	}
 	
 }
+
 
 
 
