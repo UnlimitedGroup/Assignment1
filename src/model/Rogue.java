@@ -8,7 +8,7 @@ public class Rogue extends Piece {
 		super(health, currentSquare, team);
 	}
 	
-	private boolean moveCheck(int column, int row) {
+	private boolean moveCheck(int row, int column) {
 		int currentRow = this.getCurrentSquare().getRow();
 		int currentColumn = this.getCurrentSquare().getColumn();
 		if (row == currentRow || row == currentRow + 1 || row == currentRow - 1) {
@@ -19,9 +19,9 @@ public class Rogue extends Piece {
 		return false;
 	}
 	@Override
-	public boolean move(int column, int row) {
-		if (moveCheck(column, row)) {
-			this.setCurrentSquare(Board.squares[column][row]);
+	public boolean move(int row, int column) {
+		if (moveCheck(row, column)) {
+			this.setCurrentSquare(Board.squares[row][column]);
 				return true;
 		}
 		else {

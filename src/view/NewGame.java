@@ -120,14 +120,14 @@ public class NewGame {
 						rogue = true;	
 					}
 					if (smallBox.isSelected()) {
-						column = 5;
-						row = 3;
+						row = 5;
+						column = 3;
 					}
 					if (largeBox.isSelected()) {
-						column = 6;
-						row = 4;
+						row = 6;
+						column = 4;
 					}
-					MainController.startGame(column, row, power, paladin, mage, ranger, healer, rogue);
+					MainController.startGame(row, column, power, paladin, mage, ranger, healer, rogue);
 					newGameFrame.setVisible(false);
 					Main mainFrame = new Main();
 					mainFrame.frame.setVisible(true);

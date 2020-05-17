@@ -8,7 +8,7 @@ public class Square {
 	private int column;
 	private boolean selectStatus;
 	
-	public Square (int column, int row, boolean selectStatus) throws squareBoundsException {
+	public Square (int row, int column, boolean selectStatus) throws squareBoundsException {
 		this.row = row;
 		this.column = column;
 		this.selectStatus = selectStatus;

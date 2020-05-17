@@ -11,6 +11,7 @@ import exceptions.squareBoundsException;
 import model.Board;
 import model.Healer;
 import model.Mage;
+import model.Obstacle;
 import model.Paladin;
 import model.Piece;
 import model.Power;
@@ -43,7 +44,7 @@ public class DatabaseController {
 	}
 	
 	//Prepare insert and update queries
-	private String prepQueryBoard(int columns, int rows) {
+	private String prepQueryBoard(int rows, int columns) {
 		String boardName = "mainboard";
 		int boardRows = rows;
 		int boardColumns = columns;
@@ -59,6 +60,33 @@ public class DatabaseController {
 		
 		return query;
 	}
+	/*
+	private String prepQueryObstacles(Obstacle ob, String action) {
+		String obName = ob.toString();
+		int obRow = ob.getCurrentSquare().getRow();
+		int obColumn = ob.getCurrentSquare().getColumn();
+		
+		String query;
+		
+		if (action.equals("update")) {
+			query = "UPDATE OBSTACLE SET " +
+					"ROW = " + obRow + "," +
+					"COLUMN = " + obColumn +
+					" WHERE TYPE = '" + obName + "'";
+		} 
+		else {
+			query = "INSERT INTO OBSTACLE " +
+					" (TYPE, ROW, COLUMN)" +
+					" " + "VALUES (" +
+					"'" + obName + "'," +
+					"'" + ob + "'," +
+					"'" + pieceColumn + "'," +
+					"'" + pieceHealth + 
+					"')";
+		} 
+		return query;
+	}
+	*/
 	private String prepQueryPiece(Piece piece, String action) {
 		String pieceName = piece.toString();
 		int pieceRow = piece.getCurrentSquare().getRow();
@@ -123,12 +151,12 @@ public class DatabaseController {
 	}
 	
 	//Committing Queries
-	public void insertBoard(int columns, int rows) throws SQLException {
+	public void insertBoard(int rows, int columns) throws SQLException {
 			Statement stmt = con.createStatement();
 			//Clear previous board
 			this.clearBoard(stmt);
 			//Insert new board
-			stmt.executeUpdate(prepQueryBoard(columns, rows));
+			stmt.executeUpdate(prepQueryBoard(rows, columns));
 			con.commit();
 	}
 	public void insertUpdatePiece(String action) throws SQLException {
@@ -233,21 +261,22 @@ public class DatabaseController {
 				System.out.println(result.getInt("COLUMNS"));
 				
 				//Build large board
-				if (rows >= 4 && columns >= 6) {
+				if (columns >= 4 && rows >= 6) {
 					for (int i = 0; i <= rows; i++) {
 				        for (int j = 0; j <= columns; j++) {
-				        	Board.squares[j][i] = new Square(j,i, false);
+				        	Board.squares[i][j] = new Square(i,j, false);
 				        }
 					}
 				}
-				if (rows < 4 && columns < 6) {
-					for (int i = 0; i <= 4; i++) {
-				        for (int j = 0; j <= 6; j++) {
-				        	if (i == 0 || i == 4) {
-				        		Board.squares[j][i] = null;
+				//Build small board
+				if (columns < 4 && rows < 6) {
+					for (int i = 0; i <= 6; i++) {
+				        for (int j = 0; j <= 4; j++) {
+				        	if (j == 0 || j == 4) {
+				        		Board.squares[i][j] = null;
 				        	}
 				        	else {
-				        		Board.squares[j][i] = new Square(j,i, false);
+				        		Board.squares[i][j] = new Square(i,j, false);
 				        	}
 				        }
 					}
@@ -280,6 +309,16 @@ public class DatabaseController {
 	private void clearPieces(Statement stmt) throws SQLException {
 		String clearPieces = "DELETE FROM PIECES";
 		stmt.executeUpdate(clearPieces);
+		con.commit();
+	}
+	private void clearPlayers(Statement stmt) throws SQLException {
+		String clearPlayers = "DELETE FROM PLAYER";
+		stmt.executeUpdate(clearPlayers);
+		con.commit();
+	}
+	private void clearObstacles(Statement stmt) throws SQLException {
+		String clearObstacles = "DELETE FROM OBSTACLE";
+		stmt.executeUpdate(clearObstacles);
 		con.commit();
 	}
 		
