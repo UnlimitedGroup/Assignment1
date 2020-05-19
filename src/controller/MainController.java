@@ -192,11 +192,13 @@ public class MainController {
 		System.out.println(selectedSquares[0]);
 		System.out.println(selectedSquares[1]);
 		
+		
 		for (int i = 0; i < Board.obstacles.length; i++) {
 			if (Board.squares[row][column] == Board.obstacles[i].getCurrentSquare()) {
 				return;
 			}
 		}
+		
 		
 		//deselect
 		if(Board.squares[row][column] == selectedSquares[0]) {

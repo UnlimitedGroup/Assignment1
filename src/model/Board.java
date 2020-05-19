@@ -23,15 +23,20 @@ public class Board {
 		initializePlayers(command);
 		initializeSquares(command, row, column);
 		initializePieces(command, Power, Paladin, Mage, Ranger, Healer, Rogue);
-		initializeObstacles();
+		initializeObstacles(command);
 	return;
 	}
-	private static void initializePlayers(String command) {
-		if (command != "update") {
-			Players[0] = new Player(0, true);
-			Players[1] = new Player(1, false);
+	private static void initializePlayers(String command) throws SQLException, ClassNotFoundException {
+		DatabaseController db = DatabaseController.getInstance();
+		if (command == "start") {
+			db.insertUpdatePlayers("start");	
 		}
-	return;
+		if (command == "load") {
+			db.loadPlayers();
+		}
+		if (command == "update") {
+			db.insertUpdatePlayers("update");
+		}
 	}
 	private static void initializeSquares(String command,int rows, int columns) throws SQLException, ClassNotFoundException, squareBoundsException {
 		DatabaseController db = DatabaseController.getInstance();
@@ -57,19 +62,18 @@ public class Board {
 		}
 	return;
 	}
-	private static void initializeObstacles() {
-		
-		Obstacle rock = new Rock();
-		for (int j = 0; j <= 1; j++) {
-			int randomRow = ThreadLocalRandom.current().nextInt(2, 4 + 1);
-			int randomColumn = ThreadLocalRandom.current().nextInt(2, 3 + 1);
-			obstacles[j] = rock.clone();
-			obstacles[j].setCurrentSquare(Board.squares[randomRow][randomColumn]);
+	private static void initializeObstacles(String command) throws SQLException, ClassNotFoundException {
+		DatabaseController db = DatabaseController.getInstance();
+		if (command == "start") {
+			db.insertUpdateObstacles("start");	
 		}
-		
-		
+		if (command == "load") {
+			db.loadObstacles();
+		}
+		if (command == "update") {
+			db.insertUpdateObstacles("update");
+		}
 	}
-	
 }
 
 

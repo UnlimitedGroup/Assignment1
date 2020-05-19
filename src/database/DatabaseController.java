@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 import database.*;
 import exceptions.PieceInvalidName;
 import exceptions.squareBoundsException;
@@ -14,9 +15,11 @@ import model.Mage;
 import model.Obstacle;
 import model.Paladin;
 import model.Piece;
+import model.Player;
 import model.Power;
 import model.Princess;
 import model.Ranger;
+import model.Rock;
 import model.Rogue;
 import model.Square;
 
@@ -60,9 +63,8 @@ public class DatabaseController {
 		
 		return query;
 	}
-	/*
-	private String prepQueryObstacles(Obstacle ob, String action) {
-		String obName = ob.toString();
+	private String prepQueryObstacle(Obstacle ob, String action, int incrementor) {
+		String obName = ob.toString() + incrementor;
 		int obRow = ob.getCurrentSquare().getRow();
 		int obColumn = ob.getCurrentSquare().getColumn();
 		
@@ -79,14 +81,12 @@ public class DatabaseController {
 					" (TYPE, ROW, COLUMN)" +
 					" " + "VALUES (" +
 					"'" + obName + "'," +
-					"'" + ob + "'," +
-					"'" + pieceColumn + "'," +
-					"'" + pieceHealth + 
+					"'" + obRow + "'," +
+					"'" + obColumn + 
 					"')";
 		} 
 		return query;
 	}
-	*/
 	private String prepQueryPiece(Piece piece, String action) {
 		String pieceName = piece.toString();
 		int pieceRow = piece.getCurrentSquare().getRow();
@@ -113,12 +113,40 @@ public class DatabaseController {
 		} 
 		return query;
 	}
+	private String prepQueryPlayer(Player p, String action) {
+		int playerTeam = p.getTeam();
+		boolean playerTurn = p.getTurn();
+		int playerTurnInt;
+		
+		if (playerTurn) {
+			playerTurnInt = 1;
+		}
+		else {
+			playerTurnInt = 0;
+		}
+		String query;
+		if (action.equals("update")) {
+			query = "UPDATE PLAYER SET " +
+					"TEAM = " + playerTeam + "," +
+					"TURN = " + playerTurnInt +
+					" WHERE TEAM = '" + playerTeam + "'";
+		} 
+		else {
+			query = "INSERT INTO PLAYER " +
+					" (TEAM, TURN)" +
+					" " + "VALUES (" +
+					"'" + playerTeam + "'," +
+					"'" + playerTurnInt +  
+					"')";
+		} 
+		return query;
+	}
 	private Piece getPieceFromStmt(ResultSet result) throws SQLException, squareBoundsException, PieceInvalidName {
 		Piece piece = null;
 		String pieceName = result.getString("PIECE_NAME");
 		int row = result.getInt("ROW");
 		int column = result.getInt("COLUMN");
-		Square currentSquare = Board.squares[column][row];
+		Square currentSquare = Board.squares[row][column];
 		int health = result.getInt("HEALTH");
 	
 		switch (pieceName.toLowerCase()) {
@@ -171,7 +199,6 @@ public class DatabaseController {
 				 * Pieces are always initialized in the same spots, these squares will always 
 				 * exist due to minimum board size constraints
 				 */
-				
 				Piece power = new Power(100, Board.squares[5][1], 0);
 				Piece paladin = new Paladin(100, Board.squares[5][2], 0);
 				Piece mage = new Mage(100, Board.squares[5][3], 0);
@@ -244,6 +271,53 @@ public class DatabaseController {
 			con.commit();
 		}
 	}
+	public void insertUpdateObstacles(String action) throws SQLException {
+		Statement stmt = con.createStatement();
+		//If its an insert Query, pieces are initialize
+		if (action != "update") {
+			//Clear SQL table
+			clearObstacles(stmt);
+			/*
+			 * Pieces are always initialized in the same spots, these squares will always 
+			 * exist due to minimum board size constraints
+			 */
+			Obstacle rock = new Rock();
+			for (int j = 0; j <= 1; j++) {
+				int randomRow = ThreadLocalRandom.current().nextInt(2, 4 + 1);
+				int randomColumn = ThreadLocalRandom.current().nextInt(2, 3 + 1);
+				Board.obstacles[j] = rock.clone();
+				Board.obstacles[j].setCurrentSquare(Board.squares[randomRow][randomColumn]);
+			}
+		}
+		for (int i = 0; i<Board.obstacles.length; i++) {
+			String obstacleQuery;
+			obstacleQuery = prepQueryObstacle(Board.obstacles[i], action, i);
+			stmt.executeUpdate(obstacleQuery);
+			con.commit();
+		}
+	}
+	public void insertUpdatePlayers(String action) throws SQLException {
+		Statement stmt = con.createStatement();
+		//If its an insert Query, pieces are initialize
+		if (action != "update") {
+			//Clear SQL table
+			clearPlayers(stmt);
+			/*
+			 * Pieces are always initialized in the same spots, these squares will always 
+			 * exist due to minimum board size constraints
+			 */
+			Board.Players[0] = new Player(0, true);
+			Board.Players[1] = new Player(1, false);
+			}
+		//Insert data into table
+		for (int i = 0; i<Board.Players.length; i++) {
+			String playerQuery;
+			playerQuery = prepQueryPlayer(Board.Players[i], action);
+			stmt.executeUpdate(playerQuery);
+			con.commit();
+		}
+	}
+	
 	public void loadBoard() throws ClassNotFoundException, SQLException, squareBoundsException {
 		Statement stmt;
 		ResultSet result;
@@ -300,7 +374,51 @@ public class DatabaseController {
 			}
 			con.commit();
 	}
-	
+	public void loadObstacles() throws ClassNotFoundException, SQLException {
+		Statement stmt;
+		ResultSet result;
+			
+		Obstacle rock = new Rock();
+		Class.forName("org.hsqldb.jdbc.JDBCDriver");
+		con = ConnectionTest.getConnection(DB_NAME);
+		stmt = con.createStatement();
+		result = stmt.executeQuery("SELECT * FROM OBSTACLE");
+		int counter = 0;	
+			
+		while(result.next()){
+			int row = result.getInt("ROW");
+			int column = result.getInt("COLUMN");
+			Board.obstacles[counter] = rock.clone();
+			Board.obstacles[counter].setCurrentSquare(Board.squares[row][column]);
+			counter++;
+		}
+		con.commit();
+	}
+	public void loadPlayers() throws ClassNotFoundException, SQLException {
+		Statement stmt;
+		ResultSet result;
+			
+		Class.forName("org.hsqldb.jdbc.JDBCDriver");
+		con = ConnectionTest.getConnection(DB_NAME);
+		stmt = con.createStatement();
+		result = stmt.executeQuery("SELECT * FROM PLAYER");
+		int counter = 0;	
+			
+		while(result.next()){
+			int team = result.getInt("TEAM");
+			int turn = result.getInt("TURN");
+			boolean turnBool;
+			if (turn == 1) {
+				turnBool = true;
+			}
+			else 
+				turnBool = false;
+			Board.Players[counter] = new Player(team, turnBool);
+			counter++;
+		}
+		con.commit();
+	}
+
 	//Utility 
 	private void clearBoard(Statement stmt) throws SQLException {
 		String clearBoard = "DELETE FROM BOARD";
