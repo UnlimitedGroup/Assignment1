@@ -63,20 +63,13 @@ public class DatabaseController {
 		
 		return query;
 	}
-	private String prepQueryObstacle(Obstacle ob, String action, int incrementor) {
+	private String prepQueryObstacle(Obstacle ob, int incrementor) {
 		String obName = ob.toString() + incrementor;
 		int obRow = ob.getCurrentSquare().getRow();
 		int obColumn = ob.getCurrentSquare().getColumn();
 		
 		String query;
 		
-		if (action.equals("update")) {
-			query = "UPDATE OBSTACLE SET " +
-					"ROW = " + obRow + "," +
-					"COLUMN = " + obColumn +
-					" WHERE TYPE = '" + obName + "'";
-		} 
-		else {
 			query = "INSERT INTO OBSTACLE " +
 					" (TYPE, ROW, COLUMN)" +
 					" " + "VALUES (" +
@@ -84,7 +77,7 @@ public class DatabaseController {
 					"'" + obRow + "'," +
 					"'" + obColumn + 
 					"')";
-		} 
+		
 		return query;
 	}
 	private String prepQueryPiece(Piece piece, String action) {
@@ -94,23 +87,16 @@ public class DatabaseController {
 		int pieceHealth = piece.getHealth();
 		String query;
 		
-		if (action.equals("update")) {
-			query = "UPDATE PIECES SET " +
-					"ROW = " + pieceRow + "," +
-					"COLUMN = " + pieceColumn + "," +
-					"HEALTH = " + pieceHealth + 
-					" WHERE PIECE_NAME = '" + pieceName + "'";
-		} 
-		else {
-			query = "INSERT INTO PIECES " +
-					" (PIECE_NAME, ROW, COLUMN, HEALTH)" +
-					" " + "VALUES (" +
-					"'" + pieceName + "'," +
-					"'" + pieceRow + "'," +
-					"'" + pieceColumn + "'," +
-					"'" + pieceHealth + 
-					"')";
-		} 
+		
+		query = "INSERT INTO PIECES " +
+				" (PIECE_NAME, ROW, COLUMN, HEALTH)" +
+				" " + "VALUES (" +
+				"'" + pieceName + "'," +
+				"'" + pieceRow + "'," +
+				"'" + pieceColumn + "'," +
+				"'" + pieceHealth + 
+				"')";
+		
 		return query;
 	}
 	private String prepQueryPlayer(Player p, String action) {
@@ -125,20 +111,13 @@ public class DatabaseController {
 			playerTurnInt = 0;
 		}
 		String query;
-		if (action.equals("update")) {
-			query = "UPDATE PLAYER SET " +
-					"TEAM = " + playerTeam + "," +
-					"TURN = " + playerTurnInt +
-					" WHERE TEAM = '" + playerTeam + "'";
-		} 
-		else {
-			query = "INSERT INTO PLAYER " +
-					" (TEAM, TURN)" +
-					" " + "VALUES (" +
-					"'" + playerTeam + "'," +
-					"'" + playerTurnInt +  
-					"')";
-		} 
+		
+		query = "INSERT INTO PLAYER " +
+				" (TEAM, TURN)" +
+				" " + "VALUES (" +
+				"'" + playerTeam + "'," +
+				"'" + playerTurnInt +  
+				"')";
 		return query;
 	}
 	private Piece getPieceFromStmt(ResultSet result) throws SQLException, squareBoundsException, PieceInvalidName {
@@ -187,100 +166,60 @@ public class DatabaseController {
 			stmt.executeUpdate(prepQueryBoard(rows, columns));
 			con.commit();
 	}
-	public void insertUpdatePiece(String action) throws SQLException {
-			Statement stmt = con.createStatement();
-			//If its an insert Query, pieces are initialize
-			if (action != "update") {
-				//Clear SQL table
-				clearPieces(stmt);
-				//Clear piece array
-				Board.pieceSet.clear();
-				/*
-				 * Pieces are always initialized in the same spots, these squares will always 
-				 * exist due to minimum board size constraints
-				 */
-				Piece power = new Power(100, Board.squares[5][1], 0);
-				Piece paladin = new Paladin(100, Board.squares[5][2], 0);
-				Piece mage = new Mage(100, Board.squares[5][3], 0);
-				Piece ranger = new Ranger(100, Board.squares[1][1], 1);
-				Piece healer = new Healer(100, Board.squares[1][2], 1);
-				Piece rogue = new Rogue(100, Board.squares[1][3], 1);
-				Piece princess1 = new Princess(100, Board.squares[0][2], 1);
-				Piece princess2 = new Princess(100, Board.squares[6][2], 0);
-				Board.pieceSet.add(power);
-				Board.pieceSet.add(paladin);
-				Board.pieceSet.add(mage);
-				Board.pieceSet.add(ranger);
-				Board.pieceSet.add(healer);
-				Board.pieceSet.add(rogue);
-				Board.pieceSet.add(princess1);
-				Board.pieceSet.add(princess2);
-			}
-			for (Piece p : Board.pieceSet) {
-				String pieceQuery;
-				pieceQuery = prepQueryPiece(p, action);
-				stmt.executeUpdate(pieceQuery);
-				con.commit();
-			}
-	}
-	
 	public void insertUpdatePiece(String action, Boolean Power, Boolean Paladin, Boolean Mage, Boolean Ranger, Boolean Healer, Boolean Rogue) throws SQLException {
+		
 		Statement stmt = con.createStatement();
-		//If its an insert Query, pieces are initialize
-		//Clear SQL table
+		
+		if (action == "start") {
+			Board.pieceSet.clear();
+			/*
+			 * Pieces are always initialized in the same spots, these squares will always 
+			* exist due to minimum board size constraints
+			*/
+			if (Power) {
+				Piece power = new Power(100, Board.squares[5][1], 0);
+				Board.pieceSet.add(power);
+			}
+			if (Paladin) {
+				Piece paladin = new Paladin(100, Board.squares[5][2], 0);
+				Board.pieceSet.add(paladin);
+			}
+			if (Mage) {
+				Piece mage = new Mage(100, Board.squares[5][3], 0);
+				Board.pieceSet.add(mage);
+			}
+			if (Ranger) {
+				Piece ranger = new Ranger(100, Board.squares[1][1], 1);
+				Board.pieceSet.add(ranger);
+			}
+			if (Healer) {
+				Piece healer = new Healer(100, Board.squares[1][2], 1);
+				Board.pieceSet.add(healer);
+			}
+			if (Rogue) {
+				Piece rogue = new Rogue(100, Board.squares[1][3], 1);
+				Board.pieceSet.add(rogue);
+			}
+			Piece princess1 = new Princess(100, Board.squares[0][2], 1);
+			Piece princess2 = new Princess(100, Board.squares[6][2], 0);
+			Board.pieceSet.add(princess1);
+			Board.pieceSet.add(princess2);
+		}
+		
+	if (action == "update") {
 		clearPieces(stmt);
-		//Clear piece array
-		Board.pieceSet.clear();
-		/*
-		 * Pieces are always initialized in the same spots, these squares will always 
-		* exist due to minimum board size constraints
-		*/
-		if (Power) {
-			Piece power = new Power(100, Board.squares[5][1], 0);
-			Board.pieceSet.add(power);
-		}
-		if (Paladin) {
-			Piece paladin = new Paladin(100, Board.squares[5][2], 0);
-			Board.pieceSet.add(paladin);
-		}
-		if (Mage) {
-			Piece mage = new Mage(100, Board.squares[5][3], 0);
-			Board.pieceSet.add(mage);
-		}
-		if (Ranger) {
-			Piece ranger = new Ranger(100, Board.squares[1][1], 1);
-			Board.pieceSet.add(ranger);
-		}
-		if (Healer) {
-			Piece healer = new Healer(100, Board.squares[1][2], 1);
-			Board.pieceSet.add(healer);
-		}
-		if (Rogue) {
-			Piece rogue = new Rogue(100, Board.squares[1][3], 1);
-			Board.pieceSet.add(rogue);
-		}
-		Piece princess1 = new Princess(100, Board.squares[0][2], 1);
-		Piece princess2 = new Princess(100, Board.squares[6][2], 0);
-		Board.pieceSet.add(princess1);
-		Board.pieceSet.add(princess2);
-			
 		for (Piece p : Board.pieceSet) {
 			String pieceQuery;
 			pieceQuery = prepQueryPiece(p, action);
 			stmt.executeUpdate(pieceQuery);
 			con.commit();
+			}
 		}
 	}
 	public void insertUpdateObstacles(String action) throws SQLException {
 		Statement stmt = con.createStatement();
-		//If its an insert Query, pieces are initialize
-		if (action != "update") {
-			//Clear SQL table
-			clearObstacles(stmt);
-			/*
-			 * Pieces are always initialized in the same spots, these squares will always 
-			 * exist due to minimum board size constraints
-			 */
+		
+		if (action == "start") {
 			Obstacle rock = new Rock();
 			for (int j = 0; j <= 1; j++) {
 				int randomRow = ThreadLocalRandom.current().nextInt(2, 4 + 1);
@@ -289,39 +228,63 @@ public class DatabaseController {
 				Board.obstacles[j].setCurrentSquare(Board.squares[randomRow][randomColumn]);
 			}
 		}
-		for (int i = 0; i<Board.obstacles.length; i++) {
-			String obstacleQuery;
-			obstacleQuery = prepQueryObstacle(Board.obstacles[i], action, i);
-			stmt.executeUpdate(obstacleQuery);
-			con.commit();
+		if (action == "update") {
+		clearObstacles(stmt);
+			for (int i = 0; i<Board.obstacles.length; i++) {
+				String obstacleQuery;
+				obstacleQuery = prepQueryObstacle(Board.obstacles[i], i);
+				stmt.executeUpdate(obstacleQuery);
+				con.commit();
+			}
 		}
 	}
 	public void insertUpdatePlayers(String action) throws SQLException {
 		Statement stmt = con.createStatement();
 		//If its an insert Query, pieces are initialize
-		if (action != "update") {
-			//Clear SQL table
-			clearPlayers(stmt);
-			/*
-			 * Pieces are always initialized in the same spots, these squares will always 
-			 * exist due to minimum board size constraints
-			 */
+		if (action =="start") {
 			Board.Players[0] = new Player(0, true);
 			Board.Players[1] = new Player(1, false);
-			}
+		}
 		//Insert data into table
-		for (int i = 0; i<Board.Players.length; i++) {
-			String playerQuery;
-			playerQuery = prepQueryPlayer(Board.Players[i], action);
-			stmt.executeUpdate(playerQuery);
-			con.commit();
+		if (action == "update") {
+			clearPlayers(stmt);
+			for (int i = 0; i<Board.Players.length; i++) {
+				String playerQuery;
+				playerQuery = prepQueryPlayer(Board.Players[i], action);
+				stmt.executeUpdate(playerQuery);
+				con.commit();
+			}
 		}
 	}
 	
-	public void loadBoard() throws ClassNotFoundException, SQLException, squareBoundsException {
-		Statement stmt;
-		ResultSet result;
+	public void loadBoard(String command, int r, int c) throws ClassNotFoundException, SQLException, squareBoundsException {
 		
+		if (command == "start") {
+			//Build large board
+			if (c >= 4 && r >= 6) {
+				for (int i = 0; i <= r; i++) {
+			        for (int j = 0; j <= c; j++) {
+			        	Board.squares[i][j] = new Square(i,j, false);
+			        }
+				}
+			}
+			//Build small board
+			if (c < 4 && r < 6) {
+				for (int i = 0; i <= 6; i++) {
+			        for (int j = 0; j <= 4; j++) {
+			        	if (j == 0 || j == 4) {
+			        		Board.squares[i][j] = null;
+			        	}
+			        	else {
+			        		Board.squares[i][j] = new Square(i,j, false);
+			        	}
+			        }
+				}
+			}
+		}
+		if (command == "load") {
+			Statement stmt;
+			ResultSet result;
 			Class.forName("org.hsqldb.jdbc.JDBCDriver");
 			con = ConnectionTest.getConnection(DB_NAME);
 			stmt = con.createStatement();
@@ -331,8 +294,8 @@ public class DatabaseController {
 			while(result.next()){
 				int rows = result.getInt("ROWS");
 				int columns = result.getInt("COLUMNS");
-				System.out.println(result.getInt("ROWS"));
-				System.out.println(result.getInt("COLUMNS"));
+				System.out.println("number" + result.getInt("ROWS"));
+				System.out.println("number" + result.getInt("COLUMNS"));
 				
 				//Build large board
 				if (columns >= 4 && rows >= 6) {
@@ -344,6 +307,7 @@ public class DatabaseController {
 				}
 				//Build small board
 				if (columns < 4 && rows < 6) {
+					System.out.println("building small board");
 					for (int i = 0; i <= 6; i++) {
 				        for (int j = 0; j <= 4; j++) {
 				        	if (j == 0 || j == 4) {
@@ -355,7 +319,8 @@ public class DatabaseController {
 				        }
 					}
 				}
-			} con.commit();	
+			} con.commit();
+		}
 	}
 	public void loadPieces() throws ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
 		Statement stmt;

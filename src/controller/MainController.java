@@ -280,12 +280,12 @@ public class MainController {
 	//start, load, save game
 	public static void startGame(int row, int column, Boolean Power, Boolean Paladin, Boolean Mage, Boolean Ranger, Boolean Healer, Boolean Rogue) throws ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
 		Board.create("start", row, column, Power, Paladin, Mage, Ranger, Healer, Rogue);
-	}
+	} 
 	public static void loadGame() throws ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
 		Board.create("load", 0, 0, null, null, null, null, null, null);
 	}
-	public static void saveGame() throws ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
-		Board.create("update", 0, 0, null, null, null, null, null, null);
+	public static void saveGame(int row, int column) throws ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
+		Board.create("update", row, column, null, null, null, null, null, null);
 	}	
 }
 

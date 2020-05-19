@@ -41,11 +41,13 @@ public class Board {
 	private static void initializeSquares(String command,int rows, int columns) throws SQLException, ClassNotFoundException, squareBoundsException {
 		DatabaseController db = DatabaseController.getInstance();
 		if (command == "start") {
-			db.insertBoard(rows, columns);	
-			db.loadBoard();
+			db.loadBoard("start", rows, columns);
 		}
 		if (command == "load") {
-			db.loadBoard();
+			db.loadBoard("load", rows, columns);
+		}
+		if (command == "update") {
+			db.insertBoard(rows, columns);
 		}
 	return;
 	}
@@ -58,7 +60,7 @@ public class Board {
 			db.loadPieces();
 		}
 		if (command == "update") {
-			db.insertUpdatePiece(command);
+			db.insertUpdatePiece("update", null, null, null, null, null, null);
 		}
 	return;
 	}

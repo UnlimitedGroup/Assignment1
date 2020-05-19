@@ -19,6 +19,7 @@ import javax.swing.text.StyledDocument;
 import controller.MainController;
 import exceptions.PieceInvalidName;
 import exceptions.squareBoundsException;
+import model.Board;
 
 import java.awt.Color;
 import javax.swing.JTextArea;
@@ -53,7 +54,7 @@ public class Main {
 		board.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		frame.getContentPane().add(board, BorderLayout.CENTER);
 		board.setLayout(new GridLayout(0, 5, 0, 0));
-		
+		 
 			JPanel p10 = new JPanel();
 			p10.setBorder(new LineBorder(new Color(0, 0, 0)));
 			board.add(p10);
@@ -70,7 +71,7 @@ public class Main {
 						b10.setBackground(MainController.changeButtonColour(0, 0));
 						return;
 					}});
-			
+			 
 			JPanel p11 = new JPanel();
 			p11.setBorder(new LineBorder(new Color(0, 0, 0)));
 			board.add(p11);
@@ -890,7 +891,17 @@ public class Main {
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							try {
-								MainController.saveGame();
+								int rows;
+								int columns;
+								if (Board.squares[0][0] == null) {
+									rows = 5;
+									columns = 3;
+								}
+								else {
+									rows = 6;
+									columns = 4;
+								}
+								MainController.saveGame(rows, columns);
 								b10.setIcon(MainController.displayImg(0, 0));
 								b11.setIcon(MainController.displayImg(0, 1));
 								b12.setIcon(MainController.displayImg(0, 2));
