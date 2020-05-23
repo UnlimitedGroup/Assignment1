@@ -30,14 +30,23 @@ public abstract class Piece {
 		this.currentSquare = newSquare;
 	}
 	//Action
-	public void takeDamage (int damage) {
-		this.health = this.health - damage;
+	public void decreaseHealth (int damage) {
+		if (this.health - damage > 0) {
+			this.health = this.health - damage;
+		}
+		else
+			this.health = 0;
 	}
-	public void heal(int heal) {
-		//to do
+	public void increaseHealth(int heal) {
+		if (this.health + heal < 100) {
+			this.health = this.health + heal;
+		}
+		else {
+			this.health = 100;
+		}
 	}
     abstract public boolean move(int row, int column);
 }
-
+ 
 
 

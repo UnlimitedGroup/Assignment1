@@ -60,7 +60,7 @@ public class DatabaseController {
 				"'" + boardRows + "'," +
 				"'" + boardColumns +
 				"')";
-		
+		 
 		return query;
 	}
 	private String prepQueryObstacle(Obstacle ob, int incrementor) {

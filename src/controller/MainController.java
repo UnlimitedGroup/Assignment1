@@ -10,6 +10,7 @@ import exceptions.squareBoundsException;
 import model.Board;
 import model.Obstacle;
 import model.Piece;
+import model.Potion;
 import model.Square;
 import view.Main;
 
@@ -24,6 +25,8 @@ public class MainController {
 	private static ImageIcon ranger = new ImageIcon(Main.class.getResource("/imgs/ranger.png"));
 	private static ImageIcon rogue = new ImageIcon(Main.class.getResource("/imgs/rogue.png"));
 	private static ImageIcon rock = new ImageIcon(Main.class.getResource("/imgs/rock.png"));
+	private static ImageIcon destructionPotion = new ImageIcon(Main.class.getResource("/imgs/destructionPotion.png"));
+	private static ImageIcon healingPotion = new ImageIcon(Main.class.getResource("/imgs/healingPotion.png"));
 	
 	//utility
 	public static String displayTurn() {
@@ -73,6 +76,20 @@ public class MainController {
 				}
 			}
 		}
+		for (Potion i: Board.potions) {
+			if (i != null) {
+				if(i.getCurrentSquare() == Board.squares[row][column]) {
+					if (i.getStatus() == 1) {
+						if(i.toString() == "healing potion") {
+							return healingPotion;
+						}
+						if(i.toString() == "destruction potion") {
+							return destructionPotion;
+						}
+					}
+				}
+			}
+		}
 		return null;
 	}
 	public static void resetSquares() {
@@ -84,6 +101,18 @@ public class MainController {
 		        	}
 	        	}
 	        }
+		}
+	}
+	public static void drinkPotionCheck() {
+		for (Piece i: Board.pieceSet) {
+			for (Potion j: Board.potions) {
+				if (i.getCurrentSquare() == j.getCurrentSquare()) {
+					if (j.getStatus() == 1) {
+						j.drinkPotion(i);
+						j.setStatus(0);
+					}
+				}
+			}
 		}
 	}
 	
@@ -98,7 +127,9 @@ public class MainController {
 						if (i.getTeam() == 0) {
 							if (i.move(selectedSquares[1].getRow(),selectedSquares[1].getColumn())) {
 								System.out.println(i.toString() + " " + "moves");
+								System.out.println(i.getHealth());
 								i.move(selectedSquares[1].getRow(),selectedSquares[1].getColumn());
+								drinkPotionCheck();
 								Board.Players[0].setTurn(false);
 								Board.Players[1].setTurn(true);
 								return;
@@ -112,6 +143,8 @@ public class MainController {
 							if (i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn())) {
 								i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn());
 								System.out.println(i.toString() + " " + "moves");
+								System.out.println(i.getHealth());
+								drinkPotionCheck();
 								Board.Players[0].setTurn(false);
 								Board.Players[1].setTurn(true);
 								return;
@@ -128,7 +161,9 @@ public class MainController {
 						if (i.getTeam() == 1) {
 							if (i.move(selectedSquares[1].getRow(), selectedSquares[1].getColumn())) {
 								System.out.println(i.toString() + " " + "moves");
+								System.out.println(i.getHealth());
 								i.move(selectedSquares[1].getRow(), selectedSquares[1].getColumn());
+								drinkPotionCheck();
 								Board.Players[1].setTurn(false);
 								Board.Players[0].setTurn(true);
 								return;
@@ -141,7 +176,9 @@ public class MainController {
 						if (i.getTeam() == 1) {
 							if (i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn())) {
 								System.out.println(i.toString() + " " + "moves");
+								System.out.println(i.getHealth());
 								i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn());
+								drinkPotionCheck();
 								Board.Players[1].setTurn(false);
 								Board.Players[0].setTurn(true);
 								return;
