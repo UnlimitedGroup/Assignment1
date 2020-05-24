@@ -25,7 +25,7 @@ public class Board {
 		initializeSquares(command, row, column);
 		initializePieces(command, Power, Paladin, Mage, Ranger, Healer, Rogue);
 		initializeObstacles(command);
-		initializeHealingPotions();
+		initializePotions(command);
 	return;
 	}
 	private static void initializePlayers(String command) throws SQLException, ClassNotFoundException {
@@ -64,7 +64,6 @@ public class Board {
 		if (command == "update") {
 			db.insertUpdatePiece("update", null, null, null, null, null, null);
 		}
-	return;
 	}
 	private static void initializeObstacles(String command) throws SQLException, ClassNotFoundException {
 		DatabaseController db = DatabaseController.getInstance();
@@ -78,27 +77,16 @@ public class Board {
 			db.insertUpdateObstacles("update");
 		}
 	}
-	private static void initializeHealingPotions() {
-		int counter = 4;
-		int randomRowInitial = ThreadLocalRandom.current().nextInt(2, 4 + 1);
-		int randomColumnInitial = ThreadLocalRandom.current().nextInt(2, 3 + 1);
-		potions.add(new HealingPotion(Board.squares[randomRowInitial][randomColumnInitial], 1));
-		
-		for (int j = 0; j < counter; j++) {
-			int randomRow = ThreadLocalRandom.current().nextInt(2, 4 + 1);
-			int randomColumn = ThreadLocalRandom.current().nextInt(2, 3 + 1);
-			int randomizer = ThreadLocalRandom.current().nextInt(1, 2 + 1);
-			
-			if (randomizer == 1) {
-				if (randomRow != potions.get(potions.size()-1).getCurrentSquare().getRow() && randomColumn != potions.get(potions.size()-1).getCurrentSquare().getColumn()) {
-					potions.add(new HealingPotion(Board.squares[randomRow][randomColumn], 1));
-				}
-			}
-			else {
-				if (randomRow != potions.get(potions.size()-1).getCurrentSquare().getRow() && randomColumn != potions.get(potions.size()-1).getCurrentSquare().getColumn()) {
-					potions.add(new DestructionDecorator(new HealingPotion (Board.squares[randomRow][randomColumn], 1)));
-				}
-			}
+	private static void initializePotions(String command) throws SQLException, ClassNotFoundException, squareBoundsException {
+		DatabaseController db = DatabaseController.getInstance();
+		if (command == "start") {
+			db.insertUpdatePotions("start");	
+		}
+		if (command == "load") {
+			db.loadPotions();
+		}
+		if (command == "update") {
+			db.insertUpdatePotions("update");
 		}
 	}
 }

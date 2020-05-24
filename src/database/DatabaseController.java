@@ -10,12 +10,15 @@ import database.*;
 import exceptions.PieceInvalidName;
 import exceptions.squareBoundsException;
 import model.Board;
+import model.DestructionDecorator;
 import model.Healer;
+import model.HealingPotion;
 import model.Mage;
 import model.Obstacle;
 import model.Paladin;
 import model.Piece;
 import model.Player;
+import model.Potion;
 import model.Power;
 import model.Princess;
 import model.Ranger;
@@ -38,7 +41,7 @@ public class DatabaseController {
 			e.printStackTrace();
 		}
 	}
-	
+	 
 	synchronized public static DatabaseController getInstance() {
 		if (DatabaseController.instance == null) { 
                 DatabaseController.instance = new DatabaseController();
@@ -156,6 +159,45 @@ public class DatabaseController {
 		}
 		throw new PieceInvalidName();
 	}
+	private Potion getPotionFromStmt(ResultSet result) throws SQLException, squareBoundsException {
+		Potion potion = null;
+		String potionName = result.getString("ID");
+		int row = result.getInt("ROW");
+		int column = result.getInt("COLUMN");
+		int status = result.getInt("STATUS");
+		Square currentSquare = Board.squares[row][column];
+	
+			if (potionName.contains("healing")) {
+				potion = new HealingPotion(currentSquare, status);
+				return potion;
+			}
+			if (potionName.contains("destruction")) {
+				potion = new DestructionDecorator(new HealingPotion (currentSquare, status)); 			
+				return potion;
+			}
+			else {
+				return null;
+			}
+	}
+	private String prepQueryPotion(Potion pot, int incrementor) {
+		String potName = pot.toString() + incrementor;
+		int potRow = pot.getCurrentSquare().getRow();
+		int potColumn = pot.getCurrentSquare().getColumn();
+		int potStatus = pot.getStatus();
+		
+		String query;
+		
+			query = "INSERT INTO POTION" +
+					" (ID, ROW, COLUMN, STATUS)" +
+					" " + "VALUES (" +
+					"'" + potName + "'," +
+					"'" + potRow + "'," +
+					"'" + potColumn + "'," +
+					"'" + potStatus + 
+					"')";
+		
+		return query;
+	}
 	
 	//Committing Queries
 	public void insertBoard(int rows, int columns) throws SQLException {
@@ -256,7 +298,47 @@ public class DatabaseController {
 			}
 		}
 	}
-	
+	public void insertUpdatePotions(String action) throws SQLException {
+		Statement stmt = con.createStatement();
+		
+		if (action == "start") {
+			Board.potions.clear();
+			int counter = 4;
+			int randomRowInitial = ThreadLocalRandom.current().nextInt(2, 4 + 1);
+			int randomColumnInitial = ThreadLocalRandom.current().nextInt(2, 3 + 1);
+			Board.potions.add(new HealingPotion(Board.squares[randomRowInitial][randomColumnInitial], 1));
+			
+			for (int j = 0; j < counter; j++) {
+				int randomRow = ThreadLocalRandom.current().nextInt(2, 4 + 1);
+				int randomColumn = ThreadLocalRandom.current().nextInt(2, 3 + 1);
+				int randomizer = ThreadLocalRandom.current().nextInt(1, 2 + 1);
+				
+				if (randomizer == 1) {
+					if (randomRow != Board.potions.get(Board.potions.size()-1).getCurrentSquare().getRow() && randomColumn != Board.potions.get(Board.potions.size()-1).getCurrentSquare().getColumn()) {
+						Board.potions.add(new HealingPotion(Board.squares[randomRow][randomColumn], 1));
+					}
+				}
+				else {
+					if (randomRow != Board.potions.get(Board.potions.size()-1).getCurrentSquare().getRow() && randomColumn != Board.potions.get(Board.potions.size()-1).getCurrentSquare().getColumn()) {
+						Board.potions.add(new DestructionDecorator(new HealingPotion (Board.squares[randomRow][randomColumn], 1)));
+					}
+				}
+			}
+		}
+		if (action == "update") {
+		clearPotions(stmt);
+		int counter = 0;
+			for (Potion i:Board.potions) {
+				counter++;
+				String potionQuery;
+				potionQuery = prepQueryPotion(i, counter);
+				stmt.executeUpdate(potionQuery);
+				con.commit();
+			}
+		}
+	}
+
+	//Load Queries
 	public void loadBoard(String command, int r, int c) throws ClassNotFoundException, SQLException, squareBoundsException {
 		
 		if (command == "start") {
@@ -335,6 +417,9 @@ public class DatabaseController {
 
 			while(result.next()){		
 				Piece piece = getPieceFromStmt(result);
+				System.out.println(piece);
+				System.out.println(piece.getCurrentSquare().getRow());
+				System.out.println(piece.getCurrentSquare().getColumn());
 				Board.pieceSet.add(piece);
 			}
 			con.commit();
@@ -383,7 +468,24 @@ public class DatabaseController {
 		}
 		con.commit();
 	}
+	public void loadPotions() throws ClassNotFoundException, SQLException, squareBoundsException {
+		Statement stmt;
+		ResultSet result;
+			
+			Board.potions.clear();
+			Class.forName("org.hsqldb.jdbc.JDBCDriver");
+			con = ConnectionTest.getConnection(DB_NAME);
+			stmt = con.createStatement();
+			result = stmt.executeQuery(
+					"SELECT * FROM POTION");
 
+			while(result.next()){		
+				Potion p = getPotionFromStmt(result);
+				Board.potions.add(p);
+			}
+			con.commit();
+	}
+	
 	//Utility 
 	private void clearBoard(Statement stmt) throws SQLException {
 		String clearBoard = "DELETE FROM BOARD";
@@ -402,6 +504,11 @@ public class DatabaseController {
 	private void clearObstacles(Statement stmt) throws SQLException {
 		String clearObstacles = "DELETE FROM OBSTACLE";
 		stmt.executeUpdate(clearObstacles);
+		con.commit();
+	}
+	private void clearPotions(Statement stmt) throws SQLException {
+		String clearPotions = "DELETE FROM POTION";
+		stmt.executeUpdate(clearPotions);
 		con.commit();
 	}
 		
