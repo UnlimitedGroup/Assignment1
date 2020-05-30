@@ -52,8 +52,8 @@ public class KillThePrincess {
 		Board.squares[6][3] = null;
 		Board.squares[6][4] = null;	
 		
-		
-		//Open Window
+
+		//Create UI
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

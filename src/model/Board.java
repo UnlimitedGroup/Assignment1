@@ -89,7 +89,21 @@ public class Board {
 			db.insertUpdatePotions("update");
 		}
 	}
+
+	//Change the state of the board 
+	public static void undoMove(ArrayList<Piece> PiecesBackup) {		
+		for (Piece i: PiecesBackup) {
+			for (Piece j: pieceSet) {
+				if (i.toString() == j.toString()) {
+					j.setCurrentSquare(i.getCurrentSquare());
+					j.setHealth(i.getHealth());
+				}
+			}
+		}
+	}
+
 }
+
 
 
 

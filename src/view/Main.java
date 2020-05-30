@@ -672,15 +672,19 @@ public class Main {
 					JTextArea turnDisplay = new JTextArea();
 					turnDisplay.setFont(new Font("Monospaced", Font.PLAIN, 10));
 					turnDisplay.setText(MainController.displayTurn());
-					
 					turnDisplay.setEditable(false);
 					infoPanel.add(turnDisplay);
 				
 					JLabel unitHealth = new JLabel("Unit Health:");
 					infoPanel.add(unitHealth);
 					
-					JTextArea textArea = new JTextArea();
-					infoPanel.add(textArea);
+					JTextArea healthDisplay = new JTextArea();
+					healthDisplay.setFont(new Font("Monospaced", Font.PLAIN, 10));	
+					healthDisplay.setEditable(false);
+					infoPanel.add(healthDisplay);
+					
+					JLabel lblNewLabel = new JLabel("New label");
+					infoPanel.add(lblNewLabel);
 					
 					JButton instructionsButton = new JButton("Instructions");
 					userPanel.add(instructionsButton);
@@ -783,9 +787,93 @@ public class Main {
 							b73.setBackground(MainController.changeButtonColour(6, 3));
 							b74.setBackground(MainController.changeButtonColour(6, 4));
 							turnDisplay.setText(MainController.displayTurn());
+							
+							}});
+					
+					JButton undoButton = new JButton("Undo");
+					userPanel.add(undoButton);
+					undoButton.addActionListener(new ActionListener () {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							MainController.undo();
+						
+							MainController.resetSquares();
+							//refresh all squares
+							b10.setIcon(MainController.displayImg(0, 0));
+							b11.setIcon(MainController.displayImg(0, 1));
+							b12.setIcon(MainController.displayImg(0, 2));
+							b13.setIcon(MainController.displayImg(0, 3));
+							b14.setIcon(MainController.displayImg(0, 4));
+							b20.setIcon(MainController.displayImg(1, 0));
+							b21.setIcon(MainController.displayImg(1, 1));
+							b22.setIcon(MainController.displayImg(1, 2));
+							b23.setIcon(MainController.displayImg(1, 3));
+							b24.setIcon(MainController.displayImg(1, 4));
+							b30.setIcon(MainController.displayImg(2, 0));
+							b31.setIcon(MainController.displayImg(2, 1));
+							b32.setIcon(MainController.displayImg(2, 2));
+							b33.setIcon(MainController.displayImg(2, 3));
+							b34.setIcon(MainController.displayImg(2, 4));
+							b40.setIcon(MainController.displayImg(3, 0));
+							b41.setIcon(MainController.displayImg(3, 1));
+							b42.setIcon(MainController.displayImg(3, 2));
+							b43.setIcon(MainController.displayImg(3, 3));
+							b44.setIcon(MainController.displayImg(3, 4));
+							b50.setIcon(MainController.displayImg(4, 0));
+							b51.setIcon(MainController.displayImg(4, 1));
+							b52.setIcon(MainController.displayImg(4, 2));
+							b53.setIcon(MainController.displayImg(4, 3));
+							b54.setIcon(MainController.displayImg(4, 4));
+							b60.setIcon(MainController.displayImg(5, 0));
+							b61.setIcon(MainController.displayImg(5, 1));
+							b62.setIcon(MainController.displayImg(5, 2));
+							b63.setIcon(MainController.displayImg(5, 3));
+							b64.setIcon(MainController.displayImg(5, 4));
+							b70.setIcon(MainController.displayImg(6, 0));
+							b71.setIcon(MainController.displayImg(6, 1));
+							b72.setIcon(MainController.displayImg(6, 2));
+							b73.setIcon(MainController.displayImg(6, 3));
+							b74.setIcon(MainController.displayImg(6, 4));
+							b10.setBackground(MainController.changeButtonColour(0, 0));
+							b11.setBackground(MainController.changeButtonColour(0, 1));
+							b12.setBackground(MainController.changeButtonColour(0, 2));
+							b13.setBackground(MainController.changeButtonColour(0, 3));
+							b14.setBackground(MainController.changeButtonColour(0, 4));
+							b20.setBackground(MainController.changeButtonColour(1, 0));
+							b21.setBackground(MainController.changeButtonColour(1, 1));
+							b22.setBackground(MainController.changeButtonColour(1, 2));
+							b23.setBackground(MainController.changeButtonColour(1, 3));
+							b24.setBackground(MainController.changeButtonColour(1, 4));
+							b30.setBackground(MainController.changeButtonColour(2, 0));
+							b31.setBackground(MainController.changeButtonColour(2, 1));
+							b32.setBackground(MainController.changeButtonColour(2, 2));
+							b33.setBackground(MainController.changeButtonColour(2, 3));
+							b34.setBackground(MainController.changeButtonColour(2, 4));
+							b40.setBackground(MainController.changeButtonColour(3, 0));
+							b41.setBackground(MainController.changeButtonColour(3, 1));
+							b42.setBackground(MainController.changeButtonColour(3, 2));
+							b43.setBackground(MainController.changeButtonColour(3, 3));
+							b44.setBackground(MainController.changeButtonColour(3, 4));
+							b50.setBackground(MainController.changeButtonColour(4, 0));
+							b51.setBackground(MainController.changeButtonColour(4, 1));
+							b52.setBackground(MainController.changeButtonColour(4, 2));
+							b53.setBackground(MainController.changeButtonColour(4, 3));
+							b54.setBackground(MainController.changeButtonColour(4, 4));
+							b60.setBackground(MainController.changeButtonColour(5, 0));
+							b61.setBackground(MainController.changeButtonColour(5, 1));
+							b62.setBackground(MainController.changeButtonColour(5, 2));
+							b63.setBackground(MainController.changeButtonColour(5, 3));
+							b64.setBackground(MainController.changeButtonColour(5, 4));
+							b70.setBackground(MainController.changeButtonColour(6, 0));
+							b71.setBackground(MainController.changeButtonColour(6, 1));
+							b72.setBackground(MainController.changeButtonColour(6, 2));
+							b73.setBackground(MainController.changeButtonColour(6, 3));
+							b74.setBackground(MainController.changeButtonColour(6, 4));
+							turnDisplay.setText(MainController.displayTurn());
 								
 							
 							}});
+					
 			
 					JButton spellButton = new JButton("Cast Spell");
 					userPanel.add(spellButton);

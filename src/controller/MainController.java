@@ -7,7 +7,10 @@ import javax.swing.ImageIcon;
 
 import exceptions.PieceInvalidName;
 import exceptions.squareBoundsException;
+import model.BackupCommand;
 import model.Board;
+import model.Command;
+import model.CommandHistory;
 import model.Obstacle;
 import model.Piece;
 import model.Potion;
@@ -27,6 +30,21 @@ public class MainController {
 	private static ImageIcon rock = new ImageIcon(Main.class.getResource("/imgs/rock.png"));
 	private static ImageIcon destructionPotion = new ImageIcon(Main.class.getResource("/imgs/destructionPotion.png"));
 	private static ImageIcon healingPotion = new ImageIcon(Main.class.getResource("/imgs/healingPotion.png"));
+	private static Command command;
+	private static CommandHistory commandHistory = new CommandHistory();
+	
+	//After every action command object with current game state is added to history stack
+	public static void executeCommand(Command c) {
+		c.execute();
+		commandHistory.push(c);
+	}
+	public static void undo() {
+		command = commandHistory.pop();
+		System.out.println(command);
+		if (command != null) {
+			command.undo();
+		}
+	}
 	
 	//utility
 	public static String displayTurn() {
@@ -35,6 +53,14 @@ public class MainController {
 		}
 		if (Board.Players[1].getTurn()) {
 			return "Player 2";
+		}
+		return null;
+	}
+	public static String displayHealth(int row, int column) {
+		for (Piece i: Board.pieceSet) {
+			if (Board.squares[row][column] == i.getCurrentSquare()) {
+				return Integer.toString(i.getHealth());
+			}
 		}
 		return null;
 	}
@@ -119,6 +145,7 @@ public class MainController {
 	//move piece
 	public static void move() {
 		Square selectedSquares[] = fetchSelectedSquares();
+		executeCommand(new BackupCommand());
 		
 		if (Board.Players[0].getTurn()) {
 			for (Piece i : Board.pieceSet) {
@@ -130,6 +157,7 @@ public class MainController {
 								System.out.println(i.getHealth());
 								i.move(selectedSquares[1].getRow(),selectedSquares[1].getColumn());
 								drinkPotionCheck();
+								System.out.println(i.getTeam());
 								Board.Players[0].setTurn(false);
 								Board.Players[1].setTurn(true);
 								return;
@@ -145,6 +173,7 @@ public class MainController {
 								System.out.println(i.toString() + " " + "moves");
 								System.out.println(i.getHealth());
 								drinkPotionCheck();
+								System.out.println(i.getTeam());
 								Board.Players[0].setTurn(false);
 								Board.Players[1].setTurn(true);
 								return;
@@ -164,6 +193,7 @@ public class MainController {
 								System.out.println(i.getHealth());
 								i.move(selectedSquares[1].getRow(), selectedSquares[1].getColumn());
 								drinkPotionCheck();
+								System.out.println(i.getTeam());
 								Board.Players[1].setTurn(false);
 								Board.Players[0].setTurn(true);
 								return;
@@ -179,6 +209,7 @@ public class MainController {
 								System.out.println(i.getHealth());
 								i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn());
 								drinkPotionCheck();
+								System.out.println(i.getTeam());
 								Board.Players[1].setTurn(false);
 								Board.Players[0].setTurn(true);
 								return;
@@ -316,6 +347,7 @@ public class MainController {
 	
 	//start, load, save game
 	public static void startGame(int row, int column, Boolean Power, Boolean Paladin, Boolean Mage, Boolean Ranger, Boolean Healer, Boolean Rogue) throws ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
+		commandHistory.empty();
 		Board.create("start", row, column, Power, Paladin, Mage, Ranger, Healer, Rogue);
 	} 
 	public static void loadGame() throws ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
