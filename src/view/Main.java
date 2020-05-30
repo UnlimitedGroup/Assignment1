@@ -49,6 +49,44 @@ public class Main {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 495, 361);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		/*
+		 * BUILDING SIDE PANEL	
+		 */
+		
+		JPanel userPanel = new JPanel();
+		frame.getContentPane().add(userPanel, BorderLayout.WEST);
+		userPanel.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JPanel infoPanel = new JPanel();
+		infoPanel.setBackground(Color.WHITE);
+		userPanel.add(infoPanel);
+		infoPanel.setLayout(new GridLayout(3, 3, 0, 0));
+			
+			JLabel turnStatus = new JLabel("Turn:");
+			infoPanel.add(turnStatus);
+			
+			JTextArea turnDisplay = new JTextArea();
+			turnDisplay.setFont(new Font("Monospaced", Font.PLAIN, 10));
+			turnDisplay.setText(MainController.displayTurn());
+			turnDisplay.setEditable(false);
+			infoPanel.add(turnDisplay);
+		
+			JLabel unitHealth = new JLabel("Unit Health:");
+			infoPanel.add(unitHealth);
+			
+			JTextArea healthDisplay = new JTextArea();
+			healthDisplay.setFont(new Font("Monospaced", Font.PLAIN, 10));	
+			healthDisplay.setEditable(false);
+			infoPanel.add(healthDisplay);
+			
+			JLabel lblNewLabel = new JLabel("New label");
+			infoPanel.add(lblNewLabel);
+				
+			
+		/*
+		 * BUILDING MAIN BOARD	
+		 */
 			
 		JPanel board = new JPanel();
 		board.setBorder(new LineBorder(new Color(0, 0, 0), 2));
@@ -67,6 +105,7 @@ public class Main {
 				b10.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(0,0));
 						MainController.select(0, 0);
 						b10.setBackground(MainController.changeButtonColour(0, 0));
 						return;
@@ -85,6 +124,7 @@ public class Main {
 				b11.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(0,1));
 						MainController.select(0, 1);
 						b11.setBackground(MainController.changeButtonColour(0, 1));
 						return;
@@ -102,6 +142,7 @@ public class Main {
 				b12.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(0,2));
 						MainController.select(0, 2);
 						b12.setBackground(MainController.changeButtonColour(0, 2));
 						return;
@@ -119,6 +160,7 @@ public class Main {
 				b13.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(0,3));
 						MainController.select(0, 3);
 						b13.setBackground(MainController.changeButtonColour(0, 3));
 						return;
@@ -136,6 +178,7 @@ public class Main {
 				b14.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(0,4));
 						MainController.select(0, 4);
 						b14.setBackground(MainController.changeButtonColour(0, 4));
 						return;
@@ -153,6 +196,7 @@ public class Main {
 				b20.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(1, 0));
 						MainController.select(1, 0);
 						b20.setBackground(MainController.changeButtonColour(1, 0));
 						return;
@@ -170,6 +214,7 @@ public class Main {
 				b21.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(1, 1));
 						MainController.select(1, 1);
 						b21.setBackground(MainController.changeButtonColour(1, 1));
 						return;
@@ -188,6 +233,7 @@ public class Main {
 				b22.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(1, 2));
 						MainController.select(1, 2);
 						b22.setBackground(MainController.changeButtonColour(1, 2));
 						return;
@@ -205,6 +251,7 @@ public class Main {
 				b23.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(1, 3));
 						MainController.select(1, 3);
 						b23.setBackground(MainController.changeButtonColour(1, 3));
 						return;
@@ -224,6 +271,7 @@ public class Main {
 				b24.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(1, 4));
 						MainController.select(1, 4);
 						b24.setBackground(MainController.changeButtonColour(1, 4));
 						return;
@@ -241,6 +289,7 @@ public class Main {
 				b30.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(2, 0));
 						MainController.select(2, 0);
 						b30.setBackground(MainController.changeButtonColour(2, 0));
 						return;
@@ -258,6 +307,7 @@ public class Main {
 				b31.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(2, 1));
 						MainController.select(2, 1);
 						b31.setBackground(MainController.changeButtonColour(2, 1));
 						return;
@@ -275,6 +325,7 @@ public class Main {
 				b32.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(2, 2));
 						MainController.select(2, 2);
 						b32.setBackground(MainController.changeButtonColour(2, 2));
 						return;
@@ -292,6 +343,7 @@ public class Main {
 				b33.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(2, 3));
 						MainController.select(2, 3);
 						b33.setBackground(MainController.changeButtonColour(2, 3));
 						return;
@@ -309,6 +361,7 @@ public class Main {
 				b34.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(2, 4));
 						MainController.select(2, 4);
 						b34.setBackground(MainController.changeButtonColour(2, 4));
 						return;
@@ -327,6 +380,7 @@ public class Main {
 				b40.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(3, 0));
 						MainController.select(3, 0);
 						b40.setBackground(MainController.changeButtonColour(3, 0));
 						return;
@@ -344,6 +398,7 @@ public class Main {
 				b41.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(3, 1));
 						MainController.select(3, 1);
 						b41.setBackground(MainController.changeButtonColour(3, 1));
 						return;
@@ -361,6 +416,7 @@ public class Main {
 				b42.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(3, 2));
 						MainController.select(3, 2);
 						b42.setBackground(MainController.changeButtonColour(3, 2));
 						return;
@@ -378,6 +434,7 @@ public class Main {
 				b43.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(3, 3));
 						MainController.select(3, 3);
 						b43.setBackground(MainController.changeButtonColour(3, 3));
 						return;
@@ -395,6 +452,7 @@ public class Main {
 				b44.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(3, 4));
 						MainController.select(3, 4);
 						b44.setBackground(MainController.changeButtonColour(3, 4));
 						return;
@@ -412,6 +470,7 @@ public class Main {
 				b50.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(4, 0));
 						MainController.select(4, 0);
 						b50.setBackground(MainController.changeButtonColour(4, 0));
 						return;
@@ -429,6 +488,7 @@ public class Main {
 				b51.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(4, 1));
 						MainController.select(4, 1);
 						b51.setBackground(MainController.changeButtonColour(4, 1));
 						return;
@@ -447,6 +507,7 @@ public class Main {
 				b52.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(4, 2));
 						MainController.select(4, 2);
 						b52.setBackground(MainController.changeButtonColour(4, 2));
 						return;
@@ -464,6 +525,7 @@ public class Main {
 				b53.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(4, 3));
 						MainController.select(4, 3);
 						b53.setBackground(MainController.changeButtonColour(4, 3));
 						return;
@@ -481,6 +543,7 @@ public class Main {
 				b54.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(4, 4));
 						MainController.select(4, 4);
 						b54.setBackground(MainController.changeButtonColour(4, 4));
 						return;
@@ -498,6 +561,7 @@ public class Main {
 				b60.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(5, 0));
 						MainController.select(5, 0);
 						b60.setBackground(MainController.changeButtonColour(5, 0));
 						return;
@@ -515,6 +579,7 @@ public class Main {
 				b61.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(5, 1));
 						MainController.select(5, 1);
 						b61.setBackground(MainController.changeButtonColour(5, 1));
 						return;
@@ -532,6 +597,7 @@ public class Main {
 				b62.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(5, 2));
 						MainController.select(5, 2);
 						b62.setBackground(MainController.changeButtonColour(5, 2));
 						return;
@@ -549,6 +615,7 @@ public class Main {
 				b63.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(5, 3));
 						MainController.select(5, 3);
 						b63.setBackground(MainController.changeButtonColour(5, 3));
 						return;
@@ -566,6 +633,7 @@ public class Main {
 				b64.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(5, 4));
 						MainController.select(5, 4);
 						b64.setBackground(MainController.changeButtonColour(5, 4));
 						return;
@@ -583,6 +651,7 @@ public class Main {
 				b70.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(6, 0));
 						MainController.select(6, 0);
 						b70.setBackground(MainController.changeButtonColour(6, 0));
 						return;
@@ -600,6 +669,7 @@ public class Main {
 				b71.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(6, 1));
 						MainController.select(6, 1);
 						b71.setBackground(MainController.changeButtonColour(6, 1));
 						return;
@@ -617,6 +687,7 @@ public class Main {
 				b72.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(6, 2));
 						MainController.select(6, 2);
 						b72.setBackground(MainController.changeButtonColour(6, 2));
 						return;
@@ -634,6 +705,7 @@ public class Main {
 				b73.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(6, 3));
 						MainController.select(6, 3);
 						b73.setBackground(MainController.changeButtonColour(6, 3));
 						return;
@@ -651,41 +723,12 @@ public class Main {
 				b74.addActionListener(new ActionListener () {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						healthDisplay.setText(MainController.displayHealth(6, 4));
 						MainController.select(6, 4);
 						b74.setBackground(MainController.changeButtonColour(6, 4));
 						return;
 					}});
 				
-				JPanel userPanel = new JPanel();
-				frame.getContentPane().add(userPanel, BorderLayout.WEST);
-				userPanel.setLayout(new GridLayout(0, 1, 0, 0));
-				
-				
-				JPanel infoPanel = new JPanel();
-				infoPanel.setBackground(Color.WHITE);
-				userPanel.add(infoPanel);
-				infoPanel.setLayout(new GridLayout(3, 3, 0, 0));
-					
-					JLabel turnStatus = new JLabel("Turn:");
-					infoPanel.add(turnStatus);
-					
-					JTextArea turnDisplay = new JTextArea();
-					turnDisplay.setFont(new Font("Monospaced", Font.PLAIN, 10));
-					turnDisplay.setText(MainController.displayTurn());
-					turnDisplay.setEditable(false);
-					infoPanel.add(turnDisplay);
-				
-					JLabel unitHealth = new JLabel("Unit Health:");
-					infoPanel.add(unitHealth);
-					
-					JTextArea healthDisplay = new JTextArea();
-					healthDisplay.setFont(new Font("Monospaced", Font.PLAIN, 10));	
-					healthDisplay.setEditable(false);
-					infoPanel.add(healthDisplay);
-					
-					JLabel lblNewLabel = new JLabel("New label");
-					infoPanel.add(lblNewLabel);
-					
 					JButton instructionsButton = new JButton("Instructions");
 					userPanel.add(instructionsButton);
 					instructionsButton.addActionListener(new ActionListener () {
