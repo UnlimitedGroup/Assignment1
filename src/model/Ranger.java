@@ -31,5 +31,25 @@ public class Ranger extends Piece {
 	public String toString() {
 		return "ranger";
 		}
+	public boolean spell() {
+		int currentRow = this.getCurrentSquare().getRow();
+		int currentColumn = this.getCurrentSquare().getColumn();
+		/*
+		 * UNIQUE SPELL, hit ALL units for 50 damage in its vertical southern path, 4 tiles 
+		 */
+		for (int i=0; i<4;i++) {
+			if (currentRow+i <= Board.squares.length-1) {
+				Square checkSquare = Board.squares[currentRow+i][currentColumn];
+				for (Piece j: Board.pieceSet) {
+					if (j.getTeam() != this.getTeam() && j.getCurrentSquare() == checkSquare) {
+						j.decreaseHealth(50);
+						System.out.println("enemy hit");
+					}
+				}
+			}
+		}
+		return true;
+		
+	}
 	
 }

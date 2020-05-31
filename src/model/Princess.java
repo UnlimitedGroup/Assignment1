@@ -36,58 +36,11 @@ public class Princess extends Piece {
 			return "princess2";
 		}
 	}
-	
-	
-	/*
-	SPELL TEMPLATE CODE FOR PART 2
-		}
-	public void spell(amount) {
-		int currentRow = this.getCurrentSquare().getRow();
-		int currentColumn = this.ggetCurrentSquare().getColumn();
-		Square SquareList[][] = Board.getSquareList();
-		ArrayList<Piece> PieceList = Board.getPieceSet();
-		
-		//Check team
-		if (this.getTeam() == 0) {
-			for (int i=0; i<1;i++) {
-				//Check if a piece in in the square infront square
-				Square checkSquare = SquareList[currentRow++][currentColumn];
-				for (int j = 0; j<PieceList.size()-1; j++) {
-					//Check only pieces on other team and Check if the piece is in the spell path square
-					if (PieceList.get(j).getTeam() != this.getTeam() && PieceList.get(j).getCurrentSquare() == checkSquare) {
-							PieceList.get(j).takeDamage(amount)
-							
-							* The decorator
-							* spell(amount) 
-							*- i.e. damage all units for amount, then pass amount **THIS IS THE ADDITIONAL FUNCTIONALITY THE DECORATOR ADDS
-							*- then piece.spell(amount)
-							
-							;
-							
-						
-						}
-					}
-				}
-			}
-		}
-		if (this.getTeam() == 1) {
-			for (int i=0; i<1;i++) {
-				Square checkSquare = SquareList[currentRow--][currentColumn];
-				for (int j = 0; j<PieceList.size()-1; j++) {
-					//Check only pieces on other team
-					if (PieceList.get(j).getTeam() != this.getTeam()) {
-						//Check if the piece is in the spell path square
-						if (PieceList.get(j).getCurrentSquare() == checkSquare) {
-							//Deal 25 Damage
-							PieceList.get(j).takeDamage(75);
-							
-						}
-					}
-				}
-			}
-		}
-	}
-	*/
 
+	@Override
+	public boolean spell() {
+		return false;
+	}
+	
 }
 

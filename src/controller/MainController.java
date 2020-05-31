@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.Color;
 import java.sql.SQLException;
+import java.util.Iterator;
 
 import javax.swing.ImageIcon;
 
@@ -67,28 +68,28 @@ public class MainController {
 	public static ImageIcon displayImg(int row, int column) {
 		for (Piece i: Board.pieceSet) {
 			if(i.getCurrentSquare() == Board.squares[row][column]) {
-				if(i.toString() == "healer") {
+				if(i.toString() == "healer" && i.getHealth() > 0) {
 					return healer;
 				}
-				if(i.toString() == "mage") {
+				if(i.toString() == "mage" && i.getHealth() > 0) {
 					return mage;
 				}
-				if(i.toString() == "paladin") {
+				if(i.toString() == "paladin" && i.getHealth() > 0) {
 					return paladin;
 				}
-				if(i.toString() == "power") {
+				if(i.toString() == "power" && i.getHealth() > 0) {
 					return power;
 				}
-				if(i.toString() == "princess1") {
+				if(i.toString() == "princess1" && i.getHealth() > 0) {
 					return princess1;
 				}
-				if(i.toString() == "princess2") {
+				if(i.toString() == "princess2" && i.getHealth() > 0) {
 					return princess2;
 				}
-				if(i.toString() == "rogue") {
+				if(i.toString() == "rogue" && i.getHealth() > 0) {
 					return rogue;
 				}
-				if(i.toString() == "ranger") {
+				if(i.toString() == "ranger" && i.getHealth() > 0) {
 					return ranger;
 				}
 			}	
@@ -138,6 +139,22 @@ public class MainController {
 						j.setStatus(0);
 					}
 				}
+			}
+		}
+	}
+	public static void removeDeadUnits() {
+		//INSTEAD SET THEIR CURRENT SQUARE TO NULL
+		/*
+		for (Iterator<Piece> it = Board.pieceSet.iterator(); it.hasNext();) {
+		    Piece p = it.next();
+		    if (p.getHealth() <= 0) {
+		        it.remove();   
+		    }
+		}
+		*/
+		for (Piece j: Board.pieceSet) {
+			if (j.getHealth() <= 0) {
+				j.setCurrentSquare(null);
 			}
 		}
 	}
@@ -220,6 +237,71 @@ public class MainController {
 				}
 			}
 	}
+	public static void spell() {
+		Square selectedSquares[] = fetchSelectedSquares();
+		executeCommand(new BackupCommand());
+		
+		if (Board.Players[0].getTurn()) {
+			for (Piece i : Board.pieceSet) {
+				if (selectedSquares[0] != null) {
+					if (selectedSquares[0].getRow() == i.getCurrentSquare().getRow()) {
+						if (selectedSquares[0].getColumn() == i.getCurrentSquare().getColumn()) {
+							if (i.getTeam() == 0) {
+								if (i.spell()) {
+									Board.Players[0].setTurn(false);
+									Board.Players[1].setTurn(true);
+									return;
+								}
+							}
+						}
+					}
+				}
+				if (selectedSquares[1] != null) {
+					if (selectedSquares[1].getRow() == i.getCurrentSquare().getRow()) {
+						if (selectedSquares[1].getColumn() == i.getCurrentSquare().getColumn()) {
+							if (i.getTeam() == 0) {
+								if (i.spell()) {
+									Board.Players[0].setTurn(false);
+									Board.Players[1].setTurn(true);
+									return;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		if (Board.Players[1].getTurn()) {
+			for (Piece i : Board.pieceSet) {
+				if (selectedSquares[0] != null) {
+					if (selectedSquares[0].getRow() == i.getCurrentSquare().getRow()) {
+						if (selectedSquares[0].getColumn() == i.getCurrentSquare().getColumn()) {
+							if (i.getTeam() == 1) {
+								if (i.spell()) {
+									Board.Players[1].setTurn(false);
+									Board.Players[0].setTurn(true);
+									return;
+								}
+							}
+						}
+					}
+				}
+				if (selectedSquares[1] != null) {
+					if (selectedSquares[1].getRow() == i.getCurrentSquare().getRow()) {
+						if (selectedSquares[1].getColumn() == i.getCurrentSquare().getColumn()) {
+							if (i.getTeam() == 0) {
+								if (i.spell()) {
+									Board.Players[1].setTurn(false);
+									Board.Players[0].setTurn(true);
+									return;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 	
 	//select squares related
 	private static boolean selectPreCondition() {
@@ -260,13 +342,11 @@ public class MainController {
 		System.out.println(selectedSquares[0]);
 		System.out.println(selectedSquares[1]);
 		
-		
 		for (int i = 0; i < Board.obstacles.length; i++) {
 			if (Board.squares[row][column] == Board.obstacles[i].getCurrentSquare()) {
 				return;
 			}
 		}
-		
 		
 		//deselect
 		if(Board.squares[row][column] == selectedSquares[0]) {

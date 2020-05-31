@@ -46,6 +46,7 @@ public abstract class Piece {
 		}
 	}
     abstract public boolean move(int row, int column);
+    abstract public boolean spell();
 }
  
 

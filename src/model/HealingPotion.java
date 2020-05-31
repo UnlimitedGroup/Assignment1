@@ -31,7 +31,7 @@ public class HealingPotion implements Potion {
 	}
 	@Override
 	public void drinkPotion(Piece i) {
-		i.increaseHealth(25);
+		i.increaseHealth(50);
 		this.setStatus(0);
 		System.out.println(i + "just drank" + this.toString());
 		System.out.println(i.getHealth());
