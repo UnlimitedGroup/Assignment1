@@ -1,15 +1,21 @@
 package database;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Stack;
 import java.util.concurrent.ThreadLocalRandom;
+
+import controller.MainController;
 import database.*;
 import exceptions.PieceInvalidName;
 import exceptions.squareBoundsException;
+import model.BackupCommand;
 import model.Board;
+import model.Command;
 import model.DestructionDecorator;
 import model.Healer;
 import model.HealingPotion;
@@ -258,6 +264,54 @@ public class DatabaseController {
 			}
 		}
 	}
+    public void insertUpdateBackupCommand(Stack<Command> commandHistory) throws SQLException {
+		
+		Statement stmt = con.createStatement();	
+		clearBackups(stmt);
+		clearCommands(stmt);
+		int counter = 0;
+		for (Command c : commandHistory) {
+			counter++;
+			String commandName = c.toString();
+			String query;
+			
+			query = "INSERT INTO COMMANDS " +
+					" (COMMAND_ID, ROW_ID)" +
+					" " + "VALUES (" +
+					"'" + commandName + "'," +
+					"'" + counter +
+					"')";
+			
+			stmt.executeUpdate(query);
+			con.commit();
+		}
+		int rowID = 0;
+		for (Command c : commandHistory) {
+			for (Piece i: c.getPieceSet()) {
+				rowID++;
+				String pieceName = i.toString();
+				int pieceRow = i.getCurrentSquare().getRow();
+				int pieceColumn = i.getCurrentSquare().getColumn();
+				int pieceHealth = i.getHealth();
+				String query;
+				
+				query = "INSERT INTO BACKUP " +
+						" (ROW_ID, COMMAND_ID, PIECE_NAME, ROW, COLUMN, HEALTH)" +
+						" " + "VALUES (" +
+						"'" + rowID + "'," +
+						"'" + c.toString() + "'," +
+						"'" + pieceName + "'," +
+						"'" + pieceRow + "'," +
+						"'" + pieceColumn + "'," +
+						"'" + pieceHealth + 
+						"')";
+		
+		stmt.executeUpdate(query);
+		con.commit();
+			}
+		}
+	}
+	
 	public void insertUpdateObstacles(String action) throws SQLException {
 		Statement stmt = con.createStatement();
 		
@@ -485,6 +539,63 @@ public class DatabaseController {
 			}
 			con.commit();
 	}
+	public void loadBackupCommands() throws ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
+		Statement stmt;
+		ResultSet result1;
+		ResultSet result2;
+		MainController.commandHistory.empty();
+		Class.forName("org.hsqldb.jdbc.JDBCDriver");
+		con = ConnectionTest.getConnection(DB_NAME);
+		stmt = con.createStatement();
+		
+		
+		result1 = stmt.executeQuery(
+				"SELECT * FROM COMMANDS ORDER BY ROW_ID");
+		while(result1.next()){		
+			Command command = new BackupCommand();
+			MainController.commandHistory.push(command);
+			
+	    	result2 = stmt.executeQuery(
+				"SELECT * FROM BACKUP WHERE COMMAND_ID='" + result1.getString("COMMAND_ID") + "'");
+	    	while(result2.next()){
+	    		Piece piece = null;
+	    		String pieceName = result2.getString("PIECE_NAME");
+	    		int row = result2.getInt("ROW");
+	    		int column = result2.getInt("COLUMN");
+	    		Square currentSquare = Board.squares[row][column];
+	    		int health = result2.getInt("HEALTH");
+	    	
+	    		switch (pieceName.toLowerCase()) {
+	    			case "power":
+	    				piece = new Power(health, currentSquare, 0);
+	    				command.getPieceSet().add(piece);
+	    			case "paladin":
+	    				piece = new Paladin(health, currentSquare, 0);
+	    				command.getPieceSet().add(piece);
+	    			case "mage":
+	    				piece = new Mage(health, currentSquare, 0);
+	    				command.getPieceSet().add(piece);
+	    			case "ranger":
+	    				piece = new Ranger(health, currentSquare, 1);
+	    				command.getPieceSet().add(piece);
+	    			case "healer":
+	    				piece = new Healer(health, currentSquare, 1);
+	    				command.getPieceSet().add(piece);
+	    			case "rogue":
+	    				piece = new Rogue(health, currentSquare, 1);
+	    				command.getPieceSet().add(piece);
+	    			case "princess1":
+	    				piece = new Princess(health, currentSquare, 1);
+	    				command.getPieceSet().add(piece);
+	    			case "princess2":		
+	    				piece = new Princess(health, currentSquare, 0);
+	    				command.getPieceSet().add(piece);
+	    		}
+			}
+	    	con.commit();
+		}
+		con.commit();
+	}
 	
 	//Utility 
 	private void clearBoard(Statement stmt) throws SQLException {
@@ -494,6 +605,16 @@ public class DatabaseController {
 	private void clearPieces(Statement stmt) throws SQLException {
 		String clearPieces = "DELETE FROM PIECES";
 		stmt.executeUpdate(clearPieces);
+		con.commit();
+	}
+	private void clearBackups(Statement stmt) throws SQLException {
+		String clearBackup = "DELETE FROM BACKUP";
+		stmt.executeUpdate(clearBackup);
+		con.commit();
+	}
+	private void clearCommands(Statement stmt) throws SQLException {
+		String clearCommands = "DELETE FROM COMMANDS";
+		stmt.executeUpdate(clearCommands);
 		con.commit();
 	}
 	private void clearPlayers(Statement stmt) throws SQLException {

@@ -13,8 +13,8 @@ abstract public class Command {
 		return this.pieceSetBackup;
 	}
 	public void setPieces(ArrayList<Piece> pieceSet) {
-		this.pieceSetBackup = pieceSet;
-		
+		this.pieceSetBackup = pieceSet;	
 	}
+	
 	abstract public void execute();
 }

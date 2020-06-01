@@ -13,5 +13,8 @@ public class CommandHistory {
 	}
 	public void empty () {
 		 previousCommands.clear();
-	 }	 
+	}
+	public Stack<Command> getStack () {
+		return this.previousCommands;
+	}
 }

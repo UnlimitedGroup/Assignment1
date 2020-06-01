@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 import javax.swing.ImageIcon;
 
+import database.DatabaseController;
 import exceptions.PieceInvalidName;
 import exceptions.squareBoundsException;
 import model.BackupCommand;
@@ -32,11 +33,12 @@ public class MainController {
 	private static ImageIcon destructionPotion = new ImageIcon(Main.class.getResource("/imgs/destructionPotion.png"));
 	private static ImageIcon healingPotion = new ImageIcon(Main.class.getResource("/imgs/healingPotion.png"));
 	private static Command command;
-	private static CommandHistory commandHistory = new CommandHistory();
+	public static CommandHistory commandHistory = new CommandHistory();
 	
-	//After every action command object with current game state is added to history stack
+	//Commands
 	public static void executeCommand(Command c) {
 		c.execute();
+		System.out.println(c);
 		commandHistory.push(c);
 	}
 	public static void undo() {
@@ -46,7 +48,14 @@ public class MainController {
 			command.undo();
 		}
 	}
-	
+	public static void loadCommands() throws ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
+		DatabaseController db = DatabaseController.getInstance();
+		db.loadBackupCommands();
+	}
+	public static void saveCommands() throws ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
+		DatabaseController db = DatabaseController.getInstance();
+		db.insertUpdateBackupCommand(commandHistory.getStack());
+	}
 	//utility
 	public static String displayTurn() {
 		if (Board.Players[0].getTurn()) {
@@ -432,9 +441,12 @@ public class MainController {
 	} 
 	public static void loadGame() throws ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
 		Board.create("load", 0, 0, null, null, null, null, null, null);
+		loadCommands();
+		
 	}
 	public static void saveGame(int row, int column) throws ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
 		Board.create("update", row, column, null, null, null, null, null, null);
+		saveCommands();
 	}	
 }
 
