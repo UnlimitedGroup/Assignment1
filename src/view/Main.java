@@ -47,7 +47,7 @@ public class Main {
 	
 	public void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 495, 361);
+		frame.setBounds(100, 100, 657, 459);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		/*
@@ -61,7 +61,7 @@ public class Main {
 		JPanel infoPanel = new JPanel();
 		infoPanel.setBackground(Color.WHITE);
 		userPanel.add(infoPanel);
-		infoPanel.setLayout(new GridLayout(3, 3, 0, 0));
+		infoPanel.setLayout(new GridLayout(4, 2, 0, 0));
 			
 			JLabel turnStatus = new JLabel("Turn:");
 			infoPanel.add(turnStatus);
@@ -80,10 +80,22 @@ public class Main {
 			healthDisplay.setEditable(false);
 			infoPanel.add(healthDisplay);
 			
-			JLabel lblNewLabel = new JLabel("New label");
-			infoPanel.add(lblNewLabel);
-				
+			JLabel moveLeft = new JLabel("Moves Left");
+			infoPanel.add(moveLeft);
 			
+			JLabel movesDisplay = new JLabel("");
+			movesDisplay.setFont(new Font("Monospaced", Font.PLAIN, 10));
+			infoPanel.add(movesDisplay);
+			movesDisplay.setText(MainController.displayMoveTokens());
+			
+			JLabel undoMoves = new JLabel("Undos Left");
+			infoPanel.add(undoMoves);
+			
+			JLabel undoDisplay = new JLabel("");
+			undoDisplay.setFont(new Font("Monospaced", Font.PLAIN, 10));
+			infoPanel.add(undoDisplay);
+			undoDisplay.setText(MainController.displayUndoTokens());
+					
 		/*
 		 * BUILDING MAIN BOARD	
 		 */
@@ -830,6 +842,8 @@ public class Main {
 							b73.setBackground(MainController.changeButtonColour(6, 3));
 							b74.setBackground(MainController.changeButtonColour(6, 4));
 							turnDisplay.setText(MainController.displayTurn());
+							movesDisplay.setText(MainController.displayMoveTokens());
+							undoDisplay.setText(MainController.displayUndoTokens());
 							
 							}});
 					
@@ -913,6 +927,8 @@ public class Main {
 							b73.setBackground(MainController.changeButtonColour(6, 3));
 							b74.setBackground(MainController.changeButtonColour(6, 4));
 							turnDisplay.setText(MainController.displayTurn());
+							movesDisplay.setText(MainController.displayMoveTokens());
+							undoDisplay.setText(MainController.displayUndoTokens());
 								
 							
 							}});
@@ -998,7 +1014,8 @@ public class Main {
 							b73.setBackground(MainController.changeButtonColour(6, 3));
 							b74.setBackground(MainController.changeButtonColour(6, 4));
 							turnDisplay.setText(MainController.displayTurn());
-							
+							movesDisplay.setText(MainController.displayMoveTokens());
+							undoDisplay.setText(MainController.displayUndoTokens());
 							}});
 					
 					JButton Start = new JButton("New Game");
@@ -1089,6 +1106,8 @@ public class Main {
 								b73.setBackground(MainController.changeButtonColour(6, 3));
 								b74.setBackground(MainController.changeButtonColour(6, 4));
 								turnDisplay.setText(MainController.displayTurn());
+								movesDisplay.setText(MainController.displayMoveTokens());
+								undoDisplay.setText(MainController.displayUndoTokens());
 								
 							} catch (ClassNotFoundException | SQLException | squareBoundsException
 									| PieceInvalidName e1) {
@@ -1184,6 +1203,8 @@ public class Main {
 								b73.setBackground(MainController.changeButtonColour(6, 3));
 								b74.setBackground(MainController.changeButtonColour(6, 4));
 								turnDisplay.setText(MainController.displayTurn());
+								movesDisplay.setText(MainController.displayMoveTokens());
+								undoDisplay.setText(MainController.displayUndoTokens());
 								
 							} catch (ClassNotFoundException | SQLException | squareBoundsException
 									| PieceInvalidName e1) {

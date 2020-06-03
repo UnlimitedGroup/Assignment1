@@ -1,10 +1,8 @@
 TO DO:
 
-- add command history to db for undo
-- add turn tokens and undo tokens to player model and db
 - implement last design pattern
 - improve potion decorator
-- make so move doesnt count if its not possible to move 
+- exception handling i.e. make so move doesnt count if its not possible to move 
 
 done 
 - Singleton

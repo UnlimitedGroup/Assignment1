@@ -14,8 +14,8 @@ public class KillThePrincess {
 	public static void main(String[] args) throws squareBoundsException {
 		
 		//Initialize default settings and objects
-		Board.Players[0] = new Player(0, true);
-		Board.Players[1] = new Player(1, false);
+		Board.Players[0] = new Player(0, true, 2, 2);
+		Board.Players[1] = new Player(1, false, 2, 2);
 		Board.squares[0][0] = null;
 		Board.squares[0][1] = null;
 		Board.squares[0][2] = null;

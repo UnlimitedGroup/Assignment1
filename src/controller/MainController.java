@@ -15,6 +15,7 @@ import model.Command;
 import model.CommandHistory;
 import model.Obstacle;
 import model.Piece;
+import model.Player;
 import model.Potion;
 import model.Square;
 import view.Main;
@@ -42,10 +43,16 @@ public class MainController {
 		commandHistory.push(c);
 	}
 	public static void undo() {
-		command = commandHistory.pop();
-		System.out.println(command);
-		if (command != null) {
-			command.undo();
+		for (Player p: Board.Players) {
+			if (p.getTurn()) {
+				if (p.getUndoTokens() > 0) {
+					command = commandHistory.pop();	
+					p.removeUndoToken();
+					if (command != null) {
+						command.undo();
+					}
+				}
+			}
 		}
 	}
 	public static void loadCommands() throws ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
@@ -56,6 +63,7 @@ public class MainController {
 		DatabaseController db = DatabaseController.getInstance();
 		db.insertUpdateBackupCommand(commandHistory.getStack());
 	}
+	
 	//utility
 	public static String displayTurn() {
 		if (Board.Players[0].getTurn()) {
@@ -63,6 +71,24 @@ public class MainController {
 		}
 		if (Board.Players[1].getTurn()) {
 			return "Player 2";
+		}
+		return null;
+	}
+	public static String displayMoveTokens() {
+		if (Board.Players[0].getTurn()) {
+			return Integer.toString(Board.Players[0].getMoveTokens());
+		}
+		if (Board.Players[1].getTurn()) {
+			return Integer.toString(Board.Players[1].getMoveTokens());
+		}
+		return null;
+	}
+	public static String displayUndoTokens() {
+		if (Board.Players[0].getTurn()) {
+			return Integer.toString(Board.Players[0].getUndoTokens());
+		}
+		if (Board.Players[1].getTurn()) {
+			return Integer.toString(Board.Players[1].getUndoTokens());
 		}
 		return null;
 	}
@@ -167,6 +193,15 @@ public class MainController {
 			}
 		}
 	}
+	public static boolean turnHandler(Player p) {
+		p.removeMoveToken();
+		if (p.getMoveTokens() <= 0) {
+			p.setTurn(false);
+			p.restoreMoveTokens();
+			return true;
+		}
+		return false;
+	}
 	
 	//move piece
 	public static void move() {
@@ -183,9 +218,9 @@ public class MainController {
 								System.out.println(i.getHealth());
 								i.move(selectedSquares[1].getRow(),selectedSquares[1].getColumn());
 								drinkPotionCheck();
-								System.out.println(i.getTeam());
-								Board.Players[0].setTurn(false);
-								Board.Players[1].setTurn(true);
+								if (turnHandler(Board.Players[0])) {
+									Board.Players[1].setTurn(true);
+								}
 								return;
 							}
 						}
@@ -199,9 +234,9 @@ public class MainController {
 								System.out.println(i.toString() + " " + "moves");
 								System.out.println(i.getHealth());
 								drinkPotionCheck();
-								System.out.println(i.getTeam());
-								Board.Players[0].setTurn(false);
+								if (turnHandler(Board.Players[0])) {
 								Board.Players[1].setTurn(true);
+								}
 								return;
 							}
 							}
@@ -219,9 +254,9 @@ public class MainController {
 								System.out.println(i.getHealth());
 								i.move(selectedSquares[1].getRow(), selectedSquares[1].getColumn());
 								drinkPotionCheck();
-								System.out.println(i.getTeam());
-								Board.Players[1].setTurn(false);
+								if (turnHandler(Board.Players[1])) {
 								Board.Players[0].setTurn(true);
+								}
 								return;
 							}
 						}
@@ -235,9 +270,9 @@ public class MainController {
 								System.out.println(i.getHealth());
 								i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn());
 								drinkPotionCheck();
-								System.out.println(i.getTeam());
-								Board.Players[1].setTurn(false);
+								if (turnHandler(Board.Players[1])) {
 								Board.Players[0].setTurn(true);
+								}
 								return;
 								}
 							}
@@ -257,8 +292,9 @@ public class MainController {
 						if (selectedSquares[0].getColumn() == i.getCurrentSquare().getColumn()) {
 							if (i.getTeam() == 0) {
 								if (i.spell()) {
-									Board.Players[0].setTurn(false);
-									Board.Players[1].setTurn(true);
+									if (turnHandler(Board.Players[0])) {
+										Board.Players[1].setTurn(true);
+									}
 									return;
 								}
 							}
@@ -270,8 +306,9 @@ public class MainController {
 						if (selectedSquares[1].getColumn() == i.getCurrentSquare().getColumn()) {
 							if (i.getTeam() == 0) {
 								if (i.spell()) {
-									Board.Players[0].setTurn(false);
-									Board.Players[1].setTurn(true);
+									if (turnHandler(Board.Players[0])) {
+										Board.Players[1].setTurn(true);
+									}
 									return;
 								}
 							}
@@ -287,8 +324,9 @@ public class MainController {
 						if (selectedSquares[0].getColumn() == i.getCurrentSquare().getColumn()) {
 							if (i.getTeam() == 1) {
 								if (i.spell()) {
-									Board.Players[1].setTurn(false);
-									Board.Players[0].setTurn(true);
+									if (turnHandler(Board.Players[1])) {
+										Board.Players[0].setTurn(true);
+									}
 									return;
 								}
 							}
@@ -300,8 +338,9 @@ public class MainController {
 						if (selectedSquares[1].getColumn() == i.getCurrentSquare().getColumn()) {
 							if (i.getTeam() == 0) {
 								if (i.spell()) {
-									Board.Players[1].setTurn(false);
-									Board.Players[0].setTurn(true);
+									if (turnHandler(Board.Players[1])) {
+										Board.Players[0].setTurn(true);
+									}
 									return;
 								}
 							}

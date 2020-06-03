@@ -112,6 +112,8 @@ public class DatabaseController {
 		int playerTeam = p.getTeam();
 		boolean playerTurn = p.getTurn();
 		int playerTurnInt;
+		int undoTokens = p.getUndoTokens();
+		int moveTokens = p.getMoveTokens();
 		
 		if (playerTurn) {
 			playerTurnInt = 1;
@@ -122,10 +124,12 @@ public class DatabaseController {
 		String query;
 		
 		query = "INSERT INTO PLAYER " +
-				" (TEAM, TURN)" +
+				" (TEAM, TURN, UNDOTOKENS, MOVETOKENS)" +
 				" " + "VALUES (" +
 				"'" + playerTeam + "'," +
-				"'" + playerTurnInt +  
+				"'" + playerTurnInt + "'," +
+				"'" + undoTokens + "'," +
+				"'" + moveTokens +  
 				"')";
 		return query;
 	}
@@ -338,8 +342,8 @@ public class DatabaseController {
 		Statement stmt = con.createStatement();
 		//If its an insert Query, pieces are initialize
 		if (action =="start") {
-			Board.Players[0] = new Player(0, true);
-			Board.Players[1] = new Player(1, false);
+			Board.Players[0] = new Player(0, true, 2, 2);
+			Board.Players[1] = new Player(1, false, 2, 2);
 		}
 		//Insert data into table
 		if (action == "update") {
@@ -511,13 +515,15 @@ public class DatabaseController {
 		while(result.next()){
 			int team = result.getInt("TEAM");
 			int turn = result.getInt("TURN");
+			int undoTokens = result.getInt("UNDOTOKENS");
+			int moveTokens = result.getInt("MOVETOKENS");
 			boolean turnBool;
 			if (turn == 1) {
 				turnBool = true;
 			}
 			else 
 				turnBool = false;
-			Board.Players[counter] = new Player(team, turnBool);
+			Board.Players[counter] = new Player(team, turnBool, undoTokens, moveTokens);
 			counter++;
 		}
 		con.commit();

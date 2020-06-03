@@ -16,6 +16,8 @@ public class CreateTablePlayer {
 			int result = stmt.executeUpdate("CREATE TABLE PLAYER (" +
 					"TEAM INT NOT NULL," +
 					"TURN INT NOT NULL," +
+					"UNDOTOKENS INT NOT NULL," +
+					"MOVETOKENS INT NOT NULL," +
 					"PRIMARY KEY (TEAM)" +
 					")");
 			if(result == 0) {
