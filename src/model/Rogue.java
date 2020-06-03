@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Rogue extends Piece {
 	
 	//private final int maxHealth = 100;
@@ -28,12 +30,13 @@ public class Rogue extends Piece {
 			return false;
 		}
 	}
+	/*
 	public boolean spell() {
 		int currentRow = this.getCurrentSquare().getRow();
 		int currentColumn = this.getCurrentSquare().getColumn();
-		/*
+		
 		 * UNIQUE SPELL, hit ONE unit for 100 damage in its vertical northern path, 1 tiles 
-		 */
+		
 		for (int i=0; i<1;i++) {
 			if (currentRow+i <= Board.squares.length-1) {
 				Square checkSquare = Board.squares[currentRow+i][currentColumn];
@@ -47,8 +50,29 @@ public class Rogue extends Piece {
 		}
 		return true;	
 	}
-	
-	
+	 */
+	public ArrayList<Square> prepareSpell() {
+		int currentRow = this.getCurrentSquare().getRow();
+		int currentColumn = this.getCurrentSquare().getColumn();
+		ArrayList<Square> squareCheck = new ArrayList<Square>();
+		
+		for (int i=0; i<1;i++) {
+			if (currentRow+i <= Board.squares.length-1) {
+				squareCheck.add(Board.squares[currentRow+i][currentColumn]);
+			}
+		}
+		return squareCheck;
+	}
+	public boolean castSpell(ArrayList<Square> targetSquares) {
+		for (Square s: targetSquares) {
+			for (Piece j: Board.pieceSet) {
+				if (j.getTeam() != this.getTeam() && j.getCurrentSquare() == s) {
+					j.decreaseHealth(100);
+				}
+			}
+		}
+	return true;
+	}
 	public String toString() {
 		return "rogue";
 		}

@@ -91,8 +91,17 @@ public class DatabaseController {
 	}
 	private String prepQueryPiece(Piece piece, String action) {
 		String pieceName = piece.toString();
-		int pieceRow = piece.getCurrentSquare().getRow();
-		int pieceColumn = piece.getCurrentSquare().getColumn();
+		int pieceRow;
+		int pieceColumn;
+		
+		if (piece.getCurrentSquare() == null) {
+			pieceRow = -1;
+			pieceColumn = -1;
+		}
+		else {
+			pieceRow = piece.getCurrentSquare().getRow();
+			pieceColumn = piece.getCurrentSquare().getColumn();
+		}
 		int pieceHealth = piece.getHealth();
 		String query;
 		
@@ -138,7 +147,13 @@ public class DatabaseController {
 		String pieceName = result.getString("PIECE_NAME");
 		int row = result.getInt("ROW");
 		int column = result.getInt("COLUMN");
-		Square currentSquare = Board.squares[row][column];
+		Square currentSquare;
+		if (row == -1 || column == -1) {
+			currentSquare = null;
+		}
+		else {
+			currentSquare = Board.squares[row][column];
+		}
 		int health = result.getInt("HEALTH");
 	
 		switch (pieceName.toLowerCase()) {
@@ -475,9 +490,6 @@ public class DatabaseController {
 
 			while(result.next()){		
 				Piece piece = getPieceFromStmt(result);
-				System.out.println(piece);
-				System.out.println(piece.getCurrentSquare().getRow());
-				System.out.println(piece.getCurrentSquare().getColumn());
 				Board.pieceSet.add(piece);
 			}
 			con.commit();

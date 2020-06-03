@@ -210,35 +210,39 @@ public class MainController {
 		
 		if (Board.Players[0].getTurn()) {
 			for (Piece i : Board.pieceSet) {
-				if (selectedSquares[0].getRow() == i.getCurrentSquare().getRow()) {
-					if (selectedSquares[0].getColumn() == i.getCurrentSquare().getColumn()) {
-						if (i.getTeam() == 0) {
-							if (i.move(selectedSquares[1].getRow(),selectedSquares[1].getColumn())) {
-								System.out.println(i.toString() + " " + "moves");
-								System.out.println(i.getHealth());
-								i.move(selectedSquares[1].getRow(),selectedSquares[1].getColumn());
-								drinkPotionCheck();
-								if (turnHandler(Board.Players[0])) {
+				if (i.getCurrentSquare() != null) {
+					if (selectedSquares[0].getRow() == i.getCurrentSquare().getRow()) {
+						if (selectedSquares[0].getColumn() == i.getCurrentSquare().getColumn()) {
+							if (i.getTeam() == 0) {
+								if (i.move(selectedSquares[1].getRow(),selectedSquares[1].getColumn())) {
+									System.out.println(i.toString() + " " + "moves");
+									System.out.println(i.getHealth());
+									i.move(selectedSquares[1].getRow(),selectedSquares[1].getColumn());
+									drinkPotionCheck();
+									if (turnHandler(Board.Players[0])) {
 									Board.Players[1].setTurn(true);
+									}
+									return;
 								}
-								return;
 							}
 						}
 					}
 				}
-				if (selectedSquares[1].getRow() == i.getCurrentSquare().getRow()) {
-					if (selectedSquares[1].getColumn() == i.getCurrentSquare().getColumn()) {
-						if (i.getTeam() == 0) {
-							if (i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn())) {
-								i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn());
-								System.out.println(i.toString() + " " + "moves");
-								System.out.println(i.getHealth());
-								drinkPotionCheck();
-								if (turnHandler(Board.Players[0])) {
-								Board.Players[1].setTurn(true);
+				if (i.getCurrentSquare() != null) {
+					if (selectedSquares[1].getRow() == i.getCurrentSquare().getRow()) {
+						if (selectedSquares[1].getColumn() == i.getCurrentSquare().getColumn()) {
+							if (i.getTeam() == 0) {
+								if (i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn())) {
+									i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn());
+									System.out.println(i.toString() + " " + "moves");
+									System.out.println(i.getHealth());
+									drinkPotionCheck();
+									if (turnHandler(Board.Players[0])) {
+									Board.Players[1].setTurn(true);
+									}
+									return;
 								}
-								return;
-							}
+								}
 							}
 						}
 					}
@@ -246,34 +250,38 @@ public class MainController {
 			}
 		if (Board.Players[1].getTurn()) {
 			for (Piece i : Board.pieceSet) {
-				if (selectedSquares[0].getRow() == i.getCurrentSquare().getRow()) {
-					if (selectedSquares[0].getColumn() == i.getCurrentSquare().getColumn()) {
-						if (i.getTeam() == 1) {
-							if (i.move(selectedSquares[1].getRow(), selectedSquares[1].getColumn())) {
-								System.out.println(i.toString() + " " + "moves");
-								System.out.println(i.getHealth());
-								i.move(selectedSquares[1].getRow(), selectedSquares[1].getColumn());
-								drinkPotionCheck();
-								if (turnHandler(Board.Players[1])) {
-								Board.Players[0].setTurn(true);
+				if (i.getCurrentSquare() != null) {
+					if (selectedSquares[0].getRow() == i.getCurrentSquare().getRow()) {
+						if (selectedSquares[0].getColumn() == i.getCurrentSquare().getColumn()) {
+							if (i.getTeam() == 1) {
+								if (i.move(selectedSquares[1].getRow(), selectedSquares[1].getColumn())) {
+									System.out.println(i.toString() + " " + "moves");
+									System.out.println(i.getHealth());
+									i.move(selectedSquares[1].getRow(), selectedSquares[1].getColumn());
+									drinkPotionCheck();
+									if (turnHandler(Board.Players[1])) {
+									Board.Players[0].setTurn(true);
+									}
+									return;
 								}
-								return;
 							}
 						}
 					}
 				}
-				if (selectedSquares[1].getRow() == i.getCurrentSquare().getRow()) {
-					if (selectedSquares[1].getColumn() == i.getCurrentSquare().getColumn()) {
-						if (i.getTeam() == 1) {
-							if (i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn())) {
-								System.out.println(i.toString() + " " + "moves");
-								System.out.println(i.getHealth());
-								i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn());
-								drinkPotionCheck();
-								if (turnHandler(Board.Players[1])) {
-								Board.Players[0].setTurn(true);
-								}
-								return;
+				if (i.getCurrentSquare() != null) {
+					if (selectedSquares[1].getRow() == i.getCurrentSquare().getRow()) {
+						if (selectedSquares[1].getColumn() == i.getCurrentSquare().getColumn()) {
+							if (i.getTeam() == 1) {
+								if (i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn())) {
+									System.out.println(i.toString() + " " + "moves");
+									System.out.println(i.getHealth());
+									i.move(selectedSquares[0].getRow(), selectedSquares[0].getColumn());
+									drinkPotionCheck();
+									if (turnHandler(Board.Players[1])) {
+									Board.Players[0].setTurn(true);
+									}
+									return;
+									}
 								}
 							}
 						}
@@ -288,28 +296,32 @@ public class MainController {
 		if (Board.Players[0].getTurn()) {
 			for (Piece i : Board.pieceSet) {
 				if (selectedSquares[0] != null) {
-					if (selectedSquares[0].getRow() == i.getCurrentSquare().getRow()) {
-						if (selectedSquares[0].getColumn() == i.getCurrentSquare().getColumn()) {
-							if (i.getTeam() == 0) {
-								if (i.spell()) {
-									if (turnHandler(Board.Players[0])) {
-										Board.Players[1].setTurn(true);
+					if (i.getCurrentSquare() != null) {
+						if (selectedSquares[0].getRow() == i.getCurrentSquare().getRow()) {
+							if (selectedSquares[0].getColumn() == i.getCurrentSquare().getColumn()) {
+								if (i.getTeam() == 0) {
+									if (i.spell()) {
+										if (turnHandler(Board.Players[0])) {
+											Board.Players[1].setTurn(true);
+										}
+										return;
 									}
-									return;
 								}
 							}
 						}
 					}
 				}
 				if (selectedSquares[1] != null) {
-					if (selectedSquares[1].getRow() == i.getCurrentSquare().getRow()) {
-						if (selectedSquares[1].getColumn() == i.getCurrentSquare().getColumn()) {
-							if (i.getTeam() == 0) {
-								if (i.spell()) {
-									if (turnHandler(Board.Players[0])) {
-										Board.Players[1].setTurn(true);
+					if (i.getCurrentSquare() != null) {
+						if (selectedSquares[1].getRow() == i.getCurrentSquare().getRow()) {
+							if (selectedSquares[1].getColumn() == i.getCurrentSquare().getColumn()) {
+								if (i.getTeam() == 0) {
+									if (i.spell()) {
+										if (turnHandler(Board.Players[0])) {
+											Board.Players[1].setTurn(true);
+										}
+										return;
 									}
-									return;
 								}
 							}
 						}
@@ -320,28 +332,32 @@ public class MainController {
 		if (Board.Players[1].getTurn()) {
 			for (Piece i : Board.pieceSet) {
 				if (selectedSquares[0] != null) {
-					if (selectedSquares[0].getRow() == i.getCurrentSquare().getRow()) {
-						if (selectedSquares[0].getColumn() == i.getCurrentSquare().getColumn()) {
-							if (i.getTeam() == 1) {
-								if (i.spell()) {
-									if (turnHandler(Board.Players[1])) {
-										Board.Players[0].setTurn(true);
+					if (i.getCurrentSquare() != null) {
+						if (selectedSquares[0].getRow() == i.getCurrentSquare().getRow()) {
+							if (selectedSquares[0].getColumn() == i.getCurrentSquare().getColumn()) {
+								if (i.getTeam() == 1) {
+									if (i.spell()) {
+										if (turnHandler(Board.Players[1])) {
+											Board.Players[0].setTurn(true);
+										}
+										return;
 									}
-									return;
 								}
 							}
 						}
 					}
 				}
 				if (selectedSquares[1] != null) {
-					if (selectedSquares[1].getRow() == i.getCurrentSquare().getRow()) {
-						if (selectedSquares[1].getColumn() == i.getCurrentSquare().getColumn()) {
-							if (i.getTeam() == 0) {
-								if (i.spell()) {
-									if (turnHandler(Board.Players[1])) {
-										Board.Players[0].setTurn(true);
+					if (i.getCurrentSquare() != null) {
+						if (selectedSquares[1].getRow() == i.getCurrentSquare().getRow()) {
+							if (selectedSquares[1].getColumn() == i.getCurrentSquare().getColumn()) {
+								if (i.getTeam() == 0) {
+									if (i.spell()) {
+										if (turnHandler(Board.Players[1])) {
+											Board.Players[0].setTurn(true);
+										}
+										return;
 									}
-									return;
 								}
 							}
 						}
@@ -414,11 +430,11 @@ public class MainController {
 				if (i.getCurrentSquare() == Board.squares[row][column]) {
 					//Check no other selected square has a piece
 					for (Piece j: Board.pieceSet) {
-						if(j.getCurrentSquare() == selectedSquares[0]) {
+						if(j.getCurrentSquare() == selectedSquares[0] && j.getCurrentSquare() != null) {
 							System.out.println("please select an empty square or deselect the piece selected");
 							return;
 						}
-						if(j.getCurrentSquare() == selectedSquares[1]) {
+						if(j.getCurrentSquare() == selectedSquares[1] && j.getCurrentSquare() != null) {
 							System.out.println("please select an empty square or deselect the piece selected");
 							return;
 						}
@@ -433,11 +449,11 @@ public class MainController {
 				if (x.getCurrentSquare() != Board.squares[row][column]) {
 					//Check if a square with a piece is selected  
 					for (Piece j: Board.pieceSet) {
-						if(j.getCurrentSquare() == selectedSquares[0]) {
+						if(j.getCurrentSquare() == selectedSquares[0] && j.getCurrentSquare() != null) {
 							Board.squares[row][column].setSelectStatus(true);
 							return;
 						}
-						if(j.getCurrentSquare() == selectedSquares[1]) {
+						if(j.getCurrentSquare() == selectedSquares[1] && j.getCurrentSquare() != null) {
 							Board.squares[row][column].setSelectStatus(true);
 							return;
 						}

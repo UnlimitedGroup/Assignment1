@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Power extends Piece {
 
 	//private final int maxHealth = 100;
@@ -31,6 +33,7 @@ public class Power extends Piece {
 	/*
 	 * UNIQUE SPELL, hit ONE unit for 75 damage in its vertical northern path, within 3 tiles
 	 */
+	/*
 	public boolean spell() {
 		int currentRow = this.getCurrentSquare().getRow();
 		int currentColumn = this.getCurrentSquare().getColumn();
@@ -51,6 +54,29 @@ public class Power extends Piece {
 		}
 		System.out.println("missed all enemies");
 		return true;	
+	}
+	*/
+	public ArrayList<Square> prepareSpell() {
+		int currentRow = this.getCurrentSquare().getRow();
+		int currentColumn = this.getCurrentSquare().getColumn();
+		ArrayList<Square> squareCheck = new ArrayList<Square>();
+		
+		for (int i=0; i<3;i++) {
+			if (currentRow-i >= 0) {
+				squareCheck.add(Board.squares[currentRow-i][currentColumn]);
+			}
+		}
+		return squareCheck;
+	}
+	public boolean castSpell(ArrayList<Square> targetSquares) {
+		for (Square s: targetSquares) {
+			for (Piece j: Board.pieceSet) {
+				if (j.getTeam() != this.getTeam() && j.getCurrentSquare() == s) {
+					j.decreaseHealth(75);
+				}
+			}
+		}
+	return true;
 	}
 	public String toString() {
 		return "power";

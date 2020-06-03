@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Healer extends Piece{
 
 	//private final int maxHealth = 100;
@@ -35,6 +37,7 @@ public class Healer extends Piece{
 	/*
 	 * UNIQUE SPELL, heal ALL units for 75 damage in its vertical northern path, within 2 tiles
 	 */
+	/*
 	public boolean spell() {
 		int currentRow = this.getCurrentSquare().getRow();
 		int currentColumn = this.getCurrentSquare().getColumn();
@@ -52,5 +55,31 @@ public class Healer extends Piece{
 		}
 		return true;	
 	}
+	*/
+	public ArrayList<Square> prepareSpell() {
+		int currentRow = this.getCurrentSquare().getRow();
+		int currentColumn = this.getCurrentSquare().getColumn();
+		ArrayList<Square> squareCheck = new ArrayList<Square>();
+		
+		for (int i=0; i<2;i++) {
+			if (currentRow+i <= Board.squares.length-1) {
+				squareCheck.add(Board.squares[currentRow+i][currentColumn]);
+			}
+		}
+		return squareCheck;
+	}
+	public boolean castSpell(ArrayList<Square> targetSquares) {
+		for (Square s: targetSquares) {
+			for (Piece j: Board.pieceSet) {
+				//Check only pieces on other team and Check if the piece is in the spell path square
+				if (j.getTeam() == this.getTeam() && j.getCurrentSquare() == s) {
+					j.increaseHealth(75);
+				}
+			}
+			
+		}
+	return true;
+	}
+	
 }
 

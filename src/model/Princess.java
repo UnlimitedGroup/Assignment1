@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Princess extends Piece {
 
 	//private final int maxHealth = 100;
@@ -36,11 +38,11 @@ public class Princess extends Piece {
 			return "princess2";
 		}
 	}
-
-	@Override
-	public boolean spell() {
-		return false;
+	public ArrayList<Square> prepareSpell() {
+		return null;
 	}
-	
+	public boolean castSpell(ArrayList<Square> targetSquares) {
+		return false;
+	}	
 }
 

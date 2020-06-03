@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Ranger extends Piece {
 
 	//private final int maxHealth = 100;
@@ -31,12 +33,13 @@ public class Ranger extends Piece {
 	public String toString() {
 		return "ranger";
 		}
+	/*
 	public boolean spell() {
 		int currentRow = this.getCurrentSquare().getRow();
 		int currentColumn = this.getCurrentSquare().getColumn();
-		/*
+		
 		 * UNIQUE SPELL, hit ALL units for 50 damage in its vertical southern path, 4 tiles 
-		 */
+		 
 		for (int i=0; i<4;i++) {
 			if (currentRow+i <= Board.squares.length-1) {
 				Square checkSquare = Board.squares[currentRow+i][currentColumn];
@@ -49,7 +52,31 @@ public class Ranger extends Piece {
 			}
 		}
 		return true;
-		
 	}
+	*/
+	
+	public ArrayList<Square> prepareSpell() {
+		int currentRow = this.getCurrentSquare().getRow();
+		int currentColumn = this.getCurrentSquare().getColumn();
+		ArrayList<Square> squareCheck = new ArrayList<Square>();
+		
+		for (int i=0; i<4;i++) {
+			if (currentRow+i <= Board.squares.length-1) {
+				squareCheck.add(Board.squares[currentRow+i][currentColumn]);
+			}
+		}
+		return squareCheck;
+	}
+	public boolean castSpell(ArrayList<Square> targetSquares) {
+		for (Square s: targetSquares) {
+			for (Piece j: Board.pieceSet) {
+				if (j.getTeam() != this.getTeam() && j.getCurrentSquare() == s) {
+					j.decreaseHealth(50);
+				}
+			}
+		}
+	return true;
+	}
+
 	
 }

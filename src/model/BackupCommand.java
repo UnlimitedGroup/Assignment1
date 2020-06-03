@@ -13,65 +13,105 @@ public class BackupCommand extends Command {
 		
 		for (Piece i: Board.pieceSet) {
 			if (i.toString() == "power") {
-				row = i.getCurrentSquare().getRow();
-				column = i.getCurrentSquare().getColumn();
-				currentSquare = Board.squares[row][column];
+				if (i.getCurrentSquare() != null) {
+					row = i.getCurrentSquare().getRow();
+					column = i.getCurrentSquare().getColumn();
+					currentSquare = Board.squares[row][column];
+				}
+				else {
+					currentSquare = null;
+				}
 				health = i.getHealth();
 				piece = new Power(health, currentSquare, 0);
 				this.getPieceSet().add(piece);
 			}
 			if (i.toString() == "paladin") {
-				row = i.getCurrentSquare().getRow();
-				column = i.getCurrentSquare().getColumn();
-				currentSquare = Board.squares[row][column];
+				if (i.getCurrentSquare() != null) {
+					row = i.getCurrentSquare().getRow();
+					column = i.getCurrentSquare().getColumn();
+					currentSquare = Board.squares[row][column];
+				}
+				else {
+					currentSquare = null;
+				}
 				health = i.getHealth();
 				piece = new Paladin(health, currentSquare, 0);
 				this.getPieceSet().add(piece);
 			}
 			if (i.toString() == "mage") {
-				row = i.getCurrentSquare().getRow();
-				column = i.getCurrentSquare().getColumn();
-				currentSquare = Board.squares[row][column];
+				if (i.getCurrentSquare() != null) {
+					row = i.getCurrentSquare().getRow();
+					column = i.getCurrentSquare().getColumn();
+					currentSquare = Board.squares[row][column];
+				}
+				else {
+					currentSquare = null;
+				}
 				health = i.getHealth();
 				piece = new Mage(health, currentSquare, 0);
 				this.getPieceSet().add(piece);
 			}
 			if (i.toString() == "ranger") {
-				row = i.getCurrentSquare().getRow();
-				column = i.getCurrentSquare().getColumn();
-				currentSquare = Board.squares[row][column];
+				if (i.getCurrentSquare() != null) {
+					row = i.getCurrentSquare().getRow();
+					column = i.getCurrentSquare().getColumn();
+					currentSquare = Board.squares[row][column];
+				}
+				else {
+					currentSquare = null;
+				}
 				health = i.getHealth();
 				piece = new Ranger(health, currentSquare, 1);
 				this.getPieceSet().add(piece);
 			}
 			if (i.toString() == "healer") {
-				row = i.getCurrentSquare().getRow();
-				column = i.getCurrentSquare().getColumn();
-				currentSquare = Board.squares[row][column];
+				if (i.getCurrentSquare() != null) {
+					row = i.getCurrentSquare().getRow();
+					column = i.getCurrentSquare().getColumn();
+					currentSquare = Board.squares[row][column];
+				}
+				else {
+					currentSquare = null;
+				}
 				health = i.getHealth();
 				piece = new Healer(health, currentSquare, 1);
 				this.getPieceSet().add(piece);
 			}
 			if (i.toString() == "rogue") {
-				row = i.getCurrentSquare().getRow();
-				column = i.getCurrentSquare().getColumn();
-				currentSquare = Board.squares[row][column];
+				if (i.getCurrentSquare() != null) {
+					row = i.getCurrentSquare().getRow();
+					column = i.getCurrentSquare().getColumn();
+					currentSquare = Board.squares[row][column];
+				}
+				else {
+					currentSquare = null;
+				}
 				health = i.getHealth();
 				piece = new Rogue(health, currentSquare, 1);
 				this.getPieceSet().add(piece);
 			}
 			if (i.toString() == "princess1") {
-				row = i.getCurrentSquare().getRow();
-				column = i.getCurrentSquare().getColumn();
-				currentSquare = Board.squares[row][column];
+				if (i.getCurrentSquare() != null) {
+					row = i.getCurrentSquare().getRow();
+					column = i.getCurrentSquare().getColumn();
+					currentSquare = Board.squares[row][column];
+				}
+				else {
+					currentSquare = null;
+				}
 				health = i.getHealth();
 				piece = new Princess(health, currentSquare, 1);
 				this.getPieceSet().add(piece);
 			}
 			if (i.toString() == "princess2") {
-				row = i.getCurrentSquare().getRow();
-				column = i.getCurrentSquare().getColumn();
-				currentSquare = Board.squares[row][column];
+				if (i.getCurrentSquare() != null) {
+					row = i.getCurrentSquare().getRow();
+					column = i.getCurrentSquare().getColumn();
+					currentSquare = Board.squares[row][column];
+				}
+				else {
+					currentSquare = null;
+				}
 				health = i.getHealth();
 				piece = new Princess(health, currentSquare, 0);
 				this.getPieceSet().add(piece);
