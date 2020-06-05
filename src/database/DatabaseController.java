@@ -305,6 +305,7 @@ public class DatabaseController {
 		for (Command c : commandHistory) {
 			for (Piece i: c.getPieceSet()) {
 				rowID++;
+				if (i != null) {
 				String pieceName = i.toString();
 				int pieceRow = i.getCurrentSquare().getRow();
 				int pieceColumn = i.getCurrentSquare().getColumn();
@@ -324,6 +325,7 @@ public class DatabaseController {
 		
 		stmt.executeUpdate(query);
 		con.commit();
+				}
 			}
 		}
 	}
