@@ -136,7 +136,7 @@ public class MainController {
 						if(i.toString() == "healing potion") {
 							return healingPotion;
 						}
-						if(i.toString() == "destruction potion") {
+						if(i.toString() == "major") {
 							return destructionPotion;
 						}
 					}

@@ -16,6 +16,7 @@ import model.DestructionDecorator;
 import model.Healer;
 import model.HealingPotion;
 import model.Mage;
+import model.MajorHealDecorator;
 import model.Obstacle;
 import model.Paladin;
 import model.Piece;
@@ -194,6 +195,10 @@ public class DatabaseController {
 			}
 			if (potionName.contains("destruction")) {
 				potion = new DestructionDecorator(new HealingPotion (currentSquare, status)); 			
+				return potion;
+			}
+			if (potionName.contains("major")) {
+				potion = new MajorHealDecorator(new DestructionDecorator(new HealingPotion (currentSquare, status))); 			
 				return potion;
 			}
 			else {
@@ -384,7 +389,8 @@ public class DatabaseController {
 				}
 				else {
 					if (randomRow != Board.potions.get(Board.potions.size()-1).getCurrentSquare().getRow() && randomColumn != Board.potions.get(Board.potions.size()-1).getCurrentSquare().getColumn()) {
-						Board.potions.add(new DestructionDecorator(new HealingPotion (Board.squares[randomRow][randomColumn], 1)));
+						Board.potions.add(new MajorHealDecorator(new MajorHealDecorator(new DestructionDecorator(new HealingPotion (Board.squares[randomRow][randomColumn], 1)))));
+						
 					}
 				}
 			}
