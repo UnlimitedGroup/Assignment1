@@ -2,18 +2,13 @@ package controller;
 
 import java.awt.Color;
 import java.sql.SQLException;
-import java.util.Iterator;
-
 import javax.swing.ImageIcon;
-
 import database.DatabaseController;
 import exceptions.PieceInvalidName;
 import exceptions.squareBoundsException;
-import model.BackupCommand;
 import model.Board;
 import model.Command;
 import model.CommandHistory;
-import model.Obstacle;
 import model.Piece;
 import model.Player;
 import model.Potion;
@@ -33,10 +28,8 @@ public class MainController {
 	private static ImageIcon rock = new ImageIcon(Main.class.getResource("/imgs/rock.png"));
 	private static ImageIcon destructionPotion = new ImageIcon(Main.class.getResource("/imgs/destructionPotion.png"));
 	private static ImageIcon healingPotion = new ImageIcon(Main.class.getResource("/imgs/healingPotion.png"));
-	private static Command command;
 	public static CommandHistory commandHistory = new CommandHistory();
 	
-	//Commands
 	public static void executeCommand(Command c) {
 		c.execute();
 		System.out.println(c);
@@ -46,10 +39,10 @@ public class MainController {
 		for (Player p: Board.Players) {
 			if (p.getTurn()) {
 				if (p.getUndoTokens() > 0) {
-					command = commandHistory.pop();	
+					Command c = commandHistory.pop();	
 					p.removeUndoToken();
-					if (command != null) {
-						command.undo();
+					if (c != null) {
+						c.undo();
 					}
 				}
 			}
@@ -63,8 +56,6 @@ public class MainController {
 		DatabaseController db = DatabaseController.getInstance();
 		db.insertUpdateBackupCommand(commandHistory.getStack());
 	}
-	
-	//utility
 	public static String displayTurn() {
 		if (Board.Players[0].getTurn()) {
 			return "Player 1";
@@ -154,6 +145,7 @@ public class MainController {
 		}
 		return null;
 	}
+
 	public static void resetSquares() {
 		for (int i = 0; i < Board.squares.length; i++) {
 	        for (int j = 0; j < Board.squares[i].length; j++) {
@@ -178,15 +170,6 @@ public class MainController {
 		}
 	}
 	public static void removeDeadUnits() {
-		//INSTEAD SET THEIR CURRENT SQUARE TO NULL
-		/*
-		for (Iterator<Piece> it = Board.pieceSet.iterator(); it.hasNext();) {
-		    Piece p = it.next();
-		    if (p.getHealth() <= 0) {
-		        it.remove();   
-		    }
-		}
-		*/
 		for (Piece j: Board.pieceSet) {
 			if (j.getHealth() <= 0) {
 				j.setCurrentSquare(null);
@@ -202,11 +185,9 @@ public class MainController {
 		}
 		return false;
 	}
-	
-	//move piece
 	public static void move() {
 		Square selectedSquares[] = fetchSelectedSquares();
-		executeCommand(new BackupCommand());
+		
 		
 		if (Board.Players[0].getTurn()) {
 			for (Piece i : Board.pieceSet) {
@@ -291,7 +272,7 @@ public class MainController {
 	}
 	public static void spell() {
 		Square selectedSquares[] = fetchSelectedSquares();
-		executeCommand(new BackupCommand());
+		
 		
 		if (Board.Players[0].getTurn()) {
 			for (Piece i : Board.pieceSet) {
@@ -366,8 +347,6 @@ public class MainController {
 			}
 		}
 	}
-	
-	//select squares related
 	private static boolean selectPreCondition() {
 		int count = 0;
 		for (int i = 0; i < Board.squares.length; i++) {
@@ -386,6 +365,7 @@ public class MainController {
 				return false;
 			}
 		}
+	
 	private static Square[] fetchSelectedSquares() {
 		Square selectedSquares[] = new Square[2];
 		int count = 0;
@@ -422,7 +402,7 @@ public class MainController {
 			return;
 		}
 		
-		//Ensures only two squares can be selected
+		//ensures only two squares can be selected
 		else if (selectPreCondition()) {
 			
 			//if square with piece is selected
@@ -489,15 +469,13 @@ public class MainController {
 		return new Color(255,255,204);   
 	}
 	
-	//start, load, save game
 	public static void startGame(int row, int column, Boolean Power, Boolean Paladin, Boolean Mage, Boolean Ranger, Boolean Healer, Boolean Rogue) throws ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
 		commandHistory.empty();
 		Board.create("start", row, column, Power, Paladin, Mage, Ranger, Healer, Rogue);
 	} 
 	public static void loadGame() throws ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
 		Board.create("load", 0, 0, null, null, null, null, null, null);
-		loadCommands();
-		
+		loadCommands();	
 	}
 	public static void saveGame(int row, int column) throws ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
 		Board.create("update", row, column, null, null, null, null, null, null);

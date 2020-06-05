@@ -1,12 +1,3 @@
-TO DO:
 
-- implement last design pattern
-- improve potion decorator
-- exception handling i.e. make so move doesnt count if its not possible to move 
 
-done 
-- Singleton
-- Facade
-- Prototype
-- Decorator
-- Command
+

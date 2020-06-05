@@ -2,7 +2,6 @@ package model;
 
 public class BackupCommand extends Command {
 
-	//Backs up current state of game
 	@Override
 	public void execute() {
 		Piece piece = null;

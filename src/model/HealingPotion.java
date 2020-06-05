@@ -1,16 +1,19 @@
 package model;
+import com.google.java.contract.*;
 
+@Invariant({
+	"healAmount <= 100",
+	"status == 0 || status == 1"})
 public class HealingPotion implements Potion {
 
 	final private int healAmount;
 	private Square currentSquare;
-	private int status; //unused = 1, used = 0
+	private int status;
 	
 	public HealingPotion(Square currentSquare, int s) {
 		this.healAmount = 25;
 		this.currentSquare = currentSquare;
-		this.status = s;
-		
+		this.status = s;	
 	}
 	
 	@Override
@@ -26,10 +29,13 @@ public class HealingPotion implements Potion {
 		return this.status;
 	}
 	@Override
+	@Requires("s == 0 || s == 1")
+	@Ensures("s == 0 || s == 1")
 	public void setStatus(int s) {
 		this.status = s;
 	}
 	@Override
+	@Requires("i != null")
 	public void drinkPotion(Piece i) {
 		i.increaseHealth(50);
 		this.setStatus(0);

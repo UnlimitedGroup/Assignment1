@@ -1,15 +1,16 @@
 package model;
-
 import java.util.ArrayList;
+import com.google.java.contract.*;
+
 
 public class Paladin extends Piece {
-
-	//private final int maxHealth = 100;
 
 	public Paladin(int health, Square currentSquare, int team) {
 		super(health, currentSquare, team);
 	}
-
+	
+	@Requires({"row <=7 && row >= 0", "column <= 5 && column >= 0"})
+	@Ensures({"currentRow <=7 && currentRow >= 0", "currentColumn <= 5 && currentColumn >= 0"})
 	private boolean moveCheck(int row, int column) {
 		int currentRow = this.getCurrentSquare().getRow();
 		int currentColumn = this.getCurrentSquare().getColumn();
@@ -21,6 +22,8 @@ public class Paladin extends Piece {
 		return false;
 	}
 	@Override
+	@Requires({"row <=7 && row >= 0", "column <= 5 && column >= 0"})
+	@Ensures("Board.squares[row][column] != null")
 	public boolean move(int row, int column) {
 		if (moveCheck(row, column)) {
 			this.setCurrentSquare(Board.squares[row][column]);
@@ -30,42 +33,8 @@ public class Paladin extends Piece {
 			return false;
 		}
 	}
-	/*
-	public boolean spell() {
-		int currentRow = this.getCurrentSquare().getRow();
-		int currentColumn = this.getCurrentSquare().getColumn();
-		int maxRow = Board.squares.length -1;
-		int maxColumn = Board.squares[0].length -1;
-		
-		//Team 1
-		for (int i=1; i<=1;i++) {
-			//Check if a piece in in the square infront square
-				ArrayList<Square> squareCheck = new ArrayList<Square>();
-				squareCheck.add(Board.squares[(currentRow+i <= maxRow) ? currentRow+i: maxRow][currentColumn]);
-				squareCheck.add(Board.squares[(currentRow-i >= 0) ? currentRow-i: 0][currentColumn]);
-				squareCheck.add(Board.squares[currentRow][(currentColumn+i <= maxColumn) ? currentColumn+i: maxColumn]);
-				squareCheck.add(Board.squares[currentRow][(currentColumn-i >= 0) ? currentColumn-i: 0]);
-				squareCheck.add(Board.squares[(currentRow-i >= 0) ? currentRow-i: 0][(currentColumn-i >= 0) ? currentColumn-i: 0]);
-				squareCheck.add(Board.squares[(currentRow-i >= 0) ? currentRow-i: 0][(currentColumn+i <= maxColumn) ? currentColumn+i: maxColumn]);
-				squareCheck.add(Board.squares[(currentRow+i <= maxRow) ? currentRow+i: maxRow][(currentColumn-i >= 0) ? currentColumn-i: 0]);
-				squareCheck.add(Board.squares[(currentRow+i <= maxRow) ? currentRow+i: maxRow][(currentColumn+i <= maxColumn) ? currentColumn+i: maxColumn]);
-			
-			for (Square s: squareCheck) {
-				System.out.println(s.getRow());
-				System.out.println(s.getColumn());
-				for (Piece j: Board.pieceSet) {
-					//Check only pieces on other team and Check if the piece is in the spell path square
-					if (j.getTeam() == this.getTeam() && j.getCurrentSquare() == s) {
-							j.increaseHealth(50);
-							System.out.println("allies healed");
-					}
-				}
-			}
-		}
-		return true;
-	}
-	*/
 	@Override
+	@Ensures({"currentRow <=7 && currentRow >= 0", "currentColumn <= 5 && currentColumn >= 0"})
 	public ArrayList<Square> prepareSpell() {
 		int currentRow = this.getCurrentSquare().getRow();
 		int currentColumn = this.getCurrentSquare().getColumn();
@@ -89,7 +58,6 @@ public class Paladin extends Piece {
 	public boolean castSpell(ArrayList<Square> targetSquares) {
 		for (Square s: targetSquares) {
 			for (Piece j: Board.pieceSet) {
-				//Check only pieces on other team and Check if the piece is in the spell path square
 				if (j.getTeam() != this.getTeam() && j.getCurrentSquare() == s) {
 					j.increaseHealth(50);
 				}
@@ -99,5 +67,5 @@ public class Paladin extends Piece {
 	}
 	public String toString() {
 		return "paladin";
-		}
+	}
 }

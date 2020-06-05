@@ -1,15 +1,17 @@
 package model;
-
 import java.util.ArrayList;
 
-public class Princess extends Piece {
+import com.google.java.contract.Ensures;
+import com.google.java.contract.Requires;
 
-	//private final int maxHealth = 100;
+public class Princess extends Piece {
 
 	public Princess(int health, Square currentSquare, int team) {
 		super(health, currentSquare, team);
 	}
 	
+	@Requires({"row <=7 && row >= 0", "column <= 5 && column >= 0"})
+	@Ensures({"currentRow <=7 && currentRow >= 0", "currentColumn <= 5 && currentColumn >= 0"})
 	private boolean moveCheck(int row, int column) {
 		int currentRow = this.getCurrentSquare().getRow();
 		int currentColumn = this.getCurrentSquare().getColumn();
@@ -21,6 +23,8 @@ public class Princess extends Piece {
 		return false;
 	}
 	@Override
+	@Requires({"row <=7 && row >= 0", "column <= 5 && column >= 0"})
+	@Ensures("Board.squares[row][column] != null")
 	public boolean move(int row, int column) {
 		if (moveCheck(row, column)) {
 			this.setCurrentSquare(Board.squares[row][column]);

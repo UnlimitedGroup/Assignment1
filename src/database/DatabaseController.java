@@ -1,16 +1,12 @@
 package database;
 
-import java.sql.Array;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Stack;
 import java.util.concurrent.ThreadLocalRandom;
-
 import controller.MainController;
-import database.*;
 import exceptions.PieceInvalidName;
 import exceptions.squareBoundsException;
 import model.BackupCommand;
@@ -37,10 +33,6 @@ public class DatabaseController {
 	private Connection con;
 	private static DatabaseController instance;
 	
-	
-	/**
-	 * Build the Database Singleton Object
-	 */
 	private DatabaseController() {
 		DB_NAME = "game";
 		try {
@@ -51,9 +43,6 @@ public class DatabaseController {
 			e.printStackTrace();
 		}
 	}
-	/** 
-	 * @return singleton instance of database
-	 */
 	synchronized public static DatabaseController getInstance() {
 		if (DatabaseController.instance == null) { 
                 DatabaseController.instance = new DatabaseController();
@@ -62,12 +51,6 @@ public class DatabaseController {
 	}
 	
 	
-	/**
-	 * Prepare Board Query
-	 * @param rows
-	 * @param columns
-	 * @return the board query
-	 */
 	private String prepQueryBoard(int rows, int columns) {
 		String boardName = "mainboard";
 		int boardRows = rows;
@@ -84,12 +67,6 @@ public class DatabaseController {
 		 
 		return query;
 	}
-	/**
-	 * Prepare Obstacle Query
-	 * @param ob
-	 * @param incrementor
-	 * @return the obstacle query
-	 */
 	private String prepQueryObstacle(Obstacle ob, int incrementor) {
 		String obName = ob.toString() + incrementor;
 		int obRow = ob.getCurrentSquare().getRow();
@@ -107,12 +84,6 @@ public class DatabaseController {
 		
 		return query;
 	}
-	/**
-	 * Prepare Piece Query
-	 * @param piece
-	 * @param action
-	 * @return
-	 */
 	private String prepQueryPiece(Piece piece, String action) {
 		String pieceName = piece.toString();
 		int pieceRow;
@@ -141,12 +112,6 @@ public class DatabaseController {
 		
 		return query;
 	}
-	/**
-	 * Prepare Player Query
-	 * @param the piece query
-	 * @param action
-	 * @return
-	 */
 	private String prepQueryPlayer(Player p, String action) {
 		int playerTeam = p.getTeam();
 		boolean playerTurn = p.getTurn();
@@ -172,14 +137,6 @@ public class DatabaseController {
 				"')";
 		return query;
 	}
-	/**
-	 * Build piece objects from database 
-	 * @param result
-	 * @return the player query 
-	 * @throws SQLException
-	 * @throws squareBoundsException
-	 * @throws PieceInvalidName
-	 */
 	private Piece getPieceFromStmt(ResultSet result) throws SQLException, squareBoundsException, PieceInvalidName {
 		Piece piece = null;
 		String pieceName = result.getString("PIECE_NAME");
@@ -222,19 +179,13 @@ public class DatabaseController {
 		}
 		throw new PieceInvalidName();
 	}
-	/**
-	 * Build potion objects from database
-	 * @param result
-	 * @return a piece object
-	 * @throws SQLException
-	 * @throws squareBoundsException
-	 */
 	private Potion getPotionFromStmt(ResultSet result) throws SQLException, squareBoundsException {
 		Potion potion = null;
 		String potionName = result.getString("ID");
 		int row = result.getInt("ROW");
 		int column = result.getInt("COLUMN");
 		int status = result.getInt("STATUS");
+		
 		Square currentSquare = Board.squares[row][column];
 	
 			if (potionName.contains("healing")) {
@@ -249,12 +200,6 @@ public class DatabaseController {
 				return null;
 			}
 	}
-	/**
-	 * Prepare potion query
-	 * @param pot
-	 * @param incrementor, passed from insertUpdatePotions()
-	 * @return the potion query
-	 */
 	private String prepQueryPotion(Potion pot, int incrementor) {
 		String potName = pot.toString() + incrementor;
 		int potRow = pot.getCurrentSquare().getRow();
@@ -275,13 +220,6 @@ public class DatabaseController {
 		return query;
 	}
 	
-	
-	/**
-	 * Insert squares into database
-	 * @param rows
-	 * @param columns
-	 * @throws SQLException
-	 */
 	public void insertBoard(int rows, int columns) throws SQLException {
 			Statement stmt = con.createStatement();
 			//Clear previous board
@@ -290,27 +228,13 @@ public class DatabaseController {
 			stmt.executeUpdate(prepQueryBoard(rows, columns));
 			con.commit();
 	}
-	/**
-	 * Insert and update piece objects in database
-	 * @param action
-	 * @param Power
-	 * @param Paladin
-	 * @param Mage
-	 * @param Ranger
-	 * @param Healer
-	 * @param Rogue
-	 * @throws SQLException
-	 */
 	public void insertUpdatePiece(String action, Boolean Power, Boolean Paladin, Boolean Mage, Boolean Ranger, Boolean Healer, Boolean Rogue) throws SQLException {
 		
 		Statement stmt = con.createStatement();
 		
 		if (action == "start") {
 			Board.pieceSet.clear();
-			/*
-			 * Pieces are always initialized in the same spots, these squares will always 
-			* exist due to minimum board size constraints
-			*/
+			
 			if (Power) {
 				Piece power = new Power(100, Board.squares[5][1], 0);
 				Board.pieceSet.add(power);
@@ -351,11 +275,6 @@ public class DatabaseController {
 			}
 		}
 	}
-	/**
-	 * Insert and update command objects in database
-	 * @param commandHistory
-	 * @throws SQLException
-	 */
     public void insertUpdateBackupCommand(Stack<Command> commandHistory) throws SQLException {
 		
 		Statement stmt = con.createStatement();	
@@ -403,11 +322,6 @@ public class DatabaseController {
 			}
 		}
 	}
-    /**
-     * Insert and update obstacle objects in database
-     * @param action
-     * @throws SQLException
-     */
 	public void insertUpdateObstacles(String action) throws SQLException {
 		Statement stmt = con.createStatement();
 		
@@ -430,11 +344,6 @@ public class DatabaseController {
 			}
 		}
 	}
-	/**
-	 * Insert and update player objects in database
-	 * @param action
-	 * @throws SQLException
-	 */
 	public void insertUpdatePlayers(String action) throws SQLException {
 		Statement stmt = con.createStatement();
 		//If its an insert Query, pieces are initialize
@@ -453,11 +362,6 @@ public class DatabaseController {
 			}
 		}
 	}
-	/**
-	 * Insert and update potions in database
-	 * @param action
-	 * @throws SQLException
-	 */
 	public void insertUpdatePotions(String action) throws SQLException {
 		Statement stmt = con.createStatement();
 		
@@ -497,21 +401,10 @@ public class DatabaseController {
 			}
 		}
 	}
-
 	
-	/**
-	 * Load board squares from database
-	 * @param command
-	 * @param r
-	 * @param c
-	 * @throws ClassNotFoundException
-	 * @throws SQLException
-	 * @throws squareBoundsException
-	 */
 	public void loadBoard(String command, int r, int c) throws ClassNotFoundException, SQLException, squareBoundsException {
 		
 		if (command == "start") {
-			//Build large board
 			if (c >= 4 && r >= 6) {
 				for (int i = 0; i <= r; i++) {
 			        for (int j = 0; j <= c; j++) {
@@ -519,7 +412,6 @@ public class DatabaseController {
 			        }
 				}
 			}
-			//Build small board
 			if (c < 4 && r < 6) {
 				for (int i = 0; i <= 6; i++) {
 			        for (int j = 0; j <= 4; j++) {
@@ -541,14 +433,12 @@ public class DatabaseController {
 			stmt = con.createStatement();
 			result = stmt.executeQuery(
 					"SELECT * FROM BOARD");
-			//There's only going to be one result
 			while(result.next()){
 				int rows = result.getInt("ROWS");
 				int columns = result.getInt("COLUMNS");
 				System.out.println("number" + result.getInt("ROWS"));
 				System.out.println("number" + result.getInt("COLUMNS"));
 				
-				//Build large board
 				if (columns >= 4 && rows >= 6) {
 					for (int i = 0; i <= rows; i++) {
 				        for (int j = 0; j <= columns; j++) {
@@ -556,7 +446,6 @@ public class DatabaseController {
 				        }
 					}
 				}
-				//Build small board
 				if (columns < 4 && rows < 6) {
 					System.out.println("building small board");
 					for (int i = 0; i <= 6; i++) {
@@ -573,13 +462,6 @@ public class DatabaseController {
 			} con.commit();
 		}
 	}
-	/**
-	 * Load pieces from database
-	 * @throws ClassNotFoundException
-	 * @throws SQLException
-	 * @throws squareBoundsException
-	 * @throws PieceInvalidName
-	 */
 	public void loadPieces() throws ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
 		Statement stmt;
 		ResultSet result;
@@ -597,11 +479,6 @@ public class DatabaseController {
 			}
 			con.commit();
 	}
-	/**
-	 * Load obstacles from database
-	 * @throws ClassNotFoundException
-	 * @throws SQLException
-	 */
 	public void loadObstacles() throws ClassNotFoundException, SQLException {
 		Statement stmt;
 		ResultSet result;
@@ -622,11 +499,6 @@ public class DatabaseController {
 		}
 		con.commit();
 	}
-	/**
-	 * Load players from database
-	 * @throws ClassNotFoundException
-	 * @throws SQLException
-	 */
 	public void loadPlayers() throws ClassNotFoundException, SQLException {
 		Statement stmt;
 		ResultSet result;
@@ -653,12 +525,6 @@ public class DatabaseController {
 		}
 		con.commit();
 	}
-	/**
-	 * Load potions from database
-	 * @throws ClassNotFoundException
-	 * @throws SQLException
-	 * @throws squareBoundsException
-	 */
 	public void loadPotions() throws ClassNotFoundException, SQLException, squareBoundsException {
 		Statement stmt;
 		ResultSet result;
@@ -676,13 +542,6 @@ public class DatabaseController {
 			}
 			con.commit();
 	}
-	/**
-	 * Load backup commands from database
-	 * @throws ClassNotFoundException
-	 * @throws SQLException
-	 * @throws squareBoundsException
-	 * @throws PieceInvalidName
-	 */
 	public void loadBackupCommands() throws ClassNotFoundException, SQLException, squareBoundsException, PieceInvalidName {
 		Statement stmt;
 		ResultSet result1;
@@ -741,71 +600,35 @@ public class DatabaseController {
 		con.commit();
 	}
 	
-	
-	/**
-	 * Clear board database data
-	 * @param stmt
-	 * @throws SQLException
-	 */
 	private void clearBoard(Statement stmt) throws SQLException {
 		String clearBoard = "DELETE FROM BOARD";
 		stmt.executeUpdate(clearBoard);
 	}
-	/**
-	 * Clear piece database data
-	 * @param stmt
-	 * @throws SQLException
-	 */
 	private void clearPieces(Statement stmt) throws SQLException {
 		String clearPieces = "DELETE FROM PIECES";
 		stmt.executeUpdate(clearPieces);
 		con.commit();
 	}
-	/**
-	 * clear backup commands database data
-	 * @param stmt
-	 * @throws SQLException
-	 */
 	private void clearBackups(Statement stmt) throws SQLException {
 		String clearBackup = "DELETE FROM BACKUP";
 		stmt.executeUpdate(clearBackup);
 		con.commit();
 	}
-	/**
-	 * Clear commands database data
-	 * @param stmt
-	 * @throws SQLException
-	 */
 	private void clearCommands(Statement stmt) throws SQLException {
 		String clearCommands = "DELETE FROM COMMANDS";
 		stmt.executeUpdate(clearCommands);
 		con.commit();
 	}
-	/**
-	 * Clear players database data
-	 * @param stmt
-	 * @throws SQLException
-	 */
 	private void clearPlayers(Statement stmt) throws SQLException {
 		String clearPlayers = "DELETE FROM PLAYER";
 		stmt.executeUpdate(clearPlayers);
 		con.commit();
 	}
-	/**
-	 * Clear obstacles database data
-	 * @param stmt
-	 * @throws SQLException
-	 */
 	private void clearObstacles(Statement stmt) throws SQLException {
 		String clearObstacles = "DELETE FROM OBSTACLE";
 		stmt.executeUpdate(clearObstacles);
 		con.commit();
 	}
-	/**
-	 * Clear potions database data
-	 * @param stmt
-	 * @throws SQLException
-	 */
 	private void clearPotions(Statement stmt) throws SQLException {
 		String clearPotions = "DELETE FROM POTION";
 		stmt.executeUpdate(clearPotions);

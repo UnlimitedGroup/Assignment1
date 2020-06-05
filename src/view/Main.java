@@ -19,6 +19,7 @@ import javax.swing.text.StyledDocument;
 import controller.MainController;
 import exceptions.PieceInvalidName;
 import exceptions.squareBoundsException;
+import model.BackupCommand;
 import model.Board;
 
 import java.awt.Color;
@@ -767,8 +768,8 @@ public class Main {
 					moveButton.addActionListener(new ActionListener () {
 						@Override
 						public void actionPerformed(ActionEvent e) {
+							MainController.executeCommand(new BackupCommand());
 							MainController.move();
-						
 							MainController.resetSquares();
 							//refresh all squares
 							b10.setIcon(MainController.displayImg(0, 0));
@@ -939,9 +940,11 @@ public class Main {
 					spellButton.addActionListener(new ActionListener () {
 						@Override
 						public void actionPerformed(ActionEvent e) {
+							MainController.executeCommand(new BackupCommand());
 							MainController.spell();
 							MainController.removeDeadUnits();
 							MainController.resetSquares();
+							
 							//refresh all squares
 							b10.setIcon(MainController.displayImg(0, 0));
 							b11.setIcon(MainController.displayImg(0, 1));

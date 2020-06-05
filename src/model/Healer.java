@@ -2,14 +2,15 @@ package model;
 
 import java.util.ArrayList;
 
-public class Healer extends Piece{
+import com.google.java.contract.*;
 
-	//private final int maxHealth = 100;
+public class Healer extends Piece{
 
 	public Healer(int health, Square currentSquare, int team) {
 		super(health, currentSquare, team);
 	}
-	
+	@Requires({"row <=7 && row >= 0", "column <= 5 && column >= 0"})
+	@Ensures({"currentRow <=7 && currentRow >= 0", "currentColumn <= 5 && currentColumn >= 0"})
 	private boolean moveCheck(int row, int column) {
 		int currentRow = this.getCurrentSquare().getRow();
 		int currentColumn = this.getCurrentSquare().getColumn();
@@ -21,6 +22,8 @@ public class Healer extends Piece{
 		return false;
 	}
 	@Override
+	@Requires({"row <=7 && row >= 0", "column <= 5 && column >= 0"})
+	@Ensures("Board.squares[row][column] != null")
 	public boolean move(int row, int column) {
 		if (moveCheck(row, column)) {
 			this.setCurrentSquare(Board.squares[row][column]);
@@ -34,28 +37,7 @@ public class Healer extends Piece{
 		return "healer";
 		}
 	
-	/*
-	 * UNIQUE SPELL, heal ALL units for 75 damage in its vertical northern path, within 2 tiles
-	 */
-	/*
-	public boolean spell() {
-		int currentRow = this.getCurrentSquare().getRow();
-		int currentColumn = this.getCurrentSquare().getColumn();
-		
-		for (int i=0; i<2;i++) {
-			if (currentRow+i <= Board.squares.length-1) {
-				Square checkSquare = Board.squares[currentRow+i][currentColumn];
-				for (Piece j: Board.pieceSet) {
-					//Check only pieces on other team and Check if the piece is in the spell path square
-					if (j.getTeam() == this.getTeam() && j.getCurrentSquare() == checkSquare) {
-						j.increaseHealth(75);
-					}
-				}
-			}
-		}
-		return true;	
-	}
-	*/
+	@Ensures({"currentRow <=7 && currentRow >= 0", "currentColumn <= 5 && currentColumn >= 0"})
 	public ArrayList<Square> prepareSpell() {
 		int currentRow = this.getCurrentSquare().getRow();
 		int currentColumn = this.getCurrentSquare().getColumn();
@@ -68,10 +50,10 @@ public class Healer extends Piece{
 		}
 		return squareCheck;
 	}
+	
 	public boolean castSpell(ArrayList<Square> targetSquares) {
 		for (Square s: targetSquares) {
 			for (Piece j: Board.pieceSet) {
-				//Check only pieces on other team and Check if the piece is in the spell path square
 				if (j.getTeam() == this.getTeam() && j.getCurrentSquare() == s) {
 					j.increaseHealth(75);
 				}
@@ -79,7 +61,6 @@ public class Healer extends Piece{
 			
 		}
 	return true;
-	}
-	
+	}	
 }
 

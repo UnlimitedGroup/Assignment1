@@ -2,14 +2,16 @@ package model;
 
 import java.util.ArrayList;
 
-public class Power extends Piece {
+import com.google.java.contract.Ensures;
+import com.google.java.contract.Requires;
 
-	//private final int maxHealth = 100;
+public class Power extends Piece {
 
 	public Power(int health, Square currentSquare, int team) {
 		super(health, currentSquare, team);
 	}
-	
+	@Requires({"row <=7 && row >= 0", "column <= 5 && column >= 0"})
+	@Ensures({"currentRow <=7 && currentRow >= 0", "currentColumn <= 5 && currentColumn >= 0"})
 	private boolean moveCheck(int row, int column) {
 		int currentRow = this.getCurrentSquare().getRow();
 		int currentColumn = this.getCurrentSquare().getColumn();
@@ -21,6 +23,8 @@ public class Power extends Piece {
 		return false;
 	}
 	@Override
+	@Requires({"row <=7 && row >= 0", "column <= 5 && column >= 0"})
+	@Ensures("Board.squares[row][column] != null")
 	public boolean move(int row, int column) {
 		if (moveCheck(row, column)) {
 			this.setCurrentSquare(Board.squares[row][column]);
@@ -30,32 +34,7 @@ public class Power extends Piece {
 			return false;
 		}
 	}
-	/*
-	 * UNIQUE SPELL, hit ONE unit for 75 damage in its vertical northern path, within 3 tiles
-	 */
-	/*
-	public boolean spell() {
-		int currentRow = this.getCurrentSquare().getRow();
-		int currentColumn = this.getCurrentSquare().getColumn();
-		
-		//Team 1
-		for (int i=0; i<3;i++) {
-			if (currentRow-i >= 0) {
-				Square checkSquare = Board.squares[currentRow-i][currentColumn];
-				for (Piece j: Board.pieceSet) {
-					//Check only pieces on other team and Check if the piece is in the spell path square
-					if (j.getTeam() != this.getTeam() && j.getCurrentSquare() == checkSquare) {
-						j.decreaseHealth(75);
-						System.out.println("enemy hit");
-						return true;
-					}
-				}
-			}
-		}
-		System.out.println("missed all enemies");
-		return true;	
-	}
-	*/
+	@Ensures({"currentRow <=7 && currentRow >= 0", "currentColumn <= 5 && currentColumn >= 0"})
 	public ArrayList<Square> prepareSpell() {
 		int currentRow = this.getCurrentSquare().getRow();
 		int currentColumn = this.getCurrentSquare().getColumn();
